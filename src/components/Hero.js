@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FormattedMessage } from "react-intl";
 function Hero() {
   return (
     <div className="hero bg-gray-100 py-16">
@@ -7,7 +7,7 @@ function Hero() {
         <div className="hero-wrapper grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="hero-text col-span-6">
             <h1 className=" font-bold text-4xl md:text-5xl max-w-xl text-gray-900 leading-tight">
-              A few clicks is all it takes
+              <FormattedMessage id="heroTag" />
             </h1>
             <hr className=" w-12 h-1 bg-orange-500 rounded-full mt-8" />
 

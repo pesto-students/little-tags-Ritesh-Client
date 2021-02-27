@@ -3,10 +3,10 @@ import Categories from "./Categories";
 import Header from "./Header";
 import Hero from "./Hero";
 import Footer from "./Footer";
-function Home() {
+function Home({ changeLanguage }) {
   return (
     <div>
-      <Header />
+      <Header changeLanguage={changeLanguage} />
       <Hero />
       <Categories />
       <Footer />

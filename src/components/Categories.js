@@ -1,10 +1,10 @@
 import React from "react";
-
+import { FormattedMessage } from "react-intl";
 function Categories() {
   return (
     <div className="p-12">
       <h3 className="text-black-600 text-2xl font-medium uppercase">
-        Categories to bag
+        <FormattedMessage id="categoriesTitle" />
       </h3>
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mt-6">
         <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
@@ -15,7 +15,9 @@ function Categories() {
             }}
           ></div>
           <div className="px-5 py-3 ">
-            <h3 className="text-gray-700 uppercase">Men Clothing</h3>
+            <h3 className="text-gray-700 uppercase">
+              <FormattedMessage id="menClothing" />
+            </h3>
           </div>
         </button>
         <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
@@ -26,7 +28,9 @@ function Categories() {
             }}
           ></div>
           <div className="px-5 py-3 ">
-            <h3 className="text-gray-700 uppercase">Women Clothing</h3>
+            <h3 className="text-gray-700 uppercase">
+              <FormattedMessage id="womenClothing" />
+            </h3>
           </div>
         </button>
         <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
@@ -37,7 +41,9 @@ function Categories() {
             }}
           ></div>
           <div className="px-5 py-3 ">
-            <h3 className="text-gray-700 uppercase">Jewelry</h3>
+            <h3 className="text-gray-700 uppercase">
+              <FormattedMessage id="jewelry" />
+            </h3>
           </div>
         </button>
         <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
@@ -48,7 +54,9 @@ function Categories() {
             }}
           ></div>
           <div className="px-5 py-3 ">
-            <h3 className="text-gray-700 uppercase">Electronic</h3>
+            <h3 className="text-gray-700 uppercase">
+              <FormattedMessage id="electronics" />
+            </h3>
           </div>
         </button>
       </div>

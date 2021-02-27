@@ -1,19 +1,80 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
+import Popper from "popper.js";
+function Header({ changeLanguage }) {
+  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const langBtnDropdownRef = React.createRef();
+  const langDropdownRef = React.createRef();
+  const openLangDropdown = () => {
+    new Popper(langBtnDropdownRef.current, langDropdownRef.current, {
+      placement: "bottom-start",
+    });
+    setDropdownPopoverShow(true);
+  };
+  const closeLangDropdown = () => {
+    setDropdownPopoverShow(false);
+  };
 
-function Header() {
+  //categories
+  const categories = [
+    { id: 1, catName: "Men Clothing" },
+    { id: 2, catName: "Women Clothing" },
+    { id: 3, catName: "Jewelry" },
+    { id: 4, catName: "Electronics" },
+  ];
+  const [catDropDown, setCatDropDown] = React.useState(false);
+  const catBtnDropdownRef = React.createRef();
+  const catDropdownRef = React.createRef();
+  const openCatDropdown = () => {
+    new Popper(catBtnDropdownRef.current, catDropdownRef.current, {
+      placement: "bottom-start",
+    });
+    setCatDropDown(true);
+  };
+  const closeCatDropdown = () => {
+    setCatDropDown(false);
+  };
+
+  //profile
+  const profile = [
+    { id: 1, catName: "Order History" },
+    { id: 2, catName: "Track Order" },
+    { id: 3, catName: "Contact Us" },
+    { id: 4, catName: "Edit Profile" },
+  ];
+  const [profileDropDown, setProfileDropDown] = React.useState(false);
+  const profileBtnDropdownRef = React.createRef();
+  const profileDropdownRef = React.createRef();
+  const openProfileDropdown = () => {
+    new Popper(profileBtnDropdownRef.current, profileDropdownRef.current, {
+      placement: "bottom-start",
+    });
+    setProfileDropDown(true);
+  };
+  const closeProfileDropdown = () => {
+    setProfileDropDown(false);
+  };
+  const color = "white";
+  let bgColor;
+  color === "white"
+    ? (bgColor = "bg-gray-800")
+    : (bgColor = "bg-" + color + "-500");
+
   return (
     <div>
       <nav className="flex items-center justify-between flex-wrap bg-white py-4 lg:px-12 shadow border-solid border-t-2">
         <div className="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0">
           <div className="flex items-center flex-shrink-0 text-gray-800 mr-16">
             <span className="text-3xl md:text-4xl max-w-xl text-gray-900 leading-tight">
-              Little tag
+              <FormattedMessage id="title" />
             </span>
           </div>
           <div className="block lg:hidden ">
             <button
               id="nav"
-              className="flex items-center px-3 py-2 border-2 rounded text-blue-700 border-blue-700 hover:text-blue-700 hover:border-blue-700"
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex items-start px-3 py-2 border-2 rounded text-black-700 border-black-700 hover:text-black-700 hover:border-black-700"
             >
               <svg
                 className="fill-current h-3 w-3"
@@ -27,22 +88,54 @@ function Header() {
           </div>
         </div>
 
-        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8">
+        <div
+          className={
+            (menuOpen ? "block " : "hidden ") +
+            "menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8"
+          }
+        >
           <div className="text-md text-black-700 lg:flex-grow">
-            <a
-              href="#responsive-header"
+            <button
+              ref={catBtnDropdownRef}
+              onClick={() =>
+                catDropDown ? closeCatDropdown() : openCatDropdown()
+              }
+              type="submit"
               className="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
             >
-              Categories
-            </a>
+              <FormattedMessage id="categories" />
+            </button>
+            <div
+              ref={catDropdownRef}
+              className={
+                (catDropDown ? "block " : "hidden ") +
+                (color === "white" ? "bg-white " : bgColor + " ") +
+                "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
+              }
+              style={{ minWidth: "12rem" }}
+            >
+              {categories &&
+                categories.map((category, index) => (
+                  <a
+                    key={index}
+                    href="#categories"
+                    className={
+                      "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
+                      (color === "white" ? " text-gray-800" : "text-white")
+                    }
+                  >
+                    {category.catName}
+                  </a>
+                ))}
+            </div>
             <a
               href="#responsive-header"
               className=" block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
             >
-              Wishlist
+              <FormattedMessage id="wishlist" />
             </a>
           </div>
-          <div className="relative mx-auto text-black-700 lg:block hidden">
+          <div className="relative mx-auto text-black-700 lg:flex hidden">
             <input
               className="border-2  bg-white h-10 pl-2 pr-8 rounded text-sm focus:outline-black-rounded-full"
               type="search"
@@ -75,8 +168,14 @@ function Header() {
               </svg>
             </button>
           </div>
-          <div className="lg:flex hidden">
+          <div className={menuOpen ? "flex " : "flex grow "}>
             <button
+              ref={profileBtnDropdownRef}
+              onClick={() => {
+                profileDropDown
+                  ? closeProfileDropdown()
+                  : openProfileDropdown();
+              }}
               type="submit"
               className="block text-md px-4 py-2 rounded text-black-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0"
             >
@@ -103,6 +202,55 @@ function Header() {
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 />
               </svg>
+              <div
+                ref={profileDropdownRef}
+                className={
+                  (profileDropDown ? "block " : "hidden ") +
+                  (color === "white" ? "bg-white " : bgColor + " ") +
+                  "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
+                }
+                style={{ minWidth: "12rem" }}
+              >
+                <a
+                  href="#categories"
+                  className={
+                    "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent" +
+                    (color === "white" ? " text-gray-800" : "text-white")
+                  }
+                >
+                  <span>Welcome</span> <br />
+                  <p className="font-light">
+                    To access account and <br /> manage orders
+                  </p>
+                  <button
+                    href="#responsive-header"
+                    className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
+                  >
+                    Login
+                  </button>
+                  <button
+                    href="#responsive-header"
+                    className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
+                  >
+                    Sign up
+                  </button>
+                </a>
+                <div className="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25" />
+
+                {profile &&
+                  profile.map((category, index) => (
+                    <a
+                      key={index}
+                      href="#categories"
+                      className={
+                        "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
+                        (color === "white" ? " text-gray-800" : "text-white")
+                      }
+                    >
+                      {category.catName}
+                    </a>
+                  ))}
+              </div>
             </button>
             <button
               type="submit"
@@ -133,6 +281,10 @@ function Header() {
               </svg>
             </button>
             <button
+              ref={langBtnDropdownRef}
+              onClick={() => {
+                dropdownPopoverShow ? closeLangDropdown() : openLangDropdown();
+              }}
               type="submit"
               className=" block text-md px-4 py-2 rounded text-black-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0"
             >
@@ -160,6 +312,47 @@ function Header() {
                 />
               </svg>
             </button>
+
+            <div
+              ref={langDropdownRef}
+              className={
+                (dropdownPopoverShow ? "block " : "hidden ") +
+                (color === "white" ? "bg-white " : bgColor + " ") +
+                "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
+              }
+              style={{ minWidth: "12rem" }}
+            >
+              <a
+                href="#lang:en"
+                className={
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
+                  (color === "white" ? " text-gray-800" : "text-white")
+                }
+                onClick={() => {
+                  changeLanguage("en");
+                  dropdownPopoverShow
+                    ? closeLangDropdown()
+                    : openLangDropdown();
+                }}
+              >
+                En - English
+              </a>
+              <a
+                href="#lang:sp"
+                className={
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
+                  (color === "white" ? " text-gray-800" : "text-white")
+                }
+                onClick={() => {
+                  changeLanguage("sp");
+                  dropdownPopoverShow
+                    ? closeLangDropdown()
+                    : openLangDropdown();
+                }}
+              >
+                Sp - Spanish
+              </a>
+            </div>
           </div>
         </div>
       </nav>
