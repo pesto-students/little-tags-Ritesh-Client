@@ -1,5 +1,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import Login from "./Login";
 import Popper from "popper.js";
 function Header({ changeLanguage }) {
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -16,6 +17,8 @@ function Header({ changeLanguage }) {
     setDropdownPopoverShow(false);
   };
 
+  // login
+  const [showModal, setShowModal] = React.useState(false);
   //categories
   const categories = [
     { id: 1, catName: "Men Clothing" },
@@ -211,8 +214,7 @@ function Header({ changeLanguage }) {
                 }
                 style={{ minWidth: "12rem" }}
               >
-                <a
-                  href="#categories"
+                <span
                   className={
                     "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent" +
                     (color === "white" ? " text-gray-800" : "text-white")
@@ -222,21 +224,23 @@ function Header({ changeLanguage }) {
                   <p className="font-light">
                     To access account and <br /> manage orders
                   </p>
-                  <button
-                    href="#responsive-header"
+                </span>
+                <div className="pr-2 pl-2 flex flex-row justify-between items-center">
+                  <a
+                    href="#login"
                     className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
+                    onClick={() => setShowModal(true)}
                   >
                     Login
-                  </button>
-                  <button
-                    href="#responsive-header"
+                  </a>
+                  <a
+                    href="#signup"
                     className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
                   >
                     Sign up
-                  </button>
-                </a>
+                  </a>
+                </div>
                 <div className="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25" />
-
                 {profile &&
                   profile.map((category, index) => (
                     <a
@@ -356,6 +360,7 @@ function Header({ changeLanguage }) {
           </div>
         </div>
       </nav>
+      <Login showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 }
