@@ -21,10 +21,10 @@ function Header({ changeLanguage }) {
   const [showModal, setShowModal] = React.useState(false);
   //categories
   const categories = [
-    { id: 1, catName: "Men Clothing" },
-    { id: 2, catName: "Women Clothing" },
-    { id: 3, catName: "Jewelry" },
-    { id: 4, catName: "Electronics" },
+    { id: 1, catName: "menClothing" },
+    { id: 2, catName: "womenClothing" },
+    { id: 3, catName: "jewelry" },
+    { id: 4, catName: "electronics" },
   ];
   const [catDropDown, setCatDropDown] = React.useState(false);
   const catBtnDropdownRef = React.createRef();
@@ -41,10 +41,10 @@ function Header({ changeLanguage }) {
 
   //profile
   const profile = [
-    { id: 1, catName: "Order History" },
-    { id: 2, catName: "Track Order" },
-    { id: 3, catName: "Contact Us" },
-    { id: 4, catName: "Edit Profile" },
+    { id: 1, catName: "orderHistory" },
+    { id: 2, catName: "trackOrder" },
+    { id: 3, catName: "contactUs" },
+    { id: 4, catName: "editProfile" },
   ];
   const [profileDropDown, setProfileDropDown] = React.useState(false);
   const profileBtnDropdownRef = React.createRef();
@@ -127,7 +127,7 @@ function Header({ changeLanguage }) {
                       (color === "white" ? " text-gray-800" : "text-white")
                     }
                   >
-                    {category.catName}
+                    <FormattedMessage id={category.catName} />
                   </a>
                 ))}
             </div>
@@ -171,7 +171,7 @@ function Header({ changeLanguage }) {
               </svg>
             </button>
           </div>
-          <div className={menuOpen ? "flex " : "flex grow "}>
+          <div className="text-md text-black-700 lg:flex-grow sm:flex">
             <button
               ref={profileBtnDropdownRef}
               onClick={() => {
@@ -188,6 +188,7 @@ function Header({ changeLanguage }) {
                 aria-hidden="true"
                 role="presentation"
                 focusable="false"
+                className="hidden sm:block"
                 style={{
                   display: "block",
                   fill: "none",
@@ -205,57 +206,65 @@ function Header({ changeLanguage }) {
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 />
               </svg>
-              <div
-                ref={profileDropdownRef}
-                className={
-                  (profileDropDown ? "block " : "hidden ") +
-                  (color === "white" ? "bg-white " : bgColor + " ") +
-                  "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
-                }
-                style={{ minWidth: "12rem" }}
-              >
-                <span
-                  className={
-                    "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent" +
-                    (color === "white" ? " text-gray-800" : "text-white")
-                  }
-                >
-                  <span>Welcome</span> <br />
-                  <p className="font-light">
-                    To access account and <br /> manage orders
-                  </p>
-                </span>
-                <div className="pr-2 pl-2 flex flex-row justify-between items-center">
-                  <a
-                    href="#login"
-                    className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
-                    onClick={() => setShowModal(true)}
-                  >
-                    Login
-                  </a>
-                  <a
-                    href="#signup"
-                    className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
-                  >
-                    Sign up
-                  </a>
-                </div>
-                <div className="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25" />
-                {profile &&
-                  profile.map((category, index) => (
-                    <a
-                      key={index}
-                      href="#categories"
-                      className={
-                        "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
-                        (color === "white" ? " text-gray-800" : "text-white")
-                      }
-                    >
-                      {category.catName}
-                    </a>
-                  ))}
-              </div>
+              <p className="text-sm font-normal text-center sm:hidden">
+                Profile
+              </p>
             </button>
+            <div
+              ref={profileDropdownRef}
+              className={
+                (profileDropDown ? "block " : "hidden ") +
+                (color === "white" ? "bg-white " : bgColor + " ") +
+                "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
+              }
+              style={{ minWidth: "12rem" }}
+            >
+              <span
+                className={
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent" +
+                  (color === "white" ? " text-gray-800" : "text-white")
+                }
+              >
+                <span>Welcome</span> <br />
+                <p className="font-light">
+                  To access account and <br /> manage orders
+                </p>
+              </span>
+              <div className="pr-2 pl-2 flex flex-row justify-between items-center">
+                <a
+                  href="#login"
+                  className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
+                  onClick={() => {
+                    setShowModal(true);
+                    profileDropDown
+                      ? closeProfileDropdown()
+                      : openProfileDropdown();
+                  }}
+                >
+                  <FormattedMessage id="login" />
+                </a>
+                <a
+                  href="#signup"
+                  className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
+                >
+                  <FormattedMessage id="signUp" />
+                </a>
+              </div>
+              <div className="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25" />
+              {profile &&
+                profile.map((p, index) => (
+                  <a
+                    key={index}
+                    href="#categories"
+                    className={
+                      "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
+                      (color === "white" ? " text-gray-800" : "text-white")
+                    }
+                  >
+                    <FormattedMessage id={p.catName} />
+                  </a>
+                ))}
+            </div>
             <button
               type="submit"
               className="block text-md px-4 py-2 rounded text-black-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0"
@@ -266,6 +275,7 @@ function Header({ changeLanguage }) {
                 aria-hidden="true"
                 role="presentation"
                 focusable="false"
+                className="hidden sm:block"
                 style={{
                   display: "block",
                   fill: "none",
@@ -283,6 +293,7 @@ function Header({ changeLanguage }) {
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 />
               </svg>
+              <p className="text-md font-normal text-center sm:hidden">Cart</p>
             </button>
             <button
               ref={langBtnDropdownRef}
@@ -298,6 +309,7 @@ function Header({ changeLanguage }) {
                 aria-hidden="true"
                 role="presentation"
                 focusable="false"
+                className="hidden sm:block"
                 style={{
                   display: "block",
                   fill: "none",
@@ -315,6 +327,7 @@ function Header({ changeLanguage }) {
                   d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"
                 />
               </svg>
+              <p className="text-sm font-normal text-center sm:hidden">Lang</p>
             </button>
 
             <div
