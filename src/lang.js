@@ -19,7 +19,7 @@ const langs = {
     login: "Login",
     signUp: "Sign Up",
     profileGreet: "To access account and",
-    manageOrders: "manage orders",
+    manageOrder: "manage orders",
     loginTitle: "Welcome to Shopkart",
     loginSubTitle: "Join / Sign in using",
     mobileLabel: "Enter a Mobile Number",
@@ -38,7 +38,8 @@ const langs = {
     electronics: "Electrónica",
     jewelry: "Joyas",
     copyright: "© Copyright 2021. Todos los derechos reservados.",
-    searchTitle: "Search",
+    searchTitle: "buscar",
+    manageOrder: "administrar pedidos",
     //
     orderHistory: "Historial de pedidos",
     trackOrder: "Orden de pista",
