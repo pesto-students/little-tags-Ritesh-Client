@@ -37,7 +37,7 @@ const langs = {
     womenClothing: "Ropa de mujeres",
     electronics: "Electrónica",
     jewelry: "Joyas",
-    copyright: "© Copyright 2021. Todos los derechos reservados.",
+    copyright: "© Derechos de autor 2021. Todos los derechos reservados.",
     searchTitle: "buscar",
     manageOrder: "administrar pedidos",
     //
