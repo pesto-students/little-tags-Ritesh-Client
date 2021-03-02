@@ -325,6 +325,7 @@ function Header({ props, changeLanguage }) {
                   display: "block",
                   height: 24,
                   width: 24,
+                  // fill: "black",
                   stroke: "currentcolor",
                   strokeWidth: 5.33333,
                   overflow: "visible",
