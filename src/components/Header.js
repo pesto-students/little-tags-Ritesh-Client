@@ -42,10 +42,10 @@ function Header({ props, changeLanguage }) {
 
   //profile
   const profile = [
-    { id: 1, catName: "orderHistory" },
-    { id: 2, catName: "trackOrder" },
-    { id: 3, catName: "contactUs" },
-    { id: 4, catName: "editProfile" },
+    { id: 1, pageName: "orderHistory" },
+    { id: 2, pageName: "trackOrder" },
+    { id: 3, pageName: "contactUs" },
+    { id: 4, pageName: "editProfile" },
   ];
   const [profileDropDown, setProfileDropDown] = React.useState(false);
   const profileBtnDropdownRef = React.createRef();
@@ -70,9 +70,12 @@ function Header({ props, changeLanguage }) {
       <nav className="flex items-center justify-between flex-wrap bg-white py-4 lg:px-12 shadow border-solid border-t-2">
         <div className="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0">
           <div className="flex items-center flex-shrink-0 text-gray-800 mr-16">
-            <span className="text-3xl md:text-4xl max-w-xl text-gray-900 leading-tight">
+            <a
+              href="/"
+              className="text-3xl md:text-4xl max-w-xl text-gray-900 leading-tight"
+            >
               <FormattedMessage id="title" />
-            </span>
+            </a>
           </div>
           <div className="block lg:hidden ">
             <button
@@ -95,7 +98,7 @@ function Header({ props, changeLanguage }) {
         <div
           className={
             (menuOpen ? "block " : "hidden ") +
-            "menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8"
+            "menu w-full lg:flex flex-grow lg:justify-between lg:items-center lg:w-auto lg:px-3 px-8"
           }
         >
           <div className="text-md text-black-700 lg:flex-grow">
@@ -133,7 +136,7 @@ function Header({ props, changeLanguage }) {
                 ))}
             </div>
             <a
-              href="#responsive-header"
+              href="/wishlist"
               className=" block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
             >
               <FormattedMessage id="wishlist" />
@@ -176,7 +179,7 @@ function Header({ props, changeLanguage }) {
               </svg>
             </button>
           </div>
-          <div className="text-md text-black-700 lg:flex-grow sm:flex">
+          <div className="text-md text-black-700 sm:flex">
             <button
               ref={profileBtnDropdownRef}
               onClick={() => {
@@ -262,18 +265,18 @@ function Header({ props, changeLanguage }) {
                 profile.map((p, index) => (
                   <a
                     key={index}
-                    href="#categories"
+                    href={`/${p.pageName}`}
                     className={
                       "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
                       (color === "white" ? " text-gray-800" : "text-white")
                     }
                   >
-                    <FormattedMessage id={p.catName} />
+                    <FormattedMessage id={p.pageName} />
                   </a>
                 ))}
             </div>
-            <button
-              type="submit"
+            <a
+              href="/cart"
               className="block text-md px-4 py-2 rounded text-black-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0"
             >
               <svg
@@ -301,8 +304,9 @@ function Header({ props, changeLanguage }) {
                 />
               </svg>
               <p className="text-md font-normal text-center sm:hidden">Cart</p>
-            </button>
-            <button
+            </a>
+            <a
+              href="#language"
               ref={langBtnDropdownRef}
               onClick={() => {
                 dropdownPopoverShow ? closeLangDropdown() : openLangDropdown();
@@ -359,21 +363,20 @@ function Header({ props, changeLanguage }) {
                 />
               </svg>
               <p className="text-sm font-normal text-center sm:hidden">Lang</p>
-            </button>
+            </a>
 
             <div
               ref={langDropdownRef}
               className={
                 (dropdownPopoverShow ? "block " : "hidden ") +
                 (color === "white" ? "bg-white " : bgColor + " ") +
-                "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
+                "text-base z-50 float-left py-2 list-none rounded shadow-lg mt-1"
               }
-              style={{ minWidth: "12rem" }}
+              // style={{ minWidth: "12rem" }}
             >
-              <a
-                href="#lang:en"
+              <button
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
+                  "text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
                   (color === "white" ? " text-gray-800" : "text-white")
                 }
                 onClick={() => {
@@ -384,11 +387,10 @@ function Header({ props, changeLanguage }) {
                 }}
               >
                 En - English
-              </a>
-              <a
-                href="#lang:sp"
+              </button>
+              <button
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
+                  "text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
                   (color === "white" ? " text-gray-800" : "text-white")
                 }
                 onClick={() => {
@@ -399,6 +401,7 @@ function Header({ props, changeLanguage }) {
                 }}
               >
                 Es -Español
+              </button>
               </a>
             </div>
           </div>
