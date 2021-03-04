@@ -17,13 +17,13 @@ function Categories() {
               backgroundImage: `url('https://images.unsplash.com/photo-1446214814726-e6074845b4ce?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=376&q=80')`,
             }}
           ></div>
-          <div className="px-5 py-3 ">
-            <h3 className="text-gray-700 uppercase">
+          <div className="px-5 py-3">
+            <h3 className="text-gray-700 uppercase ">
               <FormattedMessage id="menClothing" />
             </h3>
           </div>
         </a>
-        <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+        <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
           <div
             className="flex items-end justify-end h-56 w-full bg-cover"
             style={{
@@ -36,7 +36,7 @@ function Categories() {
             </h3>
           </div>
         </button>
-        <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+        <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
           <div
             className="flex items-end justify-end h-56 w-full bg-cover"
             style={{
@@ -49,7 +49,7 @@ function Categories() {
             </h3>
           </div>
         </button>
-        <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+        <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
           <div
             className="flex items-end justify-end h-56 w-full bg-cover"
             style={{
