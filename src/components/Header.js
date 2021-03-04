@@ -124,7 +124,7 @@ function Header({ changeLanguage }) {
                 categories.map((category, index) => (
                   <a
                     key={index}
-                    href="#categories"
+                    href="/productList"
                     className={
                       "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
                       (color === "white" ? " text-gray-800" : "text-white")

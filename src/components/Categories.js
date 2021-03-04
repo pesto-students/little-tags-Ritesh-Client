@@ -7,7 +7,10 @@ function Categories() {
         <FormattedMessage id="categoriesTitle" />
       </h3>
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mt-6">
-        <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+        <a
+          href="/productList"
+          className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
+        >
           <div
             className="flex items-end justify-end h-56 w-full bg-cover"
             style={{
@@ -19,7 +22,7 @@ function Categories() {
               <FormattedMessage id="menClothing" />
             </h3>
           </div>
-        </button>
+        </a>
         <button className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
           <div
             className="flex items-end justify-end h-56 w-full bg-cover"
