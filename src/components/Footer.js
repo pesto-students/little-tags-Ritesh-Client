@@ -4,7 +4,7 @@ function Footer() {
   return (
     <div className="bg-gray-100">
       <div
-        className="flex pb-5 px-3 m-auto pt-5 border-t text-gray-800 text-sm flex-col
+        className="flex items-center pb-5 px-3 m-auto pt-5 text-gray-800 text-sm flex-col sm:flex-row
       md:flex-row max-w-6xl"
       >
         <div className="mt-2">
