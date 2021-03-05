@@ -2,6 +2,7 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import Login from "./Login";
 import Popper from "popper.js";
+// import { Link } from "react-router-dom";
 
 function Header({ props, changeLanguage }) {
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -66,13 +67,16 @@ function Header({ props, changeLanguage }) {
     : (bgColor = "bg-" + color + "-500");
 
   return (
-    <div>
+    <>
       <nav className="flex items-center justify-between flex-wrap bg-white py-4 lg:px-12 shadow border-solid border-t-2">
         <div className="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0">
           <div className="flex items-center flex-shrink-0 text-gray-800 mr-16">
-            <span className="text-3xl md:text-4xl max-w-xl text-gray-900 leading-tight">
+            <a
+              href="/"
+              className="text-3xl md:text-4xl max-w-xl text-gray-900 leading-tight"
+            >
               <FormattedMessage id="title" />
-            </span>
+            </a>
           </div>
           <div className="block lg:hidden ">
             <button
@@ -95,7 +99,7 @@ function Header({ props, changeLanguage }) {
         <div
           className={
             (menuOpen ? "block " : "hidden ") +
-            "menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8"
+            "menu w-full flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8"
           }
         >
           <div className="text-md text-black-700 lg:flex-grow">
@@ -122,7 +126,7 @@ function Header({ props, changeLanguage }) {
                 categories.map((category, index) => (
                   <a
                     key={index}
-                    href="#categories"
+                    href="/productList"
                     className={
                       "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
                       (color === "white" ? " text-gray-800" : "text-white")
@@ -133,7 +137,7 @@ function Header({ props, changeLanguage }) {
                 ))}
             </div>
             <a
-              href="#responsive-header"
+              href="/wishlist"
               className=" block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
             >
               <FormattedMessage id="wishlist" />
@@ -262,7 +266,7 @@ function Header({ props, changeLanguage }) {
                 profile.map((p, index) => (
                   <a
                     key={index}
-                    href="#categories"
+                    href={`/${p.catName}`}
                     className={
                       "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
                       (color === "white" ? " text-gray-800" : "text-white")
@@ -310,29 +314,6 @@ function Header({ props, changeLanguage }) {
               type="submit"
               className=" block text-md px-4 py-2 rounded text-black-700 ml-2 font-bold fill-current hover:text-white mt-4 hover:bg-blue-700 lg:mt-0"
             >
-              {/* <svg
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-                aria-hidden='true'
-                role='presentation'
-                focusable='false'
-                className='hidden sm:block'
-                style={{
-                  display: "block",
-                  fill: "none",
-                  height: 24,
-                  width: 24,
-                  stroke: "currentcolor",
-                  strokeWidth: 5.33333,
-                  overflow: "visible",
-                }}>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9'
-                />
-              </svg> */}
               <svg
                 viewBox="0 0 512 512"
                 xmlns="http://www.w3.org/2000/svg"
@@ -349,7 +330,6 @@ function Header({ props, changeLanguage }) {
                   strokeWidth: 5.33333,
                   overflow: "visible",
                 }}
-                {...props}
               >
                 <path
                   strokeLinecap="round"
@@ -405,7 +385,7 @@ function Header({ props, changeLanguage }) {
         </div>
       </nav>
       <Login showModal={showModal} setShowModal={setShowModal} />
-    </div>
+    </>
   );
 }
 
