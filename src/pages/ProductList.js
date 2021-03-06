@@ -91,7 +91,7 @@ function ProductList() {
           {products &&
             products.map((product, index) => (
               <Link
-                to="/"
+                to="/productDetail"
                 key={index}
                 className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
               >
