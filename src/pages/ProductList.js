@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
+import Loading from "./Loading";
 function ProductList(props) {
   const { title } = props.location;
   const [itemList, setItemList] = useState([]);
+  const [load, setLoad] = React.useState(true);
   useEffect(() => {
     if (title) {
       fetch(`https://fakestoreapi.com/products/category/${title}`)
         .then((r) => r.json())
         .then((res) => {
           setItemList(res);
+          setLoad(false);
         })
         .catch((e) => {
           alert(e);
+          setLoad(false);
         });
     } else {
       props.history.goBack();
     }
-  }, [title]);
-
+  }, [title, props.history]);
+  if (load) {
+    return <Loading />;
+  }
   return (
     <main className="my-8">
       <div className="container mx-auto px-6">
