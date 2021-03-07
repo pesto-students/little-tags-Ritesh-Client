@@ -8,7 +8,7 @@ const langs = {
     menClothing: "Men Clothing",
     womenClothing: "Women Clothing",
     electronics: "Electronics",
-    jewelry: "Jewelry",
+    jewelery: "Jewelery",
     copyright: "© Copyright 2021. All Rights Reserved.",
     searchTitle: "Search",
     //
@@ -36,7 +36,7 @@ const langs = {
     menClothing: "Ropa de hombre",
     womenClothing: "Ropa de mujeres",
     electronics: "Electrónica",
-    jewelry: "Joyas",
+    jewelery: "Joyas",
     copyright: "© Derechos de autor 2021. Todos los derechos reservados.",
     searchTitle: "buscar",
     manageOrder: "administrar pedidos",
