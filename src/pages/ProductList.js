@@ -10,7 +10,11 @@ function ProductList(props) {
   const [load, setLoad] = React.useState(true);
   useEffect(() => {
     if (title) {
-      fetch(`https://fakestoreapi.com/products/category/${title}`)
+      let titleQuery = title;
+      if (title === "jewelry") {
+        titleQuery = "jewelery";
+      }
+      fetch(`https://fakestoreapi.com/products/category/${titleQuery}`)
         .then((r) => r.json())
         .then((res) => {
           setItemList(res);
@@ -53,7 +57,7 @@ function ProductList(props) {
   };
   const lowToHigh = () => {
     // setItemList(itemList.sort());
-    console.log('done');
+    console.log("done");
   };
 
   if (load) {
@@ -81,20 +85,17 @@ function ProductList(props) {
               onClick={() => {
                 sortDropDown ? closeSortDropdown() : openSortDropdown();
               }}
-              className="flex items-center text-gray-700 px-3 py-1 border font-medium rounded"
-            >
+              className="flex items-center text-gray-700 px-3 py-1 border font-medium rounded">
               <span className="text-lg pr-2">Sort</span>
               <svg
                 viewBox="0 0 24 24"
                 preserveAspectRatio="xMidYMid meet"
-                className="w-5 h-5 mr-1"
-              >
+                className="w-5 h-5 mr-1">
                 <g className="">
                   <path d="M0 0h24v24H0z" fill="none" className=""></path>
                   <path
                     d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"
-                    className=""
-                  ></path>
+                    className=""></path>
                 </g>
               </svg>
             </button>
@@ -121,8 +122,7 @@ function ProductList(props) {
                     } else {
                       highToLow();
                     }
-                  }}
-                >
+                  }}>
                   {s.name}
                 </a>
               ))}
@@ -140,15 +140,13 @@ function ProductList(props) {
                   category: { title },
                 }}
                 key={index}
-                className="relative hover-trigger w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-              >
+                className="relative hover-trigger w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
                 <div
                   className="flex items-end justify-end h-56 w-full bg-contain bg-no-repeat"
                   style={{
                     backgroundImage: `url(${item.image})`,
                     backgroundPosition: "center",
-                  }}
-                >
+                  }}>
                   {/* <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                     <svg
                       className="w-6 h-6"
@@ -186,32 +184,27 @@ function ProductList(props) {
           <div className="flex rounded-md mt-8">
             <Link
               to="#"
-              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-blue-500 hover:text-white"
-            >
+              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-blue-500 hover:text-white">
               <span>Previous</span>
             </Link>
             <Link
               to="#"
-              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white"
-            >
+              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white">
               <span>1</span>
             </Link>
             <Link
               to="#"
-              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white"
-            >
+              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white">
               <span>2</span>
             </Link>
             <Link
               to="#"
-              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white"
-            >
+              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white">
               <span>3</span>
             </Link>
             <Link
               to="#"
-              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 rounded-r hover:bg-blue-500 hover:text-white"
-            >
+              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 rounded-r hover:bg-blue-500 hover:text-white">
               <span>Next</span>
             </Link>
           </div>
