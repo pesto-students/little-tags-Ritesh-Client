@@ -5,19 +5,19 @@ function Search() {
   const items = [
     {
       id: 0,
-      name: "Cobol",
+      name: "MEN CLOTHING",
     },
     {
       id: 1,
-      name: "JavaScript",
+      name: "WOMEN CLOTHING",
     },
     {
       id: 2,
-      name: "Basic",
+      name: "JEWELRY",
     },
     {
       id: 3,
-      name: "PHP",
+      name: "ELECTRONICS",
     },
     {
       id: 4,
@@ -41,7 +41,7 @@ function Search() {
   };
 
   return (
-    <FormattedMessage id="searchTitle" defaultMessage="search">
+    <FormattedMessage id='searchTitle' defaultMessage='search'>
       {(placeholder) => {
         return (
           <ReactSearchAutocomplete
