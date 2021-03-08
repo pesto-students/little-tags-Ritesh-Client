@@ -67,7 +67,12 @@ function ProductList(props) {
           {itemList &&
             itemList.map((item, index) => (
               <Link
-                to="/productDetail"
+                to={{
+                  pathname: "/productDetail",
+                  search: `${item.title}`,
+                  data: { item },
+                  category: { title },
+                }}
                 key={index}
                 className="relative hover-trigger w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
               >

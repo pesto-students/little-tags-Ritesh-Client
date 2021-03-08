@@ -20,10 +20,10 @@ function App() {
     setLocale(lang);
   };
   return (
-    <IntlProvider locale={locale} messages={langs[locale]}>
-      <div className="flex flex-col h-screen justify-between h-screen">
-        <Header changeLanguage={changeLanguage} />
-        <Router>
+    <Router>
+      <IntlProvider locale={locale} messages={langs[locale]}>
+        <div className="flex flex-col h-screen justify-between h-screen">
+          <Header changeLanguage={changeLanguage} />
           <Switch>
             <Route path="/wishlist">
               <Wishlist />
@@ -56,10 +56,10 @@ function App() {
               <Home />
             </Route>
           </Switch>
-        </Router>
-        <Footer />
-      </div>
-    </IntlProvider>
+          <Footer />
+        </div>
+      </IntlProvider>
+    </Router>
   );
 }
 

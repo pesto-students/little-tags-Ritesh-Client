@@ -46,7 +46,6 @@ function Categories() {
               search: `${cat.catName}`,
               title: `${cat.title}`,
             }}
-            params={{ testvalue: "hello" }}
             className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
           >
             <div
