@@ -3,7 +3,7 @@ import { FormattedMessage } from "react-intl";
 import Login from "./Login";
 import Popper from "popper.js";
 // import { Link } from "react-router-dom";
-
+import Search from "./Search";
 function Header({ props, changeLanguage }) {
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -152,44 +152,9 @@ function Header({ props, changeLanguage }) {
               <FormattedMessage id="wishlist" />
             </a>
           </div>
-          <div className="flex flex-row justify-between items-center">
-            <div className="relative text-black-700 lg:flex hidden">
-              <FormattedMessage id="searchTitle" defaultMessage="search">
-                {(placeholder) => (
-                  <input
-                    className="border-2  bg-white h-10 pl-2 pr-8 rounded text-sm focus:outline-black-rounded-full"
-                    type="search"
-                    name="search"
-                    placeholder={placeholder}
-                  />
-                )}
-              </FormattedMessage>
-              <button
-                type="submit"
-                className="absolute right-0 top-0 mt-3 mr-2 text-black-700"
-              >
-                <svg
-                  viewBox="0 0 32 32"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  role="presentation"
-                  focusable="false"
-                  style={{
-                    display: "block",
-                    fill: "none",
-                    height: 16,
-                    width: 16,
-                    stroke: "currentcolor",
-                    strokeWidth: 5.33333,
-                    overflow: "visible",
-                  }}
-                >
-                  <g fill="none">
-                    <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path>
-                  </g>
-                </svg>
-              </button>
-            </div>
+          <div className="w-full sm:w-1/4">
+            <Search />
+          </div>                   
             <div className="text-md text-black-700 lg:flex-grow sm:flex">
               <div
                 onMouseEnter={() => {
