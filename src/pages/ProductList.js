@@ -88,7 +88,7 @@ function ProductList(props) {
           {itemList &&
             itemList.map((item, index) => (
               <Link
-                to="/"
+                to="/productDetail"
                 key={index}
                 className="relative hover-trigger w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
               >
