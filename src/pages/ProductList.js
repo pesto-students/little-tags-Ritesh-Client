@@ -1,44 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-function ProductList() {
-  const products = [
-    {
-      id: 1,
-      pName: "Old watch",
-      pImg:
-        "https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80",
-      price: 1850,
-    },
-    {
-      id: 2,
-      pName: "Classic watch",
-      pImg:
-        "https://images.unsplash.com/photo-1495856458515-0637185db551?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
-      price: 1260,
-    },
-    {
-      id: 3,
-      pName: "Old watch",
-      pImg:
-        "https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80",
-      price: 1260,
-    },
-    {
-      id: 4,
-      pName: "Classic watch",
-      pImg:
-        "https://images.unsplash.com/photo-1495856458515-0637185db551?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
-      price: 1260,
-    },
-  ];
-
+import { withRouter } from "react-router";
+import Loading from "./Loading";
+function ProductList(props) {
+  const { title } = props.location;
+  const [itemList, setItemList] = useState([]);
+  const [load, setLoad] = React.useState(true);
+  useEffect(() => {
+    if (title) {
+      fetch(`https://fakestoreapi.com/products/category/${title}`)
+        .then((r) => r.json())
+        .then((res) => {
+          setItemList(res);
+          setLoad(false);
+        })
+        .catch((e) => {
+          alert(e);
+          setLoad(false);
+        });
+    } else {
+      props.history.goBack();
+    }
+  }, [title, props.history]);
+  if (load) {
+    return <Loading />;
+  }
   return (
     <main className="my-8">
       <div className="container mx-auto px-6">
         <div className="flex justify-between sm:flex-row flex-col sm:items-center">
           <div>
-            <h3 className="text-gray-700 text-2xl font-medium">Product List</h3>
-            <span className="mt-3 text-sm text-gray-500">200+ Products</span>
+            <h3 className="text-gray-700 text-2xl font-medium capitalize">
+              {title}
+            </h3>
+            <span className="mt-3 text-sm text-gray-500">
+              {itemList.length} Products
+            </span>
           </div>
           <div className="flex justify-between items-center">
             <div className="relative max-w-lg items-end pr-2">
@@ -88,22 +85,23 @@ function ProductList() {
           </div>
         </div>
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
-          {products &&
-            products.map((product, index) => (
+          {itemList &&
+            itemList.map((item, index) => (
               <Link
                 to="/"
                 key={index}
-                className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
+                className="relative hover-trigger w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
               >
                 <div
-                  className="flex items-end justify-end h-56 w-full bg-cover"
+                  className="flex items-end justify-end h-56 w-full bg-contain bg-no-repeat"
                   style={{
-                    backgroundImage: `url(${product.pImg})`,
+                    backgroundImage: `url(${item.image})`,
+                    backgroundPosition: "center",
                   }}
                 >
-                  <div className="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                  {/* <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                     <svg
-                      className="h-5 w-5"
+                      className="w-6 h-6"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -113,11 +111,23 @@ function ProductList() {
                     >
                       <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
-                  </div>
+                  </div> */}
                 </div>
-                <div className="px-5 py-3">
-                  <h3 className="text-gray-700 uppercase">{product.pName}</h3>
-                  <span className="text-gray-500 mt-2">{product.price}</span>
+                <div className="pb-4">
+                  <div className="px-5 py-3">
+                    <h3 className="text-gray-700 capitalize truncate">
+                      {item.title}
+                    </h3>
+                    <span className="text-gray-500 mt-2">${item.price}</span>
+                  </div>
+                  {/* <div className="hover-target flex justify-around items-center">
+                    <button className="transition duration-500 ease-in-out bg-blue-600 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 text-white py-2 px-4  rounded">
+                      Add to cart
+                    </button>
+                    <button className="text-white py-2 px-4 bg-blue-700 rounded">
+                      Move to wishlist
+                    </button>
+                  </div> */}
                 </div>
               </Link>
             ))}
@@ -161,4 +171,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default withRouter(ProductList);
