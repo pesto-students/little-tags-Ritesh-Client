@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Search from "../components/Search";
-function ProductList() {
 import { withRouter } from "react-router";
 import Loading from "./Loading";
 function ProductList(props) {
