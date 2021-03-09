@@ -142,7 +142,7 @@ function ProductList(props) {
                   category: { title },
                 }}
                 key={index}
-                className="relative hover-trigger w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
+                className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
               >
                 <div
                   className="flex items-end justify-end h-56 w-full bg-contain bg-no-repeat"
