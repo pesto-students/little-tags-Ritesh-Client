@@ -48,12 +48,16 @@ function ProductList(props) {
     : (bgColor = "bg-" + color + "-500");
 
   const highToLow = () => {
-    // setItemList(itemList.sort());
-    console.log("done");
+    const temp = itemList.sort((a, b) =>
+      a.price < b.price ? 1 : b.price < a.price ? -1 : 0
+    );
+    setItemList(temp);
   };
   const lowToHigh = () => {
-    // setItemList(itemList.sort());
-    console.log('done');
+    const temp = itemList.sort((a, b) =>
+      a.price > b.price ? 1 : b.price > a.price ? -1 : 0
+    );
+    setItemList(temp);
   };
 
   if (load) {
@@ -108,15 +112,15 @@ function ProductList(props) {
               // style={{ minWidth: "12rem" }}
             >
               {sortList.map((s, index) => (
-                <a
+                <button
                   key={index}
-                  href="#sort"
                   className={
                     "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
                     (color === "white" ? " text-gray-800" : "text-white")
                   }
                   onClick={() => {
-                    if (s.name.includes("low")) {
+                    sortDropDown ? closeSortDropdown() : openSortDropdown();
+                    if (s.id === 1) {
                       lowToHigh();
                     } else {
                       highToLow();
@@ -124,7 +128,7 @@ function ProductList(props) {
                   }}
                 >
                   {s.name}
-                </a>
+                </button>
               ))}
             </div>
           </div>
