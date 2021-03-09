@@ -19,10 +19,6 @@ function Search() {
       id: 3,
       name: "ELECTRONICS",
     },
-    {
-      id: 4,
-      name: "Java",
-    },
   ];
 
   const handleOnSearch = (string, results) => {
@@ -41,7 +37,7 @@ function Search() {
   };
 
   return (
-    <FormattedMessage id='searchTitle' defaultMessage='search'>
+    <FormattedMessage id="searchTitle" defaultMessage="search">
       {(placeholder) => {
         return (
           <ReactSearchAutocomplete
