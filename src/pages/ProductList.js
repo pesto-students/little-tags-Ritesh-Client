@@ -56,8 +56,6 @@ function ProductList(props) {
     console.log("done");
   };
 
-  console.log(props.location);
-
   if (load) {
     return <Loading />;
   }
@@ -152,7 +150,7 @@ function ProductList(props) {
                   }}
                 >
                   <button
-                    class="
+                    className="
                     transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 p-2 rounded-full mx-5 -mb-4  focus:outline-none
                     flex-none flex items-center justify-center w-9 h-9 text-gray-400 border border-blue-500 hover:animate-ping"
                     type="button"
@@ -162,11 +160,11 @@ function ProductList(props) {
                       width="20"
                       height="20"
                       fill="currentColor"
-                      class="fill-current text-blue-500"
+                      className="fill-current text-blue-500"
                     >
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
                       />
                     </svg>
