@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Search from "../components/Search";
+// import Search from "../components/Search";
 import { withRouter } from "react-router";
 import Loading from "./Loading";
 import Popper from "popper.js";
@@ -55,6 +55,7 @@ function ProductList(props) {
     setItemList(temp);
   };
   const lowToHigh = () => {
+
     const temp = itemList.sort((a, b) =>
       a.price > b.price ? 1 : b.price > a.price ? -1 : 0
     );
@@ -67,19 +68,19 @@ function ProductList(props) {
   return (
     <main className="my-8">
       <div className="container mx-auto px-6">
-        <div className="flex justify-between sm:flex-row flex-col sm:items-center">
+        <div className="flex justify-between flex-row sm:items-center">
           <div>
-            <h3 className="text-gray-700 text-2xl font-medium capitalize">
+            <h3 className="text-gray-700 sm:text-2xl text-md font-medium capitalize">
+              <Link to="/" className="text-gray-500 pr-2">
+                Home /
+              </Link>
               {title}
             </h3>
             <span className="mt-3 text-sm text-gray-500">
               {itemList.length} Products
             </span>
           </div>
-          <div className="sm:w-1/2 w-auto flex flex-col sm:flex-row justify-between item-center">
-            <div className="w-full sm:w-2/3 -mr-4">
-              <Search />
-            </div>
+          <div className="sm:w-1/3 w-auto flex sm:justify-end justify-start">
             <button
               type="button"
               ref={sortBtnDropdownRef}
@@ -147,7 +148,7 @@ function ProductList(props) {
                   category: { title },
                 }}
                 key={index}
-                className="relative hover-trigger w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
+                className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
               >
                 <div
                   className="flex items-end justify-end h-56 w-full bg-contain bg-no-repeat"
@@ -156,73 +157,80 @@ function ProductList(props) {
                     backgroundPosition: "center",
                   }}
                 >
-                  {/* <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                  <button
+                    className="
+                    transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 p-2 rounded-full mx-5 -mb-4  focus:outline-none
+                    flex-none flex items-center justify-center w-9 h-9 text-gray-400 border border-blue-500 hover:animate-ping"
+                    type="button"
+                    aria-label="like"
+                  >
                     <svg
-                      className="w-6 h-6"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      className="fill-current text-blue-500"
                     >
-                      <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                      />
                     </svg>
-                  </div> */}
+                  </button>
                 </div>
                 <div className="pb-4">
                   <div className="px-5 py-3">
                     <h3 className="text-gray-700 capitalize truncate">
                       {item.title}
                     </h3>
-                    <span className="text-gray-500 mt-2">${item.price}</span>
+                    <span className="text-gray-500 mt-2 font-medium">
+                      ${item.price}
+                      <span className="mx-2 text-xs line-through">
+                        ${(item.price + (item.price * 35) / 100).toFixed(2)}
+                      </span>
+                      <span className="text-blue-700 text-xs">(35% off)</span>
+                    </span>
                   </div>
-                  {/* <div className="hover-target flex justify-around items-center">
-                    <button className="transition duration-500 ease-in-out bg-blue-600 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 text-white py-2 px-4  rounded">
-                      Add to cart
-                    </button>
-                    <button className="text-white py-2 px-4 bg-blue-700 rounded">
-                      Move to wishlist
-                    </button>
-                  </div> */}
                 </div>
               </Link>
             ))}
         </div>
-        <div className="flex justify-center">
-          <div className="flex rounded-md mt-8">
-            <Link
-              to="#"
-              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-blue-500 hover:text-white"
-            >
-              <span>Previous</span>
-            </Link>
-            <Link
-              to="#"
-              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white"
-            >
-              <span>1</span>
-            </Link>
-            <Link
-              to="#"
-              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white"
-            >
-              <span>2</span>
-            </Link>
-            <Link
-              to="#"
-              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white"
-            >
-              <span>3</span>
-            </Link>
-            <Link
-              to="#"
-              className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 rounded-r hover:bg-blue-500 hover:text-white"
-            >
-              <span>Next</span>
-            </Link>
+        {itemList.length > 12 ? (
+          <div className="flex justify-center">
+            <div className="flex rounded-md mt-8">
+              <Link
+                to="#"
+                className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-blue-500 hover:text-white"
+              >
+                <span>Previous</span>
+              </Link>
+              <Link
+                to="#"
+                className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white"
+              >
+                <span>1</span>
+              </Link>
+              <Link
+                to="#"
+                className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white"
+              >
+                <span>2</span>
+              </Link>
+              <Link
+                to="#"
+                className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-blue-500 hover:text-white"
+              >
+                <span>3</span>
+              </Link>
+              <Link
+                to="#"
+                className="py-2 px-4 leading-tight bg-white border border-gray-200 text-blue-700 rounded-r hover:bg-blue-500 hover:text-white"
+              >
+                <span>Next</span>
+              </Link>
+            </div>
           </div>
-        </div>
+        ) : undefined}
       </div>
     </main>
   );
