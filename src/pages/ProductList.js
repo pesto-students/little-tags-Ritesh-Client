@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import data from "../locatlData/data";
 import { withRouter } from "react-router";
 import Loading from "./Loading";
 import Popper from "popper.js";
@@ -9,16 +10,20 @@ function ProductList(props) {
   const [load, setLoad] = React.useState(true);
   useEffect(() => {
     if (title) {
-      fetch(`https://fakestoreapi.com/products/category/${title}`)
-        .then((r) => r.json())
-        .then((res) => {
-          setItemList(res);
-          setLoad(false);
-        })
-        .catch((e) => {
-          alert(e);
-          setLoad(false);
-        });
+      setTimeout(() => {
+        setItemList(data.filter((d) => d.category === title));
+        setLoad(false);
+      }, 3 * 1000);
+      // fetch(`https://fakestoreapi.com/products/category/${title}`)
+      //   .then((r) => r.json())
+      //   .then((res) => {
+      //     setItemList(res);
+      //     setLoad(false);
+      //   })
+      //   .catch((e) => {
+      //     alert(e);
+      //     setLoad(false);
+      //   });
     } else {
       props.history.goBack();
     }
