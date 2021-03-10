@@ -71,7 +71,7 @@ function ProductList(props) {
   return (
     <main className="my-8">
       <div className="container mx-auto px-6">
-        <div className="flex justify-between flex-row sm:items-center">
+        <div className="w-full flex justify-between flex-row items-center">
           <div>
             <h3 className="text-gray-700 sm:text-2xl text-md font-medium capitalize">
               <Link to="/" className="text-gray-500 pr-2">
@@ -79,18 +79,18 @@ function ProductList(props) {
               </Link>
               {title}
             </h3>
-            <span className="mt-3 text-sm text-gray-500">
+            <span className="mt-3 sm:text-sm text-xs text-gray-500">
               {itemList.length} Products
             </span>
           </div>
-          <div className="sm:w-1/3 w-auto flex sm:justify-end justify-start">
+          <div className="w-9/12 sm:w-auto">
             <button
               type="button"
               ref={sortBtnDropdownRef}
               onClick={() => {
                 sortDropDown ? closeSortDropdown() : openSortDropdown();
               }}
-              className="sm:w-1/3 w-7/12 sm:text-sm text-xs flex justify-between items-center text-gray-700 px-3 py-1 border font-medium rounded"
+              className="w-full sm:text-sm text-xs flex justify-between items-center text-gray-700 px-3 py-1 border font-medium rounded"
             >
               <span className="pr-2 w-auto">Sort : {sortByTitle}</span>
               <svg
@@ -112,9 +112,8 @@ function ProductList(props) {
               className={
                 (sortDropDown ? "block " : "hidden ") +
                 (color === "white" ? "bg-white " : bgColor + " ") +
-                "w-1/3 sm:w-auto text-base z-50 float-left px-3 py-2 text-left rounded shadow-lg"
+                "sm:w-48 w-48 text-base z-50 float-left text-left rounded shadow-lg"
               }
-              style={{ minWidth: "13rem" }}
             >
               {sortList.map((s, index) => (
                 <button
