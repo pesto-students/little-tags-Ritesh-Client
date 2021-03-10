@@ -30,6 +30,7 @@ function ProductList(props) {
     { id: 2, name: "Price high to low" },
   ];
   const [sortDropDown, setSortDropDown] = React.useState(false);
+  const [sortByTitle, setSortByTitle] = React.useState("Recommended");
   const sortBtnDropdownRef = React.createRef();
   const sortDropdownRef = React.createRef();
   const openSortDropdown = () => {
@@ -48,12 +49,17 @@ function ProductList(props) {
     : (bgColor = "bg-" + color + "-500");
 
   const highToLow = () => {
-    // setItemList(itemList.sort());
-    console.log("done");
+    const temp = itemList.sort((a, b) =>
+      a.price < b.price ? 1 : b.price < a.price ? -1 : 0
+    );
+    setItemList(temp);
   };
   const lowToHigh = () => {
-    // setItemList(itemList.sort());
-    console.log("done");
+
+    const temp = itemList.sort((a, b) =>
+      a.price > b.price ? 1 : b.price > a.price ? -1 : 0
+    );
+    setItemList(temp);
   };
 
   if (load) {
@@ -81,9 +87,9 @@ function ProductList(props) {
               onClick={() => {
                 sortDropDown ? closeSortDropdown() : openSortDropdown();
               }}
-              className="flex items-center text-gray-700 px-3 py-1 border font-medium rounded"
+              className="sm:w-1/3 w-7/12 sm:text-sm text-xs flex justify-between items-center text-gray-700 px-3 py-1 border font-medium rounded"
             >
-              <span className="text-lg pr-2">Sort</span>
+              <span className="pr-2 w-auto">Sort : {sortByTitle}</span>
               <svg
                 viewBox="0 0 24 24"
                 preserveAspectRatio="xMidYMid meet"
@@ -103,28 +109,30 @@ function ProductList(props) {
               className={
                 (sortDropDown ? "block " : "hidden ") +
                 (color === "white" ? "bg-white " : bgColor + " ") +
-                "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg"
+                "w-1/3 sm:w-auto text-base z-50 float-left px-3 py-2 text-left rounded shadow-lg"
               }
-              // style={{ minWidth: "12rem" }}
+              style={{ minWidth: "13rem" }}
             >
               {sortList.map((s, index) => (
-                <a
+                <button
                   key={index}
-                  href="#sort"
                   className={
-                    "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
+                    "w-full text-left text-xs sm:text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white" +
                     (color === "white" ? " text-gray-800" : "text-white")
                   }
                   onClick={() => {
-                    if (s.name.includes("low")) {
+                    sortDropDown ? closeSortDropdown() : openSortDropdown();
+                    if (s.id === 1) {
                       lowToHigh();
+                      setSortByTitle(s.name);
                     } else {
                       highToLow();
+                      setSortByTitle(s.name);
                     }
                   }}
                 >
                   {s.name}
-                </a>
+                </button>
               ))}
             </div>
           </div>
