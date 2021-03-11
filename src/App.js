@@ -48,7 +48,7 @@ function App() {
           <Route path="/contactUs">
             <ContactUs />
           </Route>
-          <Route path="/cart">
+          <Route path="/checkout">
             <Checkout />
           </Route>
           <Route path="/">
