@@ -297,9 +297,11 @@ function Navbar(props) {
                   ))}
               </div>
             </div>
-
             {/* cart */}
-            <button className=" p-1 rounded-md  px-4 py-2 text-black-700 fill-current hover:text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <a
+              href="/checkout"
+              className=" p-1 rounded-md  px-4 py-2 text-black-700 fill-current hover:text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+            >
               <span className="sr-only">cart</span>
               <svg
                 className="h-6 w-6"
@@ -316,7 +318,7 @@ function Navbar(props) {
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 />
               </svg>
-            </button>
+            </a>
             {/* globe */}
             {/* globe for mobile  */}
             <button
