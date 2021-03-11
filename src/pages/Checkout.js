@@ -11,6 +11,10 @@ function Checkout() {
     setLoad(false);
   }, []);
 
+  const handleStepper = () => {
+    setStepperName("Address");
+  };
+
   if (load) {
     return <Loading />;
   }
@@ -137,7 +141,7 @@ function Checkout() {
             </div>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-between mt-12 ">
+        <div className="flex flex-row justify-between mt-12 i ">
           <div className="w-3/4 shadow-md rounded-b-md mr-2">
             {itemList.map((item) => (
               <div
@@ -201,9 +205,9 @@ function Checkout() {
                   className="w-5 h-5"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
                   />
                 </svg>
@@ -219,7 +223,7 @@ function Checkout() {
               <span className="text-sm uppercase font-medium tracking-normal">
                 gifting and personalization
               </span>
-              <div className="h-28 my-1 bg-blue-100 border-gray-700 border-1 shadow-inner flex flex-row justify-between items-center">
+              <div className="h-28 my-1 bg-blue-100 border-gray-700 border-1 shadow-inner flex flex-row justify-between">
                 <div className="w-1/3 flex justify-center items-center font-normal">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -227,9 +231,9 @@ function Checkout() {
                     className="fill-current text-blue-500 font-hairline"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                     <path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z" />
                   </svg>
@@ -273,7 +277,10 @@ function Checkout() {
                     <span>$571.34</span>
                   </div>
                 </div>
-                <button className="text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white">
+                <button
+                  onClick={handleStepper}
+                  className="text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
+                >
                   Place order
                 </button>
               </div>
