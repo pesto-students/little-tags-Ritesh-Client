@@ -21,44 +21,42 @@ function App() {
   };
   return (
     <IntlProvider locale={locale} messages={langs[locale]}>
-      <div className="flex flex-col h-screen justify-between h-screen">
-        <Header changeLanguage={changeLanguage} />
-        <Router>
-          <Switch>
-            <Route path="/wishlist">
-              <Wishlist />
-            </Route>
-            <Route path="/trackOrder">
-              <TrackOrder />
-            </Route>
-            <Route path="/thanks">
-              <Thanks />
-            </Route>
-            <Route path="/productList">
-              <ProductList />
-            </Route>
-            <Route path="/productDetail">
-              <ProductDetail />
-            </Route>
-            <Route path="/orderHistory">
-              <OrderHistory />
-            </Route>
-            <Route path="/editProfile">
-              <EditProfile />
-            </Route>
-            <Route path="/contactUs">
-              <ContactUs />
-            </Route>
-            <Route path="/checkout">
-              <Checkout />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </Router>
-        <Footer />
-      </div>
+      <Header changeLanguage={changeLanguage} />
+      <Router>
+        <Switch>
+          <Route path="/wishlist">
+            <Wishlist />
+          </Route>
+          <Route path="/trackOrder">
+            <TrackOrder />
+          </Route>
+          <Route path="/thanks">
+            <Thanks />
+          </Route>
+          <Route path="/productList">
+            <ProductList />
+          </Route>
+          <Route path="/productDetail">
+            <ProductDetail />
+          </Route>
+          <Route path="/orderHistory">
+            <OrderHistory />
+          </Route>
+          <Route path="/editProfile">
+            <EditProfile />
+          </Route>
+          <Route path="/contactUs">
+            <ContactUs />
+          </Route>
+          <Route path="/checkout">
+            <Checkout />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+      <Footer />
     </IntlProvider>
   );
 }
