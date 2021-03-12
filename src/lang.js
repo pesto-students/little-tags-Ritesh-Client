@@ -8,7 +8,7 @@ const langs = {
     menClothing: "Men Clothing",
     womenClothing: "Women Clothing",
     electronics: "Electronics",
-    jewelery: "Jewelery",
+    jewelry: "Jewelry",
     copyright: "© Copyright 2021. All Rights Reserved.",
     searchTitle: "Search",
     //
@@ -27,7 +27,7 @@ const langs = {
     loginFooter: "By Signing In, I agree to",
     toc: "Terms and Conditions",
   },
-  sp: {
+  es: {
     title: "ShopKart",
     categories: "Categorias",
     wishlist: "Lista de deseos",
@@ -36,7 +36,7 @@ const langs = {
     menClothing: "Ropa de hombre",
     womenClothing: "Ropa de mujeres",
     electronics: "Electrónica",
-    jewelery: "Joyas",
+    jewelry: "Joyas",
     copyright: "© Derechos de autor 2021. Todos los derechos reservados.",
     searchTitle: "buscar",
     manageOrder: "administrar pedidos",

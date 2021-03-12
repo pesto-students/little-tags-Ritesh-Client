@@ -10,7 +10,7 @@ function LangDropDownMenu(props) {
   } = props;
   const languageList = [
     { id: 1, langCode: "en", langName: "English" },
-    { id: 2, langCode: "sp", langName: "Español" },
+    { id: 2, langCode: "es", langName: "Español" },
   ];
   return (
     <div
