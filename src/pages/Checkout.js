@@ -13,7 +13,7 @@ function Checkout() {
       setItemList(data.slice(3, 6));
       // setItemList([]);
       setLoad(false);
-    }, 0 * 1000);
+    }, 3 * 1000);
   }, []);
 
   const [currentStep, setCurrentStep] = useState(1);
