@@ -88,7 +88,10 @@ function Navbar(props) {
           </div>
           <div className="absolute inset-y-0 right-0 flex sm:space-x-3 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <ProfileDropdown setShowModal={setShowModal} />
-            <button className=" p-1 rounded-md  px-4 py-2 text-black-700 fill-current hover:text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <a
+              href="/checkout"
+              className=" p-1 rounded-md  px-4 py-2 text-black-700 fill-current hover:text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+            >
               <span className="sr-only">cart</span>
               <svg
                 className="h-6 w-6"
@@ -105,7 +108,7 @@ function Navbar(props) {
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 />
               </svg>
-            </button>
+            </a>
             <LangDropdown changeLanguage={changeLanguage} />
           </div>
         </div>
