@@ -1,5 +1,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
 function ProfileDropDownMenu(props) {
   const {
     profileDropdownRef,
@@ -36,8 +37,8 @@ function ProfileDropDownMenu(props) {
         </p>
       </span>
       <div className="pr-2 pl-2 flex flex-row justify-between items-center">
-        <a
-          href="#login"
+        <Link
+          to="#login"
           className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
           onClick={() => {
             setShowModal(true);
@@ -45,26 +46,26 @@ function ProfileDropDownMenu(props) {
           }}
         >
           <FormattedMessage id="login" />
-        </a>
-        <a
-          href="#signup"
+        </Link>
+        <Link
+          to="#signup"
           className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
         >
           <FormattedMessage id="signUp" />
-        </a>
+        </Link>
       </div>
       <div className="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25" />
       {profile &&
         profile.map((p, index) => (
-          <a
+          <Link
             key={index}
-            href={`/${p.catName}`}
+            to={`/${p.catName}`}
             className={
               "text-gray-800 text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white"
             }
           >
             <FormattedMessage id={p.catName} />
-          </a>
+          </Link>
         ))}
     </div>
   );

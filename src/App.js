@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Checkout from "./pages/Checkout";
 import ContactUs from "./pages/ContactUs";
 import EditProfile from "./pages/EditProfile";
@@ -22,40 +22,38 @@ function App() {
   return (
     <IntlProvider locale={locale} messages={langs[locale]}>
       <Header changeLanguage={changeLanguage} />
-      <Router>
-        <Switch>
-          <Route path="/wishlist">
-            <Wishlist />
-          </Route>
-          <Route path="/trackOrder">
-            <TrackOrder />
-          </Route>
-          <Route path="/thanks">
-            <Thanks />
-          </Route>
-          <Route path="/productList">
-            <ProductList />
-          </Route>
-          <Route path="/productDetail">
-            <ProductDetail />
-          </Route>
-          <Route path="/orderHistory">
-            <OrderHistory />
-          </Route>
-          <Route path="/editProfile">
-            <EditProfile />
-          </Route>
-          <Route path="/contactUs">
-            <ContactUs />
-          </Route>
-          <Route path="/checkout">
-            <Checkout />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
+      <Switch>
+        <Route path="/wishlist">
+          <Wishlist />
+        </Route>
+        <Route path="/trackOrder">
+          <TrackOrder />
+        </Route>
+        <Route path="/thanks">
+          <Thanks />
+        </Route>
+        <Route path="/productList">
+          <ProductList />
+        </Route>
+        <Route path="/productDetail">
+          <ProductDetail />
+        </Route>
+        <Route path="/orderHistory">
+          <OrderHistory />
+        </Route>
+        <Route path="/editProfile">
+          <EditProfile />
+        </Route>
+        <Route path="/contactUs">
+          <ContactUs />
+        </Route>
+        <Route path="/checkout">
+          <Checkout />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
       <Footer />
     </IntlProvider>
   );

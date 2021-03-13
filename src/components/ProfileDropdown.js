@@ -47,7 +47,7 @@ function ProfileDropdown(props) {
       onMouseLeave={() => {
         if (profileDropDown) closeProfileDropdown();
       }}
-      //   className="hidden sm:block"
+      className="hidden sm:block"
     >
       <button
         ref={profileBtnDropdownRef}

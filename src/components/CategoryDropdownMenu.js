@@ -1,5 +1,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
 function CategoryDropdownMenu(props) {
   const { catDropdownRef, catDropDown } = props;
   const categories = [
@@ -19,15 +20,15 @@ function CategoryDropdownMenu(props) {
     >
       {categories &&
         categories.map((category, index) => (
-          <a
+          <Link
             key={index}
-            href="/productList"
+            to="/productList"
             className={
               "text-gray-800 text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white"
             }
           >
             <FormattedMessage id={category.catName} />
-          </a>
+          </Link>
         ))}
     </div>
   );

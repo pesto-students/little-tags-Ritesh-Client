@@ -1,5 +1,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
 function Login({ props, showModal, setShowModal }) {
   return (
     <div>
@@ -136,9 +137,9 @@ function Login({ props, showModal, setShowModal }) {
                     <span>
                       <FormattedMessage id="loginFooter" />{" "}
                     </span>
-                    <a href="#tac" className="font-bold text-blue-400">
+                    <Link to="#tac" className="font-bold text-blue-400">
                       <FormattedMessage id="toc" />
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>

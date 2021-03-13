@@ -5,6 +5,7 @@ import ProfileDropdown from "./ProfileDropdown";
 import CategoryDropdown from "./CategoryDropdown";
 import MobileMenu from "./MobileMenu";
 import Search from "./Search";
+import { Link } from "react-router-dom";
 function Navbar(props) {
   const { setShowModal, changeLanguage } = props;
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -55,8 +56,8 @@ function Navbar(props) {
             </button>
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="flex-shrink-0 flex items-center cursor-pointer"
             >
               <img
@@ -69,16 +70,16 @@ function Navbar(props) {
                   <FormattedMessage id="title" />
                 </span>
               </div>
-            </a>
+            </Link>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
                 <CategoryDropdown />
-                <a
-                  href="/wishlist"
+                <Link
+                  to="/wishlist"
                   className="text-black hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Wishlist
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
+import { Link } from "react-router-dom";
 import quotes from "../quotes";
 function Loading() {
   const [randomQuote, setRandomQuote] = useState({
@@ -24,9 +25,9 @@ function Loading() {
           <p className="mb-2">{randomQuote[0]}</p>
           <cite>
             -
-            <a href="..." target="_blank" rel="noopener noreferrer">
+            <Link to="..." target="_blank" rel="noopener noreferrer">
               {randomQuote[1]}
-            </a>
+            </Link>
           </cite>
         </blockquote>
       </div>
