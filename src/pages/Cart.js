@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
 function Cart(props) {
   const { itemList, handleClick } = props;
-  console.log(itemList);
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="w-3/4 sm:block hidden shadow-md rounded-b-md mr-2">
         {itemList.map((item) => (
           <Link
+            to=""
             key={item.id}
             className="flex flex-row justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-4 p-4"
           >
@@ -77,8 +77,7 @@ function Cart(props) {
             </div>
             <div className="w-1/3 flex flex-col justify-center items-center text-sm font-light">
               <div className="w-hull">
-                <Link
-                  to="/"
+                <button
                   className="my-2 flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
                 >
                   <svg
@@ -92,9 +91,8 @@ function Cart(props) {
                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                   </svg>
                   <span className="pl-2">Move to wishlist</span>
-                </Link>
-                <Link
-                  to="/"
+                </button>
+                <button
                   className="flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
                 >
                   <svg
@@ -113,7 +111,7 @@ function Cart(props) {
                     />
                   </svg>
                   <span className="pl-2">Remove</span>
-                </Link>
+                </button>
               </div>
             </div>
           </Link>
