@@ -60,6 +60,13 @@ const langs = {
     MobileNumber: "Mobile Number",
     MakeItDefault: "Make it default address",
     Add: "Add",
+    Home: "Home",
+    Sort: "Sort",
+    AddToCart: "Add to cart",
+    MoveToWishlist: "Move to wishlist",
+    Recommended: "Recommended",
+    PriceLowToHigh: "Price low to high",
+    PriceHighToLow: "Price high to low",
     //
     orderHistory: "Order History",
     trackOrder: "Track Order",
@@ -97,6 +104,7 @@ const langs = {
     GoogleDownloadTextTwo: "Google play",
     //pages
     products: "productos",
+
     Size: "Tamaño",
     Quantity: "Cantidad",
     MoveToWishList: "Mover a la lista de deseos",
@@ -139,6 +147,13 @@ const langs = {
     MobileNumber: "Número de teléfono móvil",
     MakeItDefault: "Que sea la dirección predeterminada",
     Add: "Agregar",
+    Home: "Hola",
+    Sort: "Clasificar",
+    AddToCart: "Añadir a la cesta",
+    MoveToWishlist: "Mover a la lista de deseos",
+    Recommended: "Recomendado",
+    PriceLowToHigh: "Precios de barato a caro",
+    PriceHighToLow: "Precio de mayor a menor",
     //
     orderHistory: "Historial de pedidos",
     trackOrder: "Orden de pista",
