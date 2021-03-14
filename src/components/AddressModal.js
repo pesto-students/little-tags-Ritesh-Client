@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 function AddressModal({ showModal, setShowModal }) {
   return (
     <div>
@@ -9,7 +10,7 @@ function AddressModal({ showModal, setShowModal }) {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
                   <h3 className="text-lg text-center font-semibold">
-                    Add new address
+                    <FormattedMessage id="AddNewAddress" />
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -27,7 +28,7 @@ function AddressModal({ showModal, setShowModal }) {
                       for="name"
                       class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
                     >
-                      Full Name
+                      <FormattedMessage id="FullName" />
                     </label>
                     <input
                       type="text"
@@ -43,7 +44,7 @@ function AddressModal({ showModal, setShowModal }) {
                       for="name"
                       class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
                     >
-                      Mobile Number
+                      <FormattedMessage id="MobileNumber" />
                     </label>
                     <input
                       type="number"
@@ -59,7 +60,7 @@ function AddressModal({ showModal, setShowModal }) {
                       for="name"
                       className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
                     >
-                      Address
+                      <FormattedMessage id="Address" />
                     </label>
                     <input
                       type="text"
@@ -75,7 +76,7 @@ function AddressModal({ showModal, setShowModal }) {
                       for="name"
                       class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
                     >
-                      Zipcode
+                      <FormattedMessage id="ZipCode" />
                     </label>
                     <input
                       type="number"
@@ -92,14 +93,14 @@ function AddressModal({ showModal, setShowModal }) {
                       for="name"
                       class="ml-2 text-sm text-gray-600 dark:text-gray-400"
                     >
-                      Make it default address
+                      <FormattedMessage id="MakeItDefault" />
                     </label>
                   </div>
                   <button
                     onClick={() => setShowModal(false)}
                     className="w-full text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
                   >
-                    Add
+                    <FormattedMessage id="Add" />
                   </button>
                 </div>
               </div>

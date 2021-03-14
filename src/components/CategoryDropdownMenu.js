@@ -2,7 +2,7 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import categories from "../locatlData/categoriesData";
+import categories from "../localData/categoriesData";
 function CategoryDropdownMenu(props) {
   const { catDropdownRef, catDropDown } = props;
 

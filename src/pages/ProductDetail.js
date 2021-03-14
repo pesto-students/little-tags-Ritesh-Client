@@ -5,6 +5,7 @@ import { withRouter } from "react-router";
 import Loading from "./Loading";
 import { addToWishList, addToCart } from "../redux/actions";
 import { wishlistStore, cartListStore } from "../redux/store";
+import { FormattedMessage } from "react-intl";
 function ProductDetail(props) {
   const history = useHistory();
   const { data } = props.location;
@@ -52,20 +53,32 @@ function ProductDetail(props) {
   if (load) {
     return <Loading />;
   }
+  let titleName;
+  switch (item.category) {
+    case "men clothing":
+      titleName = "menClothing";
+      break;
+    case "women clothing":
+      titleName = "womenClothing";
+      break;
+    default:
+      titleName = title;
+  }
   return (
     <div className="text-gray-700 body-font bg-white">
       <div className="px-5 py-5 lg:w-4/5 mx-auto ">
         <div className="px-4 py-4 flex items-start sm:pl-24">
           <span className="text-lg capitalize font-normal text-gray-400">
             <Link to="/" className="mx-1">{`Home /`}</Link>
-            <Link
+            <Link 
               to={{
                 pathname: "/productList",
                 search: `${item.category}`,
                 title: `${item.category}`,
-              }}
-              className="mx-1"
-            >{`${item.category} /`}</Link>
+              }} 
+              className="mx-1">
+              <FormattedMessage id={titleName} /> /
+            </Link>
             <span className="text-gray-800">{item.title}</span>
           </span>
         </div>
@@ -150,7 +163,9 @@ function ProductDetail(props) {
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
               {title.includes("clothing") ? (
                 <div className="flex items-center mr-4">
-                  <span className="mr-3">Size</span>
+                  <span className="mr-3">
+                    <FormattedMessage id="Size" />
+                  </span>
                   <div className="relative">
                     <select
                       onChange={s => {
@@ -180,7 +195,9 @@ function ProductDetail(props) {
                 </div>
               ) : undefined}
               <div className="flex items-center">
-                <span className="mr-3">Quantity</span>
+                <span className="mr-3">
+                  <FormattedMessage id="Quantity" />
+                </span>
                 <div className="relative">
                   <input
                     className="w-auto px-3 py-2  border-2 border-blue-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
@@ -253,6 +270,7 @@ function ProductDetail(props) {
                 >
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                 </svg>
+
                 <span className="pl-2 py-2">{wishlistButton}</span>
               </button>
             </div>
