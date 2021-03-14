@@ -1,12 +1,14 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
 function Cart(props) {
   const { itemList, handleClick } = props;
+
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="w-3/4 sm:block hidden shadow-md rounded-b-md mr-2">
-        {itemList.map((item) => (
+        {itemList.map(item => (
           <Link
             to=""
             key={item.id}
@@ -26,11 +28,15 @@ function Cart(props) {
                   <div className="flex items-center mr-4">
                     <span className="mr-3">Size</span>
                     <div className="relative bg-transparent">
-                      <select className="rounded border bg-transparent appearance-none border-blue-200 py-2 focus:outline-none focus:border-red-500 pl-3 pr-10">
-                        <option>SM</option>
-                        <option>M</option>
-                        <option>L</option>
-                        <option>XL</option>
+                      <select
+                        value={item.size}
+                        onChange={s => console.log(s.target.value)}
+                        className="rounded border bg-transparent appearance-none border-blue-200 py-2 focus:outline-none focus:border-red-500 pl-3 pr-10"
+                      >
+                        <option value="sm">SM</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
                       </select>
                       <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                         <svg
@@ -53,7 +59,7 @@ function Cart(props) {
                   <div className="relative">
                     <input
                       className="w-auto px-3 py-2  border-2 border-blue-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                      placeholder="1"
+                      placeholder={item.quantity}
                       type="number"
                       min="1"
                       max="30"
@@ -77,9 +83,7 @@ function Cart(props) {
             </div>
             <div className="w-1/3 flex flex-col justify-center items-center text-sm font-light">
               <div className="w-hull">
-                <button
-                  className="my-2 flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
-                >
+                <button className="my-2 flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white">
                   <svg
                     fill="currentColor"
                     strokeLinecap="round"
@@ -92,9 +96,7 @@ function Cart(props) {
                   </svg>
                   <span className="pl-2">Move to wishlist</span>
                 </button>
-                <button
-                  className="flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
-                >
+                <button className="flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white">
                   <svg
                     fill="currentColor"
                     strokeLinecap="round"
@@ -120,7 +122,7 @@ function Cart(props) {
       {/* mobile view for cart item */}
       <div className="sm:hidden block">
         <div className="shadow-md rounded-b-md">
-          {itemList.map((item) => (
+          {itemList.map(item => (
             <div
               key={item.id}
               className="flex flex-col justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-4 p-4"
@@ -140,11 +142,15 @@ function Cart(props) {
                       <div className="flex items-center justify-between">
                         <span className="mr-2">Size</span>
                         <div className="relative">
-                          <select className="rounded-lg border-2 appearance-none border-blue-100 py-2 focus:outline-none bg-transparent pl-3 pr-10">
-                            <option>SM</option>
-                            <option>M</option>
-                            <option>L</option>
-                            <option>XL</option>
+                          <select
+                            value={item.size}
+                            onChange={s => console.log(s.target.value)}
+                            className="rounded-lg border-2 appearance-none border-blue-100 py-2 focus:outline-none bg-transparent pl-3 pr-10"
+                          >
+                            <option value="sm">SM</option>
+                            <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
                           </select>
                           <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                             <svg

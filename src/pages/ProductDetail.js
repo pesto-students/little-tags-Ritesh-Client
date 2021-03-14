@@ -10,6 +10,8 @@ function ProductDetail(props) {
   const { data } = props.location;
   const [wishlistButton, setWishListButtonName] = React.useState("");
   const [addToCartButton, setAddToCartButtonName] = React.useState("");
+  const [sizeOfItem, setSizeOfItem] = React.useState("sm");
+  const [quantityOfItem, setQuantityOfItem] = React.useState(1);
   const [item, setItem] = React.useState();
   const [load, setLoad] = React.useState(true);
   const [title, setTitle] = React.useState("");
@@ -34,6 +36,8 @@ function ProductDetail(props) {
   };
 
   const addToCartList = data => {
+    data.size = sizeOfItem;
+    data.quantity = quantityOfItem;
     if (addToCartButton === "go to bag") {
       history.push({
         pathname: "/checkout",
@@ -41,9 +45,8 @@ function ProductDetail(props) {
     } else {
       cartListStore.dispatch(addToCart(data));
       setAddToCartButtonName("go to bag");
-      console.log(cartListStore.getState());
-      console.log(wishlistStore.getState());
     }
+    setQuantityOfItem(1);
   };
 
   if (load) {
@@ -149,11 +152,16 @@ function ProductDetail(props) {
                 <div className="flex items-center mr-4">
                   <span className="mr-3">Size</span>
                   <div className="relative">
-                    <select className="rounded border appearance-none border-blue-200 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10">
-                      <option>SM</option>
-                      <option>M</option>
-                      <option>L</option>
-                      <option>XL</option>
+                    <select
+                      onChange={s => {
+                        setSizeOfItem(s.target.value);
+                      }}
+                      className="rounded border appearance-none border-blue-200 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10"
+                    >
+                      <option value="sm">SM</option>
+                      <option value="m">M</option>
+                      <option value="L">L</option>
+                      <option value="xl">XL</option>
                     </select>
                     <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                       <svg
@@ -176,7 +184,10 @@ function ProductDetail(props) {
                 <div className="relative">
                   <input
                     className="w-auto px-3 py-2  border-2 border-blue-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                    placeholder="1"
+                    placeholder={quantityOfItem}
+                    onChange={q => {
+                      setQuantityOfItem(q.target.value);
+                    }}
                     type="number"
                     min="1"
                     max="30"
