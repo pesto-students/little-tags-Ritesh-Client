@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FormattedMessage } from "react-intl";
 function LangDropDownMenu(props) {
   const {
     langDropdownRef,
@@ -10,7 +10,7 @@ function LangDropDownMenu(props) {
   } = props;
   const languageList = [
     { id: 1, langCode: "en", langName: "English" },
-    { id: 2, langCode: "es", langName: "Español" },
+    { id: 2, langCode: "sp", langName: "Español" },
   ];
   return (
     <div
@@ -21,7 +21,7 @@ function LangDropDownMenu(props) {
       }
       // style={{ minWidth: "12rem" }}
     >
-      {languageList.map((lang) => {
+      {languageList.map(lang => {
         return (
           <button
             key={lang.id}
@@ -33,7 +33,7 @@ function LangDropDownMenu(props) {
               langDropdown ? closeLangDropdown() : openLangDropdown();
             }}
           >
-            {lang.langCode} - {lang.langName}
+            <FormattedMessage id={lang.langName} />
           </button>
         );
       })}
