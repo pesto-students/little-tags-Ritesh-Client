@@ -5,6 +5,7 @@ import data from "../localData/data";
 import { withRouter } from "react-router";
 import Loading from "./Loading";
 import Popper from "popper.js";
+import { FormattedMessage } from "react-intl";
 function ProductList(props) {
   const { title } = props.location;
   const [itemList, setItemList] = useState([]);
@@ -61,6 +62,18 @@ function ProductList(props) {
   if (load) {
     return <Loading />;
   }
+  let titleName;
+  switch (title) {
+    case "men clothing":
+      titleName = "menClothing";
+      break;
+    case "women clothing":
+      titleName = "womenClothing";
+      break;
+    default:
+      titleName = title;
+  }
+
   return (
     <main className="my-8">
       <div className="container mx-auto px-6">
@@ -68,12 +81,12 @@ function ProductList(props) {
           <div>
             <h3 className="text-gray-700 sm:text-2xl text-md font-medium capitalize">
               <Link to="/" className="text-gray-500 pr-2">
-                Home /
+                <FormattedMessage id="Home" /> /
               </Link>
-              {title}
+              <FormattedMessage id={titleName} />
             </h3>
             <span className="mt-3 sm:text-sm text-xs text-gray-500">
-              {itemList.length} Products
+              {itemList.length} <FormattedMessage id="Products" />
             </span>
           </div>
           <div className="w-9/12 sm:w-auto">
@@ -85,7 +98,9 @@ function ProductList(props) {
               }}
               className="w-full sm:text-sm text-xs flex justify-between items-center text-gray-700 px-3 py-1 border font-medium rounded"
             >
-              <span className="pr-2 w-auto">Sort : {sortByTitle}</span>
+              <span className="pr-2 w-auto">
+                <FormattedMessage id="Sort" /> : {sortByTitle}
+              </span>
               <svg
                 viewBox="0 0 24 24"
                 preserveAspectRatio="xMidYMid meet"
