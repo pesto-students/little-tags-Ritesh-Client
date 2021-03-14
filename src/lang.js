@@ -1,7 +1,7 @@
 const langs = {
   en: {
     title: "ShopKart",
-    categories: "Categories",
+    categories: "Category",
     wishlist: "Wishlist",
     categoriesTitle: "Categories to bag",
     heroTag: "A few clicks is all it takes",
@@ -11,6 +11,14 @@ const langs = {
     jewelry: "Jewelry",
     copyright: "© Copyright 2021. All Rights Reserved.",
     searchTitle: "Search",
+    English: "En - English",
+    Español: "Es - Español",
+    AppleDownloadTextOne: "Download on the",
+    AppleDownloadTextTwo: "Apple Store",
+    GoogleDownloadTextOne: "Download it from",
+    GoogleDownloadTextTwo: "Google play",
+    // Pages
+    Products: "Products",
     //
     orderHistory: "Order History",
     trackOrder: "Track Order",
@@ -27,9 +35,9 @@ const langs = {
     loginFooter: "By Signing In, I agree to",
     toc: "Terms and Conditions",
   },
-  es: {
+  sp: {
     title: "ShopKart",
-    categories: "Categorias",
+    categories: "Categoría",
     wishlist: "Lista de deseos",
     categoriesTitle: "Categorías para empacar",
     heroTag: "Unos pocos clics es todo lo que necesita",
@@ -40,6 +48,14 @@ const langs = {
     copyright: "© Derechos de autor 2021. Todos los derechos reservados.",
     searchTitle: "buscar",
     manageOrder: "administrar pedidos",
+    English: "En - Inglés",
+    Español: "Es - Español",
+    AppleDownloadTextOne: "Descargar en la tienda",
+    AppleDownloadTextTwo: "de Apple",
+    GoogleDownloadTextOne: "Descárgalo de ",
+    GoogleDownloadTextTwo: "Google play",
+    //pages
+    products: "productos",
     //
     orderHistory: "Historial de pedidos",
     trackOrder: "Orden de pista",

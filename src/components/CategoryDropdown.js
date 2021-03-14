@@ -2,6 +2,7 @@
 import React from "react";
 import Popper from "popper.js";
 import CategoryDropdownMenu from "./CategoryDropdownMenu";
+import { FormattedMessage } from "react-intl";
 function CategoryDropdown(props) {
   const { menuOpen } = props;
   const [catDropDown, setCatDropDown] = React.useState(false);
@@ -27,7 +28,7 @@ function CategoryDropdown(props) {
           type="submit"
           className="text-black hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
         >
-          Category
+          <FormattedMessage id="categories" />
         </span>
         <CategoryDropdownMenu
           catDropdownRef={catDropdownRef}
@@ -52,7 +53,7 @@ function CategoryDropdown(props) {
         ref={catBtnDropdownRef}
         className="text-black hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
       >
-        Category
+        <FormattedMessage id="categories" />
       </button>
       <CategoryDropdownMenu
         catDropdownRef={catDropdownRef}

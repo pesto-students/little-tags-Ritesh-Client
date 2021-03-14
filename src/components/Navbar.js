@@ -78,7 +78,7 @@ function Navbar(props) {
                   to="/wishlist"
                   className="text-black hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Wishlist
+                  <FormattedMessage id="wishlist" />
                 </Link>
               </div>
             </div>
