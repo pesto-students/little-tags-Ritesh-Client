@@ -4,7 +4,7 @@ function PriceDetail() {
   return (
     <div className="py-2 border-b-2 rounded-b-lg  border-gray-200 px-2 shadow-inner">
       <span className="text-sm uppercase font-medium tracking-normal">
-        Price details
+        <FormattedMessage id="PriceDetails" />
       </span>
       <div className="flex flex-row space-x-2 justify-between border-gray-200 border-b-2 py-2">
         <div className="w-11/12 flex flex-col justify-between text-xs font-normal tracking-normal">

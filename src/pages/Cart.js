@@ -75,7 +75,10 @@ function Cart(props) {
                     <span className="mx-2 text-xs line-through">
                       ${(item.price + (item.price * 35) / 100).toFixed(2)}
                     </span>
-                    <span className="text-blue-700">(35% off)</span>
+                    <span className="text-blue-700">
+                      {" "}
+                      (35% <FormattedMessage id="off" />){" "}
+                    </span>
                   </span>
                 </span>
               </div>
@@ -193,7 +196,10 @@ function Cart(props) {
                     <span className="mx-2 text-xs line-through">
                       ${(item.price + (item.price * 35) / 100).toFixed(2)}
                     </span>
-                    <span className="text-blue-700">(35% off)</span>
+                    <span className="text-blue-700">
+                      {" "}
+                      (35% <FormattedMessage id="off" />){" "}
+                    </span>
                   </span>
                 </span>
               </div>
