@@ -67,6 +67,10 @@ const langs = {
     Recommended: "Recommended",
     PriceLowToHigh: "Price low to high",
     PriceHighToLow: "Price high to low",
+    goToBag: "go to bag",
+    addToCart: "add to cart",
+    wishList: "wishList",
+    wishlisted: "wishlisted",
     //
     orderHistory: "Order History",
     trackOrder: "Track Order",
@@ -154,6 +158,9 @@ const langs = {
     Recommended: "Recomendado",
     PriceLowToHigh: "Precios de barato a caro",
     PriceHighToLow: "Precio de mayor a menor",
+    goToBag: "ir a la bolsa",
+    wishList: "lista de deseos",
+    wishlisted: "en la lista de deseos",
     //
     orderHistory: "Historial de pedidos",
     trackOrder: "Orden de pista",

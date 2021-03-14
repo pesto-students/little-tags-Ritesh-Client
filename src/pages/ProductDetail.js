@@ -16,10 +16,13 @@ function ProductDetail(props) {
   const [item, setItem] = React.useState();
   const [load, setLoad] = React.useState(true);
   const [title, setTitle] = React.useState("");
+  const [addToCartText, setAddToCartText] = React.useState("");
+
   React.useEffect(() => {
     setLoad(true);
     setAddToCartButtonName("add to cart");
-    setWishListButtonName("wishlist");
+    setAddToCartText("AddToCart");
+    setWishListButtonName("wishList");
     setTimeout(() => {
       if (!data) {
         setLoad(false);
@@ -46,6 +49,7 @@ function ProductDetail(props) {
     } else {
       cartListStore.dispatch(addToCart(data));
       setAddToCartButtonName("go to bag");
+      setAddToCartText("goToBag");
     }
     setQuantityOfItem(1);
   };
@@ -70,13 +74,14 @@ function ProductDetail(props) {
         <div className="px-4 py-4 flex items-start sm:pl-24">
           <span className="text-lg capitalize font-normal text-gray-400">
             <Link to="/" className="mx-1">{`Home /`}</Link>
-            <Link 
+            <Link
               to={{
                 pathname: "/productList",
                 search: `${item.category}`,
                 title: `${item.category}`,
-              }} 
-              className="mx-1">
+              }}
+              className="mx-1"
+            >
               <FormattedMessage id={titleName} /> /
             </Link>
             <span className="text-gray-800">{item.title}</span>
@@ -248,7 +253,9 @@ function ProductDetail(props) {
                     />
                   </svg>
                 )}
-                <span className="pl-2 py-2 capitalize">{addToCartButton}</span>
+                <span className="pl-2 py-2 capitalize">
+                  <FormattedMessage id={addToCartText} />
+                </span>
               </button>
               <button
                 disabled={wishlistButton === "wishlisted"}
@@ -271,7 +278,9 @@ function ProductDetail(props) {
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                 </svg>
 
-                <span className="pl-2 py-2">{wishlistButton}</span>
+                <span className="pl-2 py-2">
+                  <FormattedMessage id={wishlistButton} />
+                </span>
               </button>
             </div>
           </div>
