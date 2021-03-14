@@ -31,7 +31,7 @@ const langs = {
     AddGiftWrap: "Add gift wrap",
     PlaceOrder: "Place order",
     Apply: "Apply",
-    ApplyCoupons: "ApplyCoupons",
+    ApplyCoupons: "Apply Coupons",
     TotalMRP: "Total MRP",
     DiscountOnMRP: "Discount on MRP",
     CouponDiscount: "Coupon Discount",
