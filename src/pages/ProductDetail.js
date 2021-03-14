@@ -30,7 +30,14 @@ function ProductDetail(props) {
         <div className="px-4 py-4 flex items-start sm:pl-24">
           <span className="text-lg capitalize font-normal text-gray-400">
             <Link to="/" className="mx-1">{`Home /`}</Link>
-            <Link to="/" className="mx-1">{`${item.category} /`}</Link>
+            <Link
+              to={{
+                pathname: "/productList",
+                search: `${item.category}`,
+                title: `${item.category}`,
+              }}
+              className="mx-1"
+            >{`${item.category} /`}</Link>
             <span className="text-gray-800">{item.title}</span>
           </span>
         </div>
