@@ -11,7 +11,7 @@ const data = [
   {
     id: 2,
     title: "Mens Casual Premium Slim Fit T-Shirts ",
-    price: 22.3,
+    price: 22.33,
     description:
       "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
     category: "men clothing",
@@ -38,6 +38,43 @@ const data = [
   },
   {
     id: 5,
+    title: "Men's Solid Cardigan",
+    price: 9.79,
+    description: "PAUSE Men's Solid Cardigan",
+    category: "men clothing",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/71ZmeNYVQSL._UX569_.jpg",
+  },
+  {
+    id: 6,
+    title: "Raymond Unstitched Trouser",
+    price: 11.99,
+    description:
+      "Raymond's Men's Poly Viscose 1.25 Meter Unstitched Trouser Fabric (Black, Free Size)",
+    category: "men clothing",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/51ZPhFjA9RL._UY606_.jpg",
+  },
+  {
+    id: 7,
+    title: "Men's Regular Fit Shirt",
+    price: 25.33,
+    description: "Diverse Men's Regular Fit Formal Shirt",
+    category: "men clothing",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/81qlnA0rJEL._UY606_.jpg",
+  },
+  {
+    id: 8,
+    title: "Men's Coats Jackets",
+    price: 44.39,
+    description:
+      "Nilesh Men's Coats Jackets,Winter Casual Fashion Pure Color Patchwork Jacket Zipper Outwear Coat (Nilesh JK67)",
+    category: "men clothing",
+    image: "https://images-na.ssl-images-amazon.com/images/I/41kpS4bT4vL.jpg",
+  },
+  {
+    id: 9,
     title:
       "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
     price: 695,
@@ -47,7 +84,7 @@ const data = [
     image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
   },
   {
-    id: 6,
+    id: 10,
     title: "Solid Gold Petite Micropave ",
     price: 168,
     description:
@@ -56,7 +93,7 @@ const data = [
     image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
   },
   {
-    id: 7,
+    id: 11,
     title: "White Gold Plated Princess",
     price: 9.99,
     description:
@@ -65,7 +102,7 @@ const data = [
     image: "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
   },
   {
-    id: 8,
+    id: 12,
     title: "Pierced Owl Rose Gold Plated Stainless Steel Double",
     price: 10.99,
     description:
@@ -74,7 +111,48 @@ const data = [
     image: "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
   },
   {
-    id: 9,
+    id: 13,
+    title: "Shining Diva Fashion Jewellery Set",
+    price: 199.99,
+    description:
+      "Shining Diva Fashion Latest Choker Design Antique Kundan Traditional Necklace Jewellery Set for Women",
+    category: "jewelry",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/81vLw-6u5NL._UY575_.jpg",
+  },
+  {
+    id: 14,
+    title: "American Diamond Set",
+    price: 129.99,
+    description:
+      "Zeneme Jewellery Set American Diamond Stylish Peacock Style Gold Plated Necklace Set Jewellery With Earring For Women & Girls",
+    category: "jewelry",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/617iS0yg5UL._UX679_.jpg",
+  },
+  {
+    id: 15,
+    title: "Rose Gold Jewellery Combo of 2 Adjustable Link Bracelets",
+    price: 79.33,
+    description:
+      "Om Jewells Valentine Gift Rose Gold Jewellery Combo of 2 Adjustable Link Bracelets, 2 Crystal Pendant Necklace with Infinity Dangling Earrings and Adjustable Ring for Girls and Women CO1000343",
+    category: "jewelry",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/81LLYLMitIL._UX695_.jpg",
+  },
+  {
+    id: 16,
+    title: "Gold Plated Wedding Jewellery",
+    price: 99.99,
+    description:
+      "Sukkhi Dazzling Gold Plated Wedding Jewellery Austrian Diamond Choker Necklace Set Combo For  Women (413CB1900)",
+    category: "jewelry",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/71koEgPDDdL._UY575_.jpg",
+  },
+
+  {
+    id: 17,
     title: "WD 2TB Elements Portable External Hard Drive - USB 3.0 ",
     price: 64,
     description:
@@ -83,7 +161,7 @@ const data = [
     image: "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
   },
   {
-    id: 10,
+    id: 18,
     title: "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
     price: 109,
     description:
@@ -92,7 +170,7 @@ const data = [
     image: "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
   },
   {
-    id: 11,
+    id: 19,
     title:
       "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
     price: 109,
@@ -102,7 +180,7 @@ const data = [
     image: "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
   },
   {
-    id: 12,
+    id: 20,
     title:
       "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
     price: 114,
@@ -112,7 +190,7 @@ const data = [
     image: "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg",
   },
   {
-    id: 13,
+    id: 21,
     title: "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin",
     price: 599,
     description:
@@ -121,7 +199,7 @@ const data = [
     image: "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
   },
   {
-    id: 14,
+    id: 22,
     title:
       "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED ",
     price: 999.99,
@@ -131,7 +209,28 @@ const data = [
     image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
   },
   {
-    id: 15,
+    id: 23,
+    title: "Wacom One by CTL-472/K0-CX Small ",
+    price: 39.99,
+    description:
+      "Wacom One by CTL-472/K0-CX Small 6-inch x 3.5-inch Graphic Tablet (Red/Black)",
+    category: "electronics",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/61gGegpTCLL._SX679_.jpg",
+  },
+  {
+    id: 24,
+    title:
+      "ASUS 24.5-inch Full HD (1920x1080), Nvidia G-SYNC Compatible Esports Gaming Monitor",
+    price: 199.99,
+    description:
+      "ASUS 24.5-inch Full HD (1920x1080), Nvidia G-SYNC Compatible Esports Gaming Monitor, 0.5ms, Up to 165 Hz, DP, HDMI, DVI-D, Super Narrow Bezel, FreeSync, Low Blue Light, Flicker Free - VG258QR (Black)",
+    category: "electronics",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/81r1F7TxBZL._SX679_.jpg",
+  },
+  {
+    id: 25,
     title: "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
     price: 56.99,
     description:
@@ -140,7 +239,7 @@ const data = [
     image: "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg",
   },
   {
-    id: 16,
+    id: 26,
     title:
       "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
     price: 29.95,
@@ -150,7 +249,7 @@ const data = [
     image: "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg",
   },
   {
-    id: 17,
+    id: 27,
     title: "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
     price: 39.99,
     description:
@@ -159,7 +258,7 @@ const data = [
     image: "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg",
   },
   {
-    id: 18,
+    id: 28,
     title: "MBJ Women's Solid Short Sleeve Boat Neck V ",
     price: 9.85,
     description:
@@ -168,7 +267,7 @@ const data = [
     image: "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg",
   },
   {
-    id: 19,
+    id: 29,
     title: "Opna Women's Short Sleeve Moisture",
     price: 7.95,
     description:
@@ -177,13 +276,32 @@ const data = [
     image: "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg",
   },
   {
-    id: 20,
+    id: 30,
     title: "DANVOUY Womens T Shirt Casual Cotton Short",
     price: 12.99,
     description:
       "95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.",
     category: "women clothing",
     image: "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
+  },
+  {
+    id: 31,
+    title: "Floral Blouse",
+    price: 20,
+    description:
+      "B Slim Beige Soft Sleek Under Clothing Seamless High Waist Women Body Shapewear Shorts",
+    category: "women clothing",
+    image: "https://images-na.ssl-images-amazon.com/images/I/31WrGdqfijL.jpg",
+  },
+  {
+    id: 32,
+    title: "Women Cotton Suite",
+    price: 17.85,
+    description:
+      "Shree Villa Women's Banarasi Jakad & Santoon & Chanderi Unstitched Salwar Suit",
+    category: "women clothing",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/815g4bvGchL._UX569_.jpg",
   },
 ];
 

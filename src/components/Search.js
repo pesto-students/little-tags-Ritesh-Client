@@ -2,7 +2,7 @@ import React from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
-import data from "../locatlData/data";
+import data from "../localData/data";
 function Search() {
   const history = useHistory();
   const handleOnSelect = item => {

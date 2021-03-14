@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Stepper from "./Stepper";
-import data from "../locatlData/data";
+import data from "../localData/data";
 import Loading from "./Loading";
 import Cart from "./Cart";
 import Address from "./Address";
@@ -20,7 +20,7 @@ function Checkout() {
 
   const stepArray = ["Bag", "Address", "Payment"];
 
-  const handleClick = (clickType) => {
+  const handleClick = clickType => {
     let newStep = currentStep;
     clickType === "next" ? newStep++ : newStep--;
 
