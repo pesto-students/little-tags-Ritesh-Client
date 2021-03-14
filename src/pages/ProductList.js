@@ -25,7 +25,7 @@ function ProductList(props) {
 
   const sortList = [
     { id: 1, name: "PriceLowToHigh" },
-    { id: 2, name: "PriceLowToHigh" },
+    { id: 2, name: "PriceHighToLow" },
   ];
   const [sortDropDown, setSortDropDown] = React.useState(false);
   const [sortByTitle, setSortByTitle] = React.useState("Recommended");
