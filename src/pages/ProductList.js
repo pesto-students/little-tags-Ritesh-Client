@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import data from "../locatlData/data";
@@ -9,22 +10,14 @@ function ProductList(props) {
   const [itemList, setItemList] = useState([]);
   const [load, setLoad] = React.useState(true);
   useEffect(() => {
+    setLoad(true);
     if (title) {
       setTimeout(() => {
-        setItemList(data.filter((d) => d.category === title));
+        setItemList(data.filter(d => d.category === title));
         setLoad(false);
       }, 3 * 1000);
-      // fetch(`https://fakestoreapi.com/products/category/${title}`)
-      //   .then((r) => r.json())
-      //   .then((res) => {
-      //     setItemList(res);
-      //     setLoad(false);
-      //   })
-      //   .catch((e) => {
-      //     alert(e);
-      //     setLoad(false);
-      //   });
     } else {
+      setLoad(false);
       props.history.goBack();
     }
   }, [title, props.history]);
