@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
+import { FormattedMessage } from "react-intl";
 function Cart(props) {
   const { itemList, handleClick } = props;
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="w-3/4 sm:block hidden shadow-md rounded-b-md mr-2">
-        {itemList.map((item) => (
+        {itemList.map(item => (
           <Link
             to=""
             key={item.id}
@@ -24,7 +25,9 @@ function Cart(props) {
               <div className="flex mt-6 items-center text-sm font-normal">
                 {"men clothing".includes("clothing") ? (
                   <div className="flex items-center mr-4">
-                    <span className="mr-3">Size</span>
+                    <span className="mr-3">
+                      <FormattedMessage id="Size" />
+                    </span>
                     <div className="relative bg-transparent">
                       <select className="rounded border bg-transparent appearance-none border-blue-200 py-2 focus:outline-none focus:border-red-500 pl-3 pr-10">
                         <option>SM</option>
@@ -49,7 +52,9 @@ function Cart(props) {
                   </div>
                 ) : undefined}
                 <div className="flex items-center">
-                  <span className="mr-3">Quantity</span>
+                  <span className="mr-3">
+                    <FormattedMessage id="Quantity" />
+                  </span>
                   <div className="relative">
                     <input
                       className="w-auto px-3 py-2  border-2 border-blue-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
@@ -64,7 +69,7 @@ function Cart(props) {
               </div>
               <div className="text-left text-sm font-medium tracking-wide">
                 <span className="font-semibold text-gray-600">
-                  Price :
+                  <FormattedMessage id="Price" /> :
                   <span className="text-gray-500 mt-2">
                     ${item.price}
                     <span className="mx-2 text-xs line-through">
@@ -77,9 +82,7 @@ function Cart(props) {
             </div>
             <div className="w-1/3 flex flex-col justify-center items-center text-sm font-light">
               <div className="w-hull">
-                <button
-                  className="my-2 flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
-                >
+                <button className="my-2 flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white">
                   <svg
                     fill="currentColor"
                     strokeLinecap="round"
@@ -90,11 +93,11 @@ function Cart(props) {
                   >
                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                   </svg>
-                  <span className="pl-2">Move to wishlist</span>
+                  <span className="pl-2">
+                    <FormattedMessage id="MoveToWishList" />
+                  </span>
                 </button>
-                <button
-                  className="flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
-                >
+                <button className="flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white">
                   <svg
                     fill="currentColor"
                     strokeLinecap="round"
@@ -110,7 +113,9 @@ function Cart(props) {
                       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                     />
                   </svg>
-                  <span className="pl-2">Remove</span>
+                  <span className="pl-2">
+                    <FormattedMessage id="Remove" />
+                  </span>
                 </button>
               </div>
             </div>
@@ -120,7 +125,7 @@ function Cart(props) {
       {/* mobile view for cart item */}
       <div className="sm:hidden block">
         <div className="shadow-md rounded-b-md">
-          {itemList.map((item) => (
+          {itemList.map(item => (
             <div
               key={item.id}
               className="flex flex-col justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-4 p-4"
@@ -138,7 +143,9 @@ function Cart(props) {
                   <div className="flex flex-col justify-between mt-2 text-xs font-light">
                     {"men clothing".includes("clothing") ? (
                       <div className="flex items-center justify-between">
-                        <span className="mr-2">Size</span>
+                        <span className="mr-2">
+                          <FormattedMessage id="Size" />
+                        </span>
                         <div className="relative">
                           <select className="rounded-lg border-2 appearance-none border-blue-100 py-2 focus:outline-none bg-transparent pl-3 pr-10">
                             <option>SM</option>
@@ -163,7 +170,9 @@ function Cart(props) {
                       </div>
                     ) : undefined}
                     <div className="flex items-center justify-between mt-2 text-xs font-light">
-                      <span className="pr-2">Quantity</span>
+                      <span className="pr-2">
+                        <FormattedMessage id="Quantity" />
+                      </span>
                       <input
                         className="py-2 text-black px-2 border-2 border-blue-100 rounded-lg focus:outline-none focus:border-blue-700 transition-colors"
                         placeholder="1"
@@ -178,7 +187,7 @@ function Cart(props) {
               </div>
               <div className="text-sm font-medium tracking-wide my-1">
                 <span className="font-semibold text-gray-600">
-                  Price :
+                  <FormattedMessage id="Price" /> :
                   <span className="text-gray-500 mt-2">
                     ${item.price}
                     <span className="mx-2 text-xs line-through">
@@ -208,7 +217,9 @@ function Cart(props) {
                       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                     />
                   </svg>
-                  <span className="pl-2">Remove</span>
+                  <span className="pl-2">
+                    <FormattedMessage id="Remove" />
+                  </span>
                 </Link>
                 <Link
                   to="/"
@@ -224,7 +235,9 @@ function Cart(props) {
                   >
                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                   </svg>
-                  <span className="pl-2">Move to wishlist</span>
+                  <span className="pl-2">
+                    <FormattedMessage id="MoveToWishList" />
+                  </span>
                 </Link>
               </div>
             </div>
@@ -234,7 +247,7 @@ function Cart(props) {
       <div className="sm:w-1/4 flex flex-col space-y-2 shadow-md rounded-b-md ">
         <div className="py-2 border-b-2 rounded-b-lg  border-gray-200 px-2 shadow-inner">
           <span className="text-sm uppercase font-medium tracking-normal">
-            Coupons
+            <FormattedMessage id="Coupons" />
           </span>
           <div className="flex flex-row justify-between items-center">
             <svg
@@ -251,20 +264,23 @@ function Cart(props) {
                 d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
               />
             </svg>
-            <input
-              type="text"
-              placeholder="Apply Coupon"
-              className="w-4/6 mx-1 text-gray-700 border-b border-blue-200 focus:outline-none focus:ring focus:border-blue-300"
-            />
-
+            <FormattedMessage id="ApplyCoupons">
+              {placeholder => (
+                <input
+                  type="text"
+                  placeholder={placeholder}
+                  className="w-4/6 mx-1 text-gray-700 border-b border-blue-200 focus:outline-none focus:ring focus:border-blue-300"
+                />
+              )}
+            </FormattedMessage>
             <button className=" text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white">
-              Apply
+              <FormattedMessage id="Apply" />
             </button>
           </div>
         </div>
         <div className="py-2 border-b-2 rounded-b-lg  border-gray-200 px-2 shadow-inner">
           <span className="text-sm uppercase font-medium tracking-normal">
-            gifting and personalization
+            <FormattedMessage id="GiftingAndPersonalization" />
           </span>
           <div className="h-28 my-1 bg-blue-100 border-gray-700 border-1 shadow-inner flex flex-row justify-between">
             <div className="w-1/3 flex justify-center items-center font-normal">
@@ -283,13 +299,13 @@ function Cart(props) {
             </div>
             <div className="flex flex-col space-y-1 justify-between items-start p-2">
               <span className="text-xs capitalize  font-medium tracking-normal">
-                Buying for loved ones ?
+                <FormattedMessage id="BuyingForLovedOnes" />
               </span>
               <span className="text-xs capitalize font-normal tracking-tight">
-                Gift wrapped and personalized message on card , Only for $ 25
+                <FormattedMessage id="GiftWrap" />
               </span>
               <button className="capitalize font-bold text-xs text-blue-700">
-                Add gift wrap
+                <FormattedMessage id="AddGiftWrap" />
               </button>
             </div>
           </div>
@@ -299,7 +315,7 @@ function Cart(props) {
           onClick={() => handleClick("next")}
           className="text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
         >
-          Place order
+          <FormattedMessage id="PlaceOrder" />
         </button>
       </div>
       <div className="sm:hidden block">
@@ -323,7 +339,7 @@ function Cart(props) {
             onClick={() => handleClick("next")}
             className="w-4/6 border-blue-200  border-2 p-2 rounded-lg bg-blue-700 text-white"
           >
-            Place order
+            <FormattedMessage id="PlaceOrder" />
           </button>
         </div>
       </div>
