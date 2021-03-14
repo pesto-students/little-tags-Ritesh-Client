@@ -9,14 +9,17 @@ function ProductDetail(props) {
   const [load, setLoad] = React.useState(true);
   const [title, setTitle] = React.useState("");
   React.useEffect(() => {
-    if (!data) {
-      setLoad(false);
-      props.history.goBack();
-    } else {
-      setItem(data.item);
-      setLoad(false);
-      setTitle(data.item.category);
-    }
+    setLoad(true);
+    setTimeout(() => {
+      if (!data) {
+        setLoad(false);
+        props.history.goBack();
+      } else {
+        setItem(data.item);
+        setLoad(false);
+        setTitle(data.item.category);
+      }
+    }, 3 * 1000);
   }, [data, props.history]);
   if (load) {
     return <Loading />;
