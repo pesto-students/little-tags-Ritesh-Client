@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function EmptyPage() {
+function EmptyPage(props) {
+  const { title } = props;
   return (
     <div className="container mx-auto px-4">
       <section className="px-4 text-center">
@@ -13,11 +14,11 @@ function EmptyPage() {
             />
           </div>
           <h2 className="uppercase text-3xl lg:text-5xl font-black">
-            Your cart is empty
+            {title ? title : "Your cart is empty"}
           </h2>
 
           <span className="uppercase text-2xl text-gray-900">
-            Its an add to cart kinda day !
+            Its an add to cart kinda day |
           </span>
           <div className="w-auto">
             <Link
