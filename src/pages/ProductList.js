@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import data from "../locatlData/data";
+import data from "../localData/data";
 import { withRouter } from "react-router";
 import Loading from "./Loading";
 import Popper from "popper.js";
