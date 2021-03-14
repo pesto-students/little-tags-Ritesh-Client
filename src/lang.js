@@ -55,6 +55,11 @@ const langs = {
     POD: "Pay on delivery (cash / card / UPI)",
     AnyMessage: "Any message",
     Remarks: "Remarks",
+    FullName: "Full Name",
+    ZipCode: "Zipcode",
+    MobileNumber: "Mobile Number",
+    MakeItDefault: "Make it default address",
+    Add: "Add",
     //
     orderHistory: "Order History",
     trackOrder: "Track Order",
@@ -129,6 +134,11 @@ const langs = {
     POD: "Pago contra entrega (efectivo / tarjeta / UPI)",
     AnyMessage: "Cualquier mensaje",
     Remarks: "Observaciones",
+    FullName: "Nombre completo",
+    ZipCode: "Código postal",
+    MobileNumber: "Número de teléfono móvil",
+    MakeItDefault: "Que sea la dirección predeterminada",
+    Add: "Agregar",
     //
     orderHistory: "Historial de pedidos",
     trackOrder: "Orden de pista",
