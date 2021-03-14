@@ -1,18 +1,21 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { withRouter } from "react-router";
 import Loading from "./Loading";
-import { addToWishList } from "../redux/actions";
-import { wishlistStore } from "../redux/store";
+import { addToWishList, addToCart } from "../redux/actions";
+import { wishlistStore, cartListStore } from "../redux/store";
 function ProductDetail(props) {
+  const history = useHistory();
   const { data } = props.location;
   const [wishlistButton, setWishListButtonName] = React.useState("");
+  const [addToCartButton, setAddToCartButtonName] = React.useState("");
   const [item, setItem] = React.useState();
   const [load, setLoad] = React.useState(true);
   const [title, setTitle] = React.useState("");
   React.useEffect(() => {
     setLoad(true);
+    setAddToCartButtonName("add to cart");
     setWishListButtonName("wishlist");
     setTimeout(() => {
       if (!data) {
@@ -29,6 +32,20 @@ function ProductDetail(props) {
     wishlistStore.dispatch(addToWishList(data));
     setWishListButtonName("wishlisted");
   };
+
+  const addToCartList = data => {
+    if (addToCartButton === "go to bag") {
+      history.push({
+        pathname: "/checkout",
+      });
+    } else {
+      cartListStore.dispatch(addToCart(data));
+      setAddToCartButtonName("go to bag");
+      console.log(cartListStore.getState());
+      console.log(wishlistStore.getState());
+    }
+  };
+
   if (load) {
     return <Loading />;
   }
@@ -169,23 +186,41 @@ function ProductDetail(props) {
               </div>
             </div>
             <div className="flex flex-row items-center  sm:text-lg text-sm">
-              <button className="flex items-center sm:mr-4 mr-2 text-white bg-blue-700 hover:bg-blue-600 border-2 rounded-md py-2 px-6 ">
-                <svg
-                  fill="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="w-5 h-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
+              <button
+                onClick={() => addToCartList(item)}
+                className="flex items-center sm:mr-4 mr-2 text-white bg-blue-700 hover:bg-blue-600 border-2 rounded-md py-2 px-6 "
+              >
+                {addToCartButton === "add to cart" ? (
+                  <svg
+                    fill="currentColor"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                  />
-                </svg>
-                <span className="pl-2 py-2">Add to cart</span>
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                )}
+                <span className="pl-2 py-2 capitalize">{addToCartButton}</span>
               </button>
               <button
                 disabled={wishlistButton === "wishlisted"}
