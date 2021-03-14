@@ -1,16 +1,25 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { withRouter } from "react-router";
 import Loading from "./Loading";
+import { addToWishList, addToCart } from "../redux/actions";
+import { wishlistStore, cartListStore } from "../redux/store";
 import { FormattedMessage } from "react-intl";
 function ProductDetail(props) {
+  const history = useHistory();
   const { data } = props.location;
+  const [wishlistButton, setWishListButtonName] = React.useState("");
+  const [addToCartButton, setAddToCartButtonName] = React.useState("");
+  const [sizeOfItem, setSizeOfItem] = React.useState("sm");
+  const [quantityOfItem, setQuantityOfItem] = React.useState(1);
   const [item, setItem] = React.useState();
   const [load, setLoad] = React.useState(true);
   const [title, setTitle] = React.useState("");
   React.useEffect(() => {
     setLoad(true);
+    setAddToCartButtonName("add to cart");
+    setWishListButtonName("wishlist");
     setTimeout(() => {
       if (!data) {
         setLoad(false);
@@ -20,8 +29,27 @@ function ProductDetail(props) {
         setLoad(false);
         setTitle(data.item.category);
       }
-    }, 3 * 1000);
+    }, 1.5 * 1000);
   }, [data, props.history]);
+  const addToWishlist = data => {
+    wishlistStore.dispatch(addToWishList(data));
+    setWishListButtonName("wishlisted");
+  };
+
+  const addToCartList = data => {
+    data.size = sizeOfItem;
+    data.quantity = quantityOfItem;
+    if (addToCartButton === "go to bag") {
+      history.push({
+        pathname: "/checkout",
+      });
+    } else {
+      cartListStore.dispatch(addToCart(data));
+      setAddToCartButtonName("go to bag");
+    }
+    setQuantityOfItem(1);
+  };
+
   if (load) {
     return <Loading />;
   }
@@ -42,7 +70,13 @@ function ProductDetail(props) {
         <div className="px-4 py-4 flex items-start sm:pl-24">
           <span className="text-lg capitalize font-normal text-gray-400">
             <Link to="/" className="mx-1">{`Home /`}</Link>
-            <Link to="/" className="mx-1">
+            <Link 
+              to={{
+                pathname: "/productList",
+                search: `${item.category}`,
+                title: `${item.category}`,
+              }} 
+              className="mx-1">
               <FormattedMessage id={titleName} /> /
             </Link>
             <span className="text-gray-800">{item.title}</span>
@@ -133,11 +167,16 @@ function ProductDetail(props) {
                     <FormattedMessage id="Size" />
                   </span>
                   <div className="relative">
-                    <select className="rounded border appearance-none border-blue-200 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10">
-                      <option>SM</option>
-                      <option>M</option>
-                      <option>L</option>
-                      <option>XL</option>
+                    <select
+                      onChange={s => {
+                        setSizeOfItem(s.target.value);
+                      }}
+                      className="rounded border appearance-none border-blue-200 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10"
+                    >
+                      <option value="sm">SM</option>
+                      <option value="m">M</option>
+                      <option value="L">L</option>
+                      <option value="xl">XL</option>
                     </select>
                     <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                       <svg
@@ -162,7 +201,10 @@ function ProductDetail(props) {
                 <div className="relative">
                   <input
                     className="w-auto px-3 py-2  border-2 border-blue-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                    placeholder="1"
+                    placeholder={quantityOfItem}
+                    onChange={q => {
+                      setQuantityOfItem(q.target.value);
+                    }}
                     type="number"
                     min="1"
                     max="30"
@@ -171,33 +213,52 @@ function ProductDetail(props) {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row items-center  sm:text-md text-xs">
-              <Link
-                to="/"
+            <div className="flex flex-row items-center  sm:text-lg text-sm">
+              <button
+                onClick={() => addToCartList(item)}
                 className="flex items-center sm:mr-4 mr-2 text-white bg-blue-700 hover:bg-blue-600 border-2 rounded-md py-2 px-6 "
               >
-                <svg
-                  fill="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="w-5 h-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
+                {addToCartButton === "add to cart" ? (
+                  <svg
+                    fill="currentColor"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                  />
-                </svg>
-                <span className="pl-2 py-2">
-                  <FormattedMessage id="AddToCart" />
-                </span>
-              </Link>
-              <Link
-                to="/"
-                className="flex items-center text-gray-800 border-2 py-2 px-6 rounded-lg hover:border-blue-200"
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                )}
+                <span className="pl-2 py-2 capitalize">{addToCartButton}</span>
+              </button>
+              <button
+                disabled={wishlistButton === "wishlisted"}
+                onClick={() => addToWishlist(item)}
+                className={
+                  (wishlistButton === "wishlisted"
+                    ? "bg-blue-200 text-white "
+                    : "") +
+                  "flex capitalize items-center text-gray-800 border-2 py-2 px-6 rounded-lg hover:border-blue-200"
+                }
               >
                 <svg
                   fill="currentColor"
@@ -209,10 +270,9 @@ function ProductDetail(props) {
                 >
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                 </svg>
-                <span className="pl-2 py-2">
-                  <FormattedMessage id="MoveToWishlist" />
-                </span>
-              </Link>
+
+                <span className="pl-2 py-2">{wishlistButton}</span>
+              </button>
             </div>
           </div>
         </div>

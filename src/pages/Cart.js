@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
 import { FormattedMessage } from "react-intl";
 function Cart(props) {
   const { itemList, handleClick } = props;
+
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="w-3/4 sm:block hidden shadow-md rounded-b-md mr-2">
@@ -29,11 +31,15 @@ function Cart(props) {
                       <FormattedMessage id="Size" />
                     </span>
                     <div className="relative bg-transparent">
-                      <select className="rounded border bg-transparent appearance-none border-blue-200 py-2 focus:outline-none focus:border-red-500 pl-3 pr-10">
-                        <option>SM</option>
-                        <option>M</option>
-                        <option>L</option>
-                        <option>XL</option>
+                      <select
+                        value={item.size}
+                        onChange={s => console.log(s.target.value)}
+                        className="rounded border bg-transparent appearance-none border-blue-200 py-2 focus:outline-none focus:border-red-500 pl-3 pr-10"
+                      >
+                        <option value="sm">SM</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
                       </select>
                       <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                         <svg
@@ -58,7 +64,7 @@ function Cart(props) {
                   <div className="relative">
                     <input
                       className="w-auto px-3 py-2  border-2 border-blue-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                      placeholder="1"
+                      placeholder={item.quantity}
                       type="number"
                       min="1"
                       max="30"
@@ -150,11 +156,15 @@ function Cart(props) {
                           <FormattedMessage id="Size" />
                         </span>
                         <div className="relative">
-                          <select className="rounded-lg border-2 appearance-none border-blue-100 py-2 focus:outline-none bg-transparent pl-3 pr-10">
-                            <option>SM</option>
-                            <option>M</option>
-                            <option>L</option>
-                            <option>XL</option>
+                          <select
+                            value={item.size}
+                            onChange={s => console.log(s.target.value)}
+                            className="rounded-lg border-2 appearance-none border-blue-100 py-2 focus:outline-none bg-transparent pl-3 pr-10"
+                          >
+                            <option value="sm">SM</option>
+                            <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
                           </select>
                           <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                             <svg

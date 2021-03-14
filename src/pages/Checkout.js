@@ -1,20 +1,20 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Stepper from "./Stepper";
-import data from "../localData/data";
 import Loading from "./Loading";
 import Cart from "./Cart";
 import Address from "./Address";
 import Payment from "./Payment";
+import EmptyPage from "./EmptyPage";
 function Checkout() {
   const [itemList, setItemList] = useState([]);
   const [load, setLoad] = useState(true);
-  React.useEffect(() => {
-    setTimeout(() => {
-      setItemList(data.slice(3, 6));
-      // setItemList([]);
-      setLoad(false);
-    }, 3 * 1000);
-  }, []);
+  const temp = useSelector(cartListStore => cartListStore);
+  setTimeout(() => {
+    setItemList(temp);
+    // setItemList([]);
+    setLoad(false);
+  }, 0 * 1000);
 
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -38,12 +38,16 @@ function Checkout() {
       <div className="container horizontal mt-5 mb-12">
         <Stepper steps={stepArray} currentStepNumber={currentStep} />
       </div>
-      {currentStep === 1 ? (
-        <Cart handleClick={handleClick} itemList={itemList} />
-      ) : currentStep === 2 ? (
-        <Address handleClick={handleClick} />
+      {itemList.length !== 0 ? (
+        currentStep === 1 ? (
+          <Cart handleClick={handleClick} itemList={itemList} />
+        ) : currentStep === 2 ? (
+          <Address handleClick={handleClick} />
+        ) : (
+          <Payment handleClick={handleClick} itemList={itemList} />
+        )
       ) : (
-        <Payment handleClick={handleClick} itemList={itemList} />
+        <EmptyPage />
       )}
     </div>
   );

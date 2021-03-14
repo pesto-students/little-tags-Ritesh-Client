@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import LangDropdown from "./LangDropdown";
@@ -6,9 +7,11 @@ import CategoryDropdown from "./CategoryDropdown";
 import MobileMenu from "./MobileMenu";
 import Search from "./Search";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 function Navbar(props) {
   const { setShowModal, changeLanguage } = props;
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const itemInCart = useSelector(cartListStore => cartListStore);
 
   return (
     <nav className="bg-white-800">
@@ -93,21 +96,28 @@ function Navbar(props) {
               className=" p-1 rounded-md  px-4 py-2 text-black-700 fill-current hover:text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
             >
               <span className="sr-only">cart</span>
-              <svg
-                className="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                />
-              </svg>
+              <span className="relative inline-block">
+                <svg
+                  className="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                  />
+                </svg>
+                {itemInCart.length !== 0 ? (
+                  <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                    {itemInCart.length}
+                  </span>
+                ) : null}
+              </span>
             </Link>
             <LangDropdown changeLanguage={changeLanguage} />
           </div>
