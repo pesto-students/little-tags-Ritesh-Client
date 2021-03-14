@@ -103,7 +103,7 @@ const langs = {
     GoogleDownloadTextOne: "Descárgalo de ",
     GoogleDownloadTextTwo: "Google play",
     //pages
-    products: "productos",
+    Products: "productos",
 
     Size: "Tamaño",
     Quantity: "Cantidad",
