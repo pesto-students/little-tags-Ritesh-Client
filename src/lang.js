@@ -64,6 +64,9 @@ const langs = {
     Sort: "Sort",
     AddToCart: "Add to cart",
     MoveToWishlist: "Move to wishlist",
+    Recommended: "Recommended",
+    PriceLowToHigh: "Price low to high",
+    PriceHighToLow: "Price high to low",
     //
     orderHistory: "Order History",
     trackOrder: "Track Order",
@@ -146,10 +149,11 @@ const langs = {
     Add: "Agregar",
     Home: "Hola",
     Sort: "Clasificar",
-    AddToCart: "Add to cart",
-    MoveToWishlist: "Move to wishlist",
     AddToCart: "Añadir a la cesta",
     MoveToWishlist: "Mover a la lista de deseos",
+    Recommended: "Recomendado",
+    PriceLowToHigh: "Precios de barato a caro",
+    PriceHighToLow: "Precio de mayor a menor",
     //
     orderHistory: "Historial de pedidos",
     trackOrder: "Orden de pista",

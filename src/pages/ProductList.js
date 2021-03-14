@@ -24,8 +24,8 @@ function ProductList(props) {
   }, [title, props.history]);
 
   const sortList = [
-    { id: 1, name: "Price low to high" },
-    { id: 2, name: "Price high to low" },
+    { id: 1, name: "PriceLowToHigh" },
+    { id: 2, name: "PriceLowToHigh" },
   ];
   const [sortDropDown, setSortDropDown] = React.useState(false);
   const [sortByTitle, setSortByTitle] = React.useState("Recommended");
@@ -63,6 +63,7 @@ function ProductList(props) {
     return <Loading />;
   }
   let titleName;
+  let sortByTitleName;
   switch (title) {
     case "men clothing":
       titleName = "menClothing";
@@ -72,6 +73,17 @@ function ProductList(props) {
       break;
     default:
       titleName = title;
+  }
+
+  switch (sortByTitle) {
+    case "Price low to high":
+      sortByTitleName = "PriceLowToHigh";
+      break;
+    case "Price high to low":
+      sortByTitleName = "PriceHighToLow";
+      break;
+    default:
+      sortByTitleName = sortByTitle;
   }
 
   return (
@@ -99,7 +111,8 @@ function ProductList(props) {
               className="w-full sm:text-sm text-xs flex justify-between items-center text-gray-700 px-3 py-1 border font-medium rounded"
             >
               <span className="pr-2 w-auto">
-                <FormattedMessage id="Sort" /> : {sortByTitle}
+                <FormattedMessage id="Sort" /> :{" "}
+                <FormattedMessage id={sortByTitleName} />
               </span>
               <svg
                 viewBox="0 0 24 24"
@@ -141,7 +154,7 @@ function ProductList(props) {
                     }
                   }}
                 >
-                  {s.name}
+                  <FormattedMessage id={s.name} />
                 </button>
               ))}
             </div>
