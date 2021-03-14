@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import { FormattedMessage } from "react-intl";
 const Stepper = ({ steps, currentStepNumber }) => {
   const [stepperSteps, setStep] = useState([]);
   const stepsStateRef = useRef();
@@ -121,7 +121,7 @@ const Stepper = ({ steps, currentStepNumber }) => {
               step.highlighted ? "text-gray-900" : "text-gray-400"
             }`}
           >
-            {step.description}
+            <FormattedMessage id={step.description} />
           </div>
         </div>
         <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300 "></div>
