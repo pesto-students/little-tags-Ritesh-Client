@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 function Navbar(props) {
   const { setShowModal, changeLanguage, setShowSignupModal } = props;
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const itemInCart = useSelector(cartListStore => cartListStore);
+  const itemInCart = useSelector(state => state.cartListReducer.items);
 
   return (
     <nav className="bg-white-800">
