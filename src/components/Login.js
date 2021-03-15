@@ -4,11 +4,13 @@ import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { googleProvider } from "../config/auth";
 import socialMediaAuth from "../services/socialMediaAuth";
+import * as actions from "../redux/actionTypes";
+import { useDispatch } from "react-redux";
 function Login({ props, showModal, setShowModal }) {
+  const dispatch = useDispatch();
   const handleLogin = async provider => {
     const res = await socialMediaAuth(provider);
-    console.log(res.providerData[0]);
-    // dispatch({ type: SET_USER, data: res.providerData[0].displayName });
+    dispatch({ type: actions.SET_USER, data: res.providerData[0].displayName });
     setShowModal(false);
   };
   return (

@@ -1,5 +1,12 @@
 import * as actions from "./actionTypes";
 
+// user
+export const setUser = data => {
+  return {
+    type: actions.SET_USER,
+    data,
+  };
+};
 // wishlist functions
 export const addToWishList = data => {
   return {
