@@ -1,18 +1,27 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-// import { useSelector } from "react-redux";
-import data from "../localData/data";
+import { useSelector } from "react-redux";
+import { wishListStore, cartListStore } from "../redux/store";
+import { removeFromWishList, addToCart } from "../redux/actions";
 import EmptyPage from "./EmptyPage";
 function Wishlist() {
-  // const itemInWishlist = useSelector(wishlistStore => wishlistStore);
-  const itemInWishlist = data.slice(1, 4);
+  const itemInWishlist = useSelector(wishListStore => wishListStore);
+  const handleRemoveFromWishlist = id => {
+    wishListStore.dispatch(removeFromWishList(id));
+  };
+
+  const handleMoveToCart = data => {
+    cartListStore.dispatch(addToCart(data));
+    handleRemoveFromWishlist(data.id);
+  };
+
   return (
     <main className="my-8">
       <div className="container mx-auto px-6">
         <h3 className="text-gray-700 sm:text-2xl text-md font-medium capitalize">
           My wishlist {itemInWishlist.length}
         </h3>
-        {itemInWishlist ? (
+        {itemInWishlist.length !== 0 ? (
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
             {itemInWishlist.map((item, index) => (
               <div
@@ -21,6 +30,7 @@ function Wishlist() {
               >
                 <div className="flex items-end justify-end mt-2">
                   <button
+                    onClick={() => handleRemoveFromWishlist(item.id)}
                     className="
                     transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 p-2 rounded-full mx-5 -mb-4  focus:outline-none
                     flex-none flex items-center justify-center w-6 h-6 text-gray-400 border border-blue-500 hover:animate-ping"
@@ -50,7 +60,10 @@ function Wishlist() {
                     </span>
                   </div>
                 </div>
-                <button className="w-full flex uppercase items-center justify-center text-gray-800 border-2 py-2 px-6 rounded-lg hover:border-blue-200">
+                <button
+                  onClick={() => handleMoveToCart(item)}
+                  className="w-full flex uppercase items-center justify-center text-gray-800 border-2 py-2 px-6 rounded-lg hover:border-blue-200"
+                >
                   <span className="pl-2 py-2 text-center">Move to bag</span>
                 </button>
               </div>
