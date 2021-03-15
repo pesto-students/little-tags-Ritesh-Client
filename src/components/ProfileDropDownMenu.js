@@ -42,7 +42,7 @@ function ProfileDropDownMenu(props) {
         (profileDropDown ? "block " : "hidden ") +
         "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg"
       }
-      style={{ minWidth: "12rem" }}
+      // style={{ minWidth: "12rem" }}
     >
       <span
         className={
@@ -57,7 +57,7 @@ function ProfileDropDownMenu(props) {
         </p>
       </span>
       {username === "" ? (
-        <div className="pr-2 pl-2 flex flex-row justify-between items-center">
+        <div className="pr-2 pl-2 flex flex-row space-x-4 items-center">
           <button
             className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
             onClick={() => {
@@ -92,7 +92,7 @@ function ProfileDropDownMenu(props) {
             "text-gray-800 text-left text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white"
           }
         >
-          Sign out
+          Sign Out
         </button>
       ) : undefined}
     </div>
