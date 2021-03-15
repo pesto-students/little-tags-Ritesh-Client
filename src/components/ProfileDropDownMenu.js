@@ -15,6 +15,7 @@ function ProfileDropDownMenu(props) {
     setShowModal,
     closeProfileDropdown,
     openProfileDropdown,
+    setShowSignupModal,
   } = props;
   const profile = [
     { id: 1, catName: "orderHistory" },
@@ -67,7 +68,13 @@ function ProfileDropDownMenu(props) {
           >
             <FormattedMessage id="login" />
           </button>
-          <button className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110">
+          <button
+            onClick={() => {
+              setShowSignupModal(true);
+              profileDropDown ? closeProfileDropdown() : openProfileDropdown();
+            }}
+            className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
+          >
             <FormattedMessage id="signUp" />
           </button>
         </div>

@@ -9,7 +9,7 @@ import Search from "./Search";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 function Navbar(props) {
-  const { setShowModal, changeLanguage } = props;
+  const { setShowModal, changeLanguage, setShowSignupModal } = props;
   const [menuOpen, setMenuOpen] = React.useState(false);
   const itemInCart = useSelector(cartListStore => cartListStore);
 
@@ -90,7 +90,10 @@ function Navbar(props) {
             <Search />
           </div>
           <div className="absolute inset-y-0 right-0 flex sm:space-x-3 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <ProfileDropdown setShowModal={setShowModal} />
+            <ProfileDropdown
+              setShowModal={setShowModal}
+              setShowSignupModal={setShowSignupModal}
+            />
             <Link
               to="/checkout"
               className=" p-1 rounded-md  px-4 py-2 text-black-700 fill-current hover:text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -123,7 +126,11 @@ function Navbar(props) {
           </div>
         </div>
       </div>
-      <MobileMenu menuOpen={menuOpen} setShowModal={setShowModal} />
+      <MobileMenu
+        menuOpen={menuOpen}
+        setShowModal={setShowModal}
+        setShowSignupModal={setShowSignupModal}
+      />
     </nav>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import Popper from "popper.js";
 import ProfileDropDownMenu from "./ProfileDropDownMenu";
 function ProfileDropdown(props) {
-  const { setShowModal, menuOpen } = props;
+  const { setShowModal, menuOpen, setShowSignupModal } = props;
 
   const [profileDropDown, setProfileDropDown] = React.useState(false);
   const profileBtnDropdownRef = React.createRef();
@@ -87,6 +87,7 @@ function ProfileDropdown(props) {
         profileDropdownRef={profileDropdownRef}
         profileDropDown={profileDropDown}
         setShowModal={setShowModal}
+        setShowSignupModal={setShowSignupModal}
         closeProfileDropdown={closeProfileDropdown}
         openProfileDropdown={openProfileDropdown}
       />
