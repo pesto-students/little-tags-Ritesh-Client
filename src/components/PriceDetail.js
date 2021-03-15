@@ -4,7 +4,10 @@ function PriceDetail({ itemList }) {
   const [totalPrice, setTotalPrice] = React.useState(0);
   React.useEffect(() => {
     let tp = 0;
-    tp = itemList.map(item => tp + item.price * item.quantity);
+    tp = itemList.map(
+      item =>
+        tp + item.price * (item.quantity !== undefined ? item.quantity : 1)
+    );
     console.log(tp[0]);
     setTotalPrice(tp[0]);
   }, [itemList]);
