@@ -2,7 +2,14 @@ import React from "react";
 import PriceDetail from "../components/PriceDetail";
 import { FormattedMessage } from "react-intl";
 function Payment(props) {
-  const { handleClick } = props;
+  const { handleClick, itemList } = props;
+  const [totalPrice, setTotalPrice] = React.useState(0);
+  React.useEffect(() => {
+    let tp = 0;
+    tp = itemList.map(item => tp + item.price * item.quantity);
+    console.log(tp[0]);
+    setTotalPrice(tp[0]);
+  }, [itemList]);
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="sm:w-3/4 shadow-md rounded-b-md mr-2  p-4">
@@ -80,7 +87,8 @@ function Payment(props) {
             </span>
           </div>
         </div>
-        <PriceDetail handleClick={handleClick} />
+        {/* <PriceDetail handleClick={handleClick} /> */}
+        <PriceDetail itemList={itemList} />
       </div>
       <div className="sm:hidden block">
         <div className="fixed inset-x-0 text-blue-700 bottom-0 flex justify-around items-center bg-white border-t border-blue-200 rounded-t-sm p-1 shadow-sm">
@@ -98,7 +106,9 @@ function Payment(props) {
               d="M5 10l7-7m0 0l7 7m-7-7v18"
             />
           </svg>
-          <span className="text-md font-medium text-center">$571.34</span>
+          <span className="text-md font-medium text-center">
+            ${totalPrice.toFixed(2)}
+          </span>
           <button
             onClick={() => handleClick("next")}
             className="w-4/6 border-blue-200  border-2 p-2 rounded-lg bg-blue-700 text-white"

@@ -43,7 +43,7 @@ function Checkout() {
         currentStep === 1 ? (
           <Cart handleClick={handleClick} itemList={itemList} />
         ) : currentStep === 2 ? (
-          <Address handleClick={handleClick} />
+          <Address handleClick={handleClick} itemList={itemList} />
         ) : (
           <Payment handleClick={handleClick} itemList={itemList} />
         )

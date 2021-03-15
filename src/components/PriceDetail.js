@@ -1,6 +1,13 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
-function PriceDetail() {
+function PriceDetail({ itemList }) {
+  const [totalPrice, setTotalPrice] = React.useState(0);
+  React.useEffect(() => {
+    let tp = 0;
+    tp = itemList.map(item => tp + item.price * item.quantity);
+    console.log(tp[0]);
+    setTotalPrice(tp[0]);
+  }, [itemList]);
   return (
     <div className="py-2 border-b-2 rounded-b-lg  border-gray-200 px-2 shadow-inner">
       <span className="text-sm uppercase font-medium tracking-normal">
@@ -19,8 +26,10 @@ function PriceDetail() {
           </span>
         </div>
         <div className="w-1/4 flex flex-col justify-between text-xs font-normal tracking-tight">
-          <span>$878.99</span>
-          <span className="text-gray-500">-$307.65</span>
+          <span>${totalPrice.toFixed(2)}</span>
+          <span className="text-gray-500">
+            -${(totalPrice + (totalPrice * 35) / 100).toFixed(2)}
+          </span>
           <span>No</span>
         </div>
       </div>
@@ -30,7 +39,7 @@ function PriceDetail() {
             <span className="font-medium">Total</span>
           </div>
           <div className="w-1/4 flex flex-col justify-between text-xs font-normal tracking-tight">
-            <span>$571.34</span>
+            <span>${totalPrice.toFixed(2)}</span>
           </div>
         </div>
       </div>
