@@ -5,7 +5,7 @@ import PriceDetail from "../components/PriceDetail";
 import { FormattedMessage } from "react-intl";
 function Cart(props) {
   const { itemList, handleClick } = props;
-
+  console.log(itemList);
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="w-3/4 sm:block hidden shadow-md rounded-b-md mr-2">

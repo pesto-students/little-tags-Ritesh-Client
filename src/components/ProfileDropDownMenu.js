@@ -2,13 +2,13 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import { userStore } from "../redux/store";
+import { store } from "../redux/store";
 import * as actions from "../redux/actionTypes";
 import { useDispatch } from "react-redux";
 import firebase from "firebase/app";
 function ProfileDropDownMenu(props) {
   const dispatch = useDispatch();
-  const username = userStore.getState().userData;
+  const username = store.getState().userData;
   const {
     profileDropdownRef,
     profileDropDown,

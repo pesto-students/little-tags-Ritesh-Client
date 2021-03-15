@@ -1,15 +1,5 @@
-import { createStore } from "redux";
-import {
-  wishlistReducer,
-  cartListReducer,
-  languageReducer,
-  userReducer,
-} from "./reducer.js";
+import { createStore, applyMiddleware } from "redux";
+import { rootReducer } from "../redux/reducer";
+import thunk from "redux-thunk";
 
-export const userStore = createStore(userReducer);
-
-export const wishListStore = createStore(wishlistReducer);
-
-export const cartListStore = createStore(cartListReducer);
-
-export const languageStore = createStore(languageReducer);
+export const store = createStore(rootReducer, applyMiddleware(thunk));
