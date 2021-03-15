@@ -65,7 +65,7 @@ function Footer() {
           <FormattedMessage id="copyright" />
         </div>
         <div className="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
-          {footerIcon.map((icon) => (
+          {footerIcon.map(icon => (
             <Link key={icon.id} to="/#" className="w-6 mx-1">
               <svg
                 className="fill-current cursor-pointer text-gray-500 hover:text-gray-400"
