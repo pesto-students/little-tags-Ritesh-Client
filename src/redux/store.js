@@ -8,7 +8,7 @@ import {
 
 export const userStore = createStore(userReducer);
 
-export const wishlistStore = createStore(wishlistReducer);
+export const wishListStore = createStore(wishlistReducer);
 
 export const cartListStore = createStore(cartListReducer);
 
