@@ -8,7 +8,7 @@ const initialStateForUser = {
   userData: "",
 };
 
-export const userReducer = (state = [], action) => {
+export const userReducer = (state = initialStateForUser, action) => {
   console.log(action.data);
   switch (action.type) {
     case actions.SET_USER:
