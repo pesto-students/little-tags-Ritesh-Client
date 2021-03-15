@@ -1,7 +1,16 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
+import { googleProvider } from "../config/auth";
+import socialMediaAuth from "../services/socialMediaAuth";
 function Login({ props, showModal, setShowModal }) {
+  const handleLogin = async provider => {
+    const res = await socialMediaAuth(provider);
+    console.log(res.providerData[0]);
+    // dispatch({ type: SET_USER, data: res.providerData[0].displayName });
+    setShowModal(false);
+  };
   return (
     <div>
       {showModal ? (
@@ -29,7 +38,7 @@ function Login({ props, showModal, setShowModal }) {
                   </p>
                   <div className="flex flex-row justify-around items-center">
                     <button
-                      href="/#"
+                      onClick={() => handleLogin(googleProvider)}
                       className="w-4/9 h-auto p-2 bg-gray-200 border-2 solid border-red-400 hover:bg-gray-100 rounded  my-2  flex flex-row items-center"
                     >
                       <svg
@@ -91,7 +100,7 @@ function Login({ props, showModal, setShowModal }) {
                     </button>
                     <div className="pl-12"></div>
                     <button
-                      href="/#"
+                      // onClick={() => handleLogin(facebookProvider)}
                       className="w-4/9 h-auto p-2 bg-gray-200 border-2 solid border-blue-400 hover:bg-gray-100 rounded  my-2 flex flex-row items-center"
                     >
                       <svg
