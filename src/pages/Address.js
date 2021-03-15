@@ -3,8 +3,18 @@ import PriceDetail from "../components/PriceDetail";
 import AddressModal from "../components/AddressModal";
 import { FormattedMessage } from "react-intl";
 function Address(props) {
-  const { handleClick } = props;
+  const { handleClick, itemList } = props;
   const [showModal, setShowModal] = React.useState(false);
+  const [totalPrice, setTotalPrice] = React.useState(0);
+  React.useEffect(() => {
+    let tp = 0;
+    tp = itemList.map(
+      item =>
+        tp + item.price * (item.quantity !== undefined ? item.quantity : 1)
+    );
+    console.log(tp[0]);
+    setTotalPrice(tp[0]);
+  }, [itemList]);
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="sm:w-3/4 shadow-md rounded-b-md mr-2  p-4">
@@ -98,7 +108,7 @@ function Address(props) {
             </span>
           </div>
         </div>
-        <PriceDetail handleClick={handleClick} />
+        <PriceDetail itemList={itemList} />
         <button
           onClick={() => handleClick("next")}
           className="text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
@@ -128,7 +138,9 @@ function Address(props) {
               d="M5 10l7-7m0 0l7 7m-7-7v18"
             />
           </svg>
-          <span className="text-md font-medium text-center">$571.34</span>
+          <span className="text-md font-medium text-center">
+            ${totalPrice.toFixed(2)}
+          </span>
           <button
             onClick={() => handleClick("next")}
             className="w-4/6 border-blue-200  border-2 p-2 rounded-lg bg-blue-700 text-white"
