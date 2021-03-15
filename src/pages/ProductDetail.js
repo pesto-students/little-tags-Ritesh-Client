@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { withRouter } from "react-router";
 import Loading from "./Loading";
 import { addToWishList, addToCart } from "../redux/actions";
-import { wishlistStore, cartListStore } from "../redux/store";
+import { wishListStore, cartListStore } from "../redux/store";
 import { FormattedMessage } from "react-intl";
 function ProductDetail(props) {
   const history = useHistory();
@@ -34,12 +34,12 @@ function ProductDetail(props) {
       }
     }, 1.5 * 1000);
   }, [data, props.history]);
-  const addToWishlist = data => {
-    wishlistStore.dispatch(addToWishList(data));
+  const handleAddToWishlist = data => {
+    wishListStore.dispatch(addToWishList(data));
     setWishListButtonName("wishlisted");
   };
 
-  const addToCartList = data => {
+  const handleAddToCartList = data => {
     data.size = sizeOfItem;
     data.quantity = quantityOfItem;
     if (addToCartButton === "go to bag") {
@@ -58,7 +58,7 @@ function ProductDetail(props) {
     return <Loading />;
   }
   let titleName;
-  switch (item.category) {
+  switch (data.item.category) {
     case "men clothing":
       titleName = "menClothing";
       break;
@@ -66,7 +66,7 @@ function ProductDetail(props) {
       titleName = "womenClothing";
       break;
     default:
-      titleName = title;
+      titleName = data.item.category;
   }
   return (
     <div className="text-gray-700 body-font bg-white">
@@ -220,7 +220,7 @@ function ProductDetail(props) {
             </div>
             <div className="flex flex-row items-center  sm:text-lg text-sm">
               <button
-                onClick={() => addToCartList(item)}
+                onClick={() => handleAddToCartList(item)}
                 className="flex items-center sm:mr-4 mr-2 text-white bg-blue-700 hover:bg-blue-600 border-2 rounded-md py-2 px-6 "
               >
                 {addToCartButton === "add to cart" ? (
@@ -259,7 +259,7 @@ function ProductDetail(props) {
               </button>
               <button
                 disabled={wishlistButton === "wishlisted"}
-                onClick={() => addToWishlist(item)}
+                onClick={() => handleAddToWishlist(item)}
                 className={
                   (wishlistButton === "wishlisted"
                     ? "bg-blue-200 text-white "
