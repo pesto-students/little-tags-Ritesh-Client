@@ -6,3 +6,6 @@ export const REMOVE_FROM_WISHLIST = "removeFromWishList";
 
 // language
 export const CHANGE_LANGUAGE = "changeLanguage";
+
+// user
+export const SET_USER = "setUser";

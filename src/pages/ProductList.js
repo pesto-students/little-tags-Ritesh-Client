@@ -6,7 +6,9 @@ import { withRouter } from "react-router";
 import Loading from "./Loading";
 import Popper from "popper.js";
 import { FormattedMessage } from "react-intl";
+import checkAuth from "../services/checkAuth";
 function ProductList(props) {
+  checkAuth();
   const { title } = props.location;
   const [itemList, setItemList] = useState([]);
   const [load, setLoad] = React.useState(true);

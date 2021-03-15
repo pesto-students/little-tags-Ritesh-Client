@@ -14,9 +14,11 @@ import { IntlProvider } from "react-intl";
 import { langs } from "./lang";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import checkAuth from "./services/checkAuth";
 function App() {
+  checkAuth();
   const [locale, setLocale] = React.useState("en");
-  const changeLanguage = (lang) => {
+  const changeLanguage = lang => {
     setLocale(lang);
   };
   return (

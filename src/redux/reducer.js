@@ -5,6 +5,23 @@ const locale = "en";
 const initialWishlist = [];
 const initialCart = [];
 const initialState = { locale };
+const initialStateForUser = {
+  userData: "",
+};
+
+export const userReducer = (state = initialStateForUser, action) => {
+  console.log(action.data);
+  switch (action.type) {
+    case actions.SET_USER:
+      return {
+        ...state,
+        userData: action.data,
+      };
+    default:
+      return { ...state };
+  }
+};
+
 export const wishlistReducer = (state = initialWishlist, action) => {
   switch (action.type) {
     case actions.ADDED_TO_WISHLIST:
