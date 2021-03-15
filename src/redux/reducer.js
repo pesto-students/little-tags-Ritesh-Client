@@ -5,7 +5,6 @@ const locale = "en";
 const initialWishlist = [];
 const initialCart = [];
 const initialState = { locale };
-
 const initialStateForUser = {
   userData: "",
 };
