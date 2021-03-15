@@ -58,7 +58,7 @@ function ProductDetail(props) {
     return <Loading />;
   }
   let titleName;
-  switch (item.category) {
+  switch (data.item.category) {
     case "men clothing":
       titleName = "menClothing";
       break;
@@ -66,7 +66,7 @@ function ProductDetail(props) {
       titleName = "womenClothing";
       break;
     default:
-      titleName = title;
+      titleName = data.item.category;
   }
   return (
     <div className="text-gray-700 body-font bg-white">
