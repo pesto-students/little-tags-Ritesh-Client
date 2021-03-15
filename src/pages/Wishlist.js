@@ -17,6 +17,7 @@ function Wishlist() {
   };
 
   const handleMoveToCart = data => {
+    store.dispatch({ type: actions.ADDED_TO_CART, payload: data });
     handleRemoveFromWishlist(data.id);
   };
   return (
