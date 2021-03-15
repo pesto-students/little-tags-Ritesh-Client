@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { withRouter } from "react-router";
 import Loading from "./Loading";
 import { addToWishList, addToCart } from "../redux/actions";
-import { wishListStore, cartListStore } from "../redux/store";
+import { store } from "../redux/store";
 import { FormattedMessage } from "react-intl";
 function ProductDetail(props) {
   const history = useHistory();
@@ -35,7 +35,7 @@ function ProductDetail(props) {
     }, 1.5 * 1000);
   }, [data, props.history]);
   const handleAddToWishlist = data => {
-    wishListStore.dispatch(addToWishList(data));
+    store.dispatch(addToWishList(data));
     setWishListButtonName("wishlisted");
   };
 
@@ -47,7 +47,7 @@ function ProductDetail(props) {
         pathname: "/checkout",
       });
     } else {
-      cartListStore.dispatch(addToCart(data));
+      store.dispatch(addToCart(data));
       setAddToCartButtonName("go to bag");
       setAddToCartText("goToBag");
     }

@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import Stepper from "./Stepper";
 import Loading from "./Loading";
 import Cart from "./Cart";
 import Address from "./Address";
 import Payment from "./Payment";
 import EmptyPage from "./EmptyPage";
+import { store } from "../redux/store";
 function Checkout() {
   const [itemList, setItemList] = useState([]);
   const [load, setLoad] = useState(true);
-  const temp = useSelector(cartListStore => cartListStore);
+  // const temp = useSelector(cartListStore => cartListStore);
   setTimeout(() => {
-    setItemList(temp);
+    // setItemList(temp);
+    setItemList(store.getState().cartListReducer.items);
     // setItemList([]);
     setLoad(false);
   }, 0 * 1000);

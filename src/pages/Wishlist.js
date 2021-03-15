@@ -1,20 +1,24 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { useSelector } from "react-redux";
-import { wishListStore, cartListStore } from "../redux/store";
-import { removeFromWishList, addToCart } from "../redux/actions";
+import * as actions from "../redux/actionTypes";
+import { store } from "../redux/store";
+
 import EmptyPage from "./EmptyPage";
 function Wishlist() {
-  const itemInWishlist = useSelector(wishListStore => wishListStore);
+  const [itemInWishlist, setItemList] = React.useState([]);
+  React.useEffect(() => {
+    setItemList(store.getState().wishlistReducer.items);
+  }, [itemInWishlist]);
+
   const handleRemoveFromWishlist = id => {
-    wishListStore.dispatch(removeFromWishList(id));
+    store.dispatch({ type: actions.REMOVE_FROM_WISHLIST, payload: id });
+    const remainingArray = itemInWishlist.filter(item => item.id !== id);
+    setItemList(remainingArray);
   };
 
   const handleMoveToCart = data => {
-    cartListStore.dispatch(addToCart(data));
     handleRemoveFromWishlist(data.id);
   };
-
   return (
     <main className="my-8">
       <div className="container mx-auto px-6">
