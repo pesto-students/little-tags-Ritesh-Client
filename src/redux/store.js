@@ -5,7 +5,7 @@ import {
   languageReducer,
 } from "./reducer.js";
 
-export const wishlistStore = createStore(wishlistReducer);
+export const wishListStore = createStore(wishlistReducer);
 
 export const cartListStore = createStore(cartListReducer);
 

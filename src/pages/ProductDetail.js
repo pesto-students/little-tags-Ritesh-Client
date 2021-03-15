@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { withRouter } from "react-router";
 import Loading from "./Loading";
 import { addToWishList, addToCart } from "../redux/actions";
-import { wishlistStore, cartListStore } from "../redux/store";
+import { wishListStore, cartListStore } from "../redux/store";
 import { FormattedMessage } from "react-intl";
 function ProductDetail(props) {
   const history = useHistory();
@@ -31,12 +31,12 @@ function ProductDetail(props) {
       }
     }, 1.5 * 1000);
   }, [data, props.history]);
-  const addToWishlist = data => {
-    wishlistStore.dispatch(addToWishList(data));
+  const handleAddToWishlist = data => {
+    wishListStore.dispatch(addToWishList(data));
     setWishListButtonName("wishlisted");
   };
 
-  const addToCartList = data => {
+  const handleAddToCartList = data => {
     data.size = sizeOfItem;
     data.quantity = quantityOfItem;
     if (addToCartButton === "go to bag") {
@@ -70,13 +70,14 @@ function ProductDetail(props) {
         <div className="px-4 py-4 flex items-start sm:pl-24">
           <span className="text-lg capitalize font-normal text-gray-400">
             <Link to="/" className="mx-1">{`Home /`}</Link>
-            <Link 
+            <Link
               to={{
                 pathname: "/productList",
                 search: `${item.category}`,
                 title: `${item.category}`,
-              }} 
-              className="mx-1">
+              }}
+              className="mx-1"
+            >
               <FormattedMessage id={titleName} /> /
             </Link>
             <span className="text-gray-800">{item.title}</span>
@@ -215,7 +216,7 @@ function ProductDetail(props) {
             </div>
             <div className="flex flex-row items-center  sm:text-lg text-sm">
               <button
-                onClick={() => addToCartList(item)}
+                onClick={() => handleAddToCartList(item)}
                 className="flex items-center sm:mr-4 mr-2 text-white bg-blue-700 hover:bg-blue-600 border-2 rounded-md py-2 px-6 "
               >
                 {addToCartButton === "add to cart" ? (
@@ -252,7 +253,7 @@ function ProductDetail(props) {
               </button>
               <button
                 disabled={wishlistButton === "wishlisted"}
-                onClick={() => addToWishlist(item)}
+                onClick={() => handleAddToWishlist(item)}
                 className={
                   (wishlistButton === "wishlisted"
                     ? "bg-blue-200 text-white "
