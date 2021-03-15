@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
 import { FormattedMessage } from "react-intl";
 function Payment(props) {
@@ -61,12 +62,13 @@ function Payment(props) {
                 >
                   <FormattedMessage id="GoBack" />
                 </button>
-                <button
-                  onClick={() => handleClick("next")}
+                <Link
+                  // onClick={() => handleClick("next")}
+                  to="/thanks"
                   className="text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
                 >
                   <FormattedMessage id="PlaceOrder" />
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -109,12 +111,13 @@ function Payment(props) {
           <span className="text-md font-medium text-center">
             ${totalPrice.toFixed(2)}
           </span>
-          <button
-            onClick={() => handleClick("next")}
+          <Link
+            // onClick={() => handleClick("next")}
+            to="/thanks"
             className="w-4/6 border-blue-200  border-2 p-2 rounded-lg bg-blue-700 text-white"
           >
             <FormattedMessage id="PlaceOrder" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>
