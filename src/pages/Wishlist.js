@@ -2,7 +2,7 @@
 import React from "react";
 import * as actions from "../redux/actionTypes";
 import { store } from "../redux/store";
-
+import { addToCart } from "../redux/actions";
 import EmptyPage from "./EmptyPage";
 function Wishlist() {
   const [itemInWishlist, setItemList] = React.useState([]);
@@ -17,7 +17,7 @@ function Wishlist() {
   };
 
   const handleMoveToCart = data => {
-    store.dispatch({ type: actions.ADDED_TO_CART, payload: data });
+    store.dispatch(addToCart(data));
     handleRemoveFromWishlist(data.id);
   };
   return (
