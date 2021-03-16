@@ -6,6 +6,7 @@ import Loading from "./Loading";
 import { addToWishList, addToCart } from "../redux/actions";
 import { store } from "../redux/store";
 import { FormattedMessage } from "react-intl";
+import ErrorPage from "./ErrorPage";
 function ProductDetail(props) {
   const history = useHistory();
   const { data } = props.location;
@@ -26,14 +27,13 @@ function ProductDetail(props) {
     setTimeout(() => {
       if (!data) {
         setLoad(false);
-        props.history.goBack();
       } else {
         setItem(data.item);
         setLoad(false);
         setTitle(data.item.category);
       }
     }, 1.5 * 1000);
-  }, [data, props.history]);
+  }, [data]);
   const handleAddToWishlist = data => {
     store.dispatch(addToWishList(data));
     setWishListButtonName("wishlisted");
@@ -54,19 +54,23 @@ function ProductDetail(props) {
     setQuantityOfItem(1);
   };
 
+  let titleName;
+  if (data) {
+    switch (data.item.category) {
+      case "men clothing":
+        titleName = "menClothing";
+        break;
+      case "women clothing":
+        titleName = "womenClothing";
+        break;
+      default:
+        titleName = data.item.category;
+    }
+  }
   if (load) {
     return <Loading />;
-  }
-  let titleName;
-  switch (data.item.category) {
-    case "men clothing":
-      titleName = "menClothing";
-      break;
-    case "women clothing":
-      titleName = "womenClothing";
-      break;
-    default:
-      titleName = data.item.category;
+  } else if (!item) {
+    return <ErrorPage />;
   }
   return (
     <div className="text-gray-700 body-font bg-white">

@@ -15,7 +15,7 @@ function Checkout() {
     setItemList(store.getState().cartListReducer.items);
     // setItemList([]);
     setLoad(false);
-  }, 0 * 1000);
+  }, 1.5 * 1000);
 
   const [currentStep, setCurrentStep] = useState(1);
 
