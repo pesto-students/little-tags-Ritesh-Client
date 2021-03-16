@@ -6,9 +6,11 @@ import { store } from "../redux/store";
 import * as actions from "../redux/actionTypes";
 import { useDispatch } from "react-redux";
 import firebase from "firebase/app";
+import Loading from "../pages/Loading";
 function ProfileDropDownMenu(props) {
   const dispatch = useDispatch();
-  const username = store.getState().userData;
+  const [load, setLoad] = React.useState(false);
+  const username = store.getState().userReducer.userData;
   const {
     profileDropdownRef,
     profileDropDown,
@@ -24,6 +26,7 @@ function ProfileDropDownMenu(props) {
     { id: 4, catName: "editProfile" },
   ];
   const signOutUser = () => {
+    setLoad(true);
     firebase
       .auth()
       .signOut()
@@ -31,11 +34,16 @@ function ProfileDropDownMenu(props) {
         dispatch({ type: actions.SET_USER, data: "" });
         console.log("sign out");
         closeProfileDropdown();
+        setLoad(false);
       })
       .catch(function (error) {
         console.log(error);
+        setLoad(false);
       });
   };
+  if (load) {
+    return <Loading />;
+  }
   return (
     <div
       ref={profileDropdownRef}
