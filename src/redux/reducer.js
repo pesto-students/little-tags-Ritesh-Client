@@ -35,7 +35,7 @@ const wishlistReducer = (state = initialWishlist, action) => {
 const cartListReducer = (state = initialCart, action) => {
   switch (action.type) {
     case actions.ADDED_TO_CART:
-      return { ...state, items: [...state.items, action.payload] };
+      return { ...state, items: [...state.items, action.payload.data] };
     case actions.REMOVE_FROM_CART: {
       return {
         ...state,
