@@ -15,6 +15,8 @@ import { langs } from "./lang";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import checkAuth from "./services/checkAuth";
+import ErrorPage from "./pages/ErrorPage";
+import ErrorBoundary from "./ErrorBoundary";
 function App() {
   checkAuth();
   const [locale, setLocale] = React.useState("en");
@@ -36,10 +38,14 @@ function App() {
             <Thanks />
           </Route>
           <Route path="/productList">
-            <ProductList />
+            <ErrorBoundary>
+              <ProductList />
+            </ErrorBoundary>
           </Route>
           <Route path="/productDetail">
-            <ProductDetail />
+            <ErrorBoundary>
+              <ProductDetail />
+            </ErrorBoundary>
           </Route>
           <Route path="/orderHistory">
             <OrderHistory />
@@ -53,8 +59,11 @@ function App() {
           <Route path="/checkout">
             <Checkout />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
+          </Route>
+          <Route>
+            <ErrorPage />
           </Route>
         </Switch>
         <Footer />

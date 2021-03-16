@@ -6,9 +6,7 @@ import { withRouter } from "react-router";
 import Loading from "./Loading";
 import Popper from "popper.js";
 import { FormattedMessage } from "react-intl";
-import checkAuth from "../services/checkAuth";
 function ProductList(props) {
-  checkAuth();
   const { title } = props.location;
   const [itemList, setItemList] = useState([]);
   const [load, setLoad] = React.useState(true);
@@ -18,10 +16,10 @@ function ProductList(props) {
       setTimeout(() => {
         setItemList(data.filter(d => d.category === title));
         setLoad(false);
-      }, 3 * 1000);
+      }, 1.5 * 1000);
     } else {
       setLoad(false);
-      props.history.goBack();
+      // props.history.goBack();
     }
   }, [title, props.history]);
 
@@ -61,9 +59,6 @@ function ProductList(props) {
     setItemList(temp);
   };
 
-  if (load) {
-    return <Loading />;
-  }
   let titleName;
   let sortByTitleName;
   switch (title) {
@@ -87,7 +82,9 @@ function ProductList(props) {
     default:
       sortByTitleName = sortByTitle;
   }
-
+  if (load) {
+    return <Loading />;
+  }
   return (
     <main className="my-8">
       <div className="container mx-auto px-6">

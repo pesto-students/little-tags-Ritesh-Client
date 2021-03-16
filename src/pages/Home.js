@@ -18,7 +18,7 @@ function Home() {
       } else {
         store.dispatch(setUser(""));
       }
-    }, 3 * 1000);
+    }, 1.5 * 1000);
   }, []);
   if (load) return <Loading />;
   return (
