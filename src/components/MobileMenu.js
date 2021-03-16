@@ -4,7 +4,7 @@ import ProfileDropdown from "./ProfileDropdown";
 import CategoryDropdown from "./CategoryDropdown";
 import { Link } from "react-router-dom";
 function MobileMenu(props) {
-  const { menuOpen, setShowModal } = props;
+  const { menuOpen, setShowModal, setShowSignupModal } = props;
   return (
     <div className="sm:hidden text-center">
       <div
@@ -21,7 +21,11 @@ function MobileMenu(props) {
         >
           Wishlist
         </Link>
-        <ProfileDropdown setShowModal={setShowModal} menuOpen={menuOpen} />
+        <ProfileDropdown
+          setShowModal={setShowModal}
+          setShowSignupModal={setShowSignupModal}
+          menuOpen={menuOpen}
+        />
       </div>
       <div className="w-full p-4">
         <Search />

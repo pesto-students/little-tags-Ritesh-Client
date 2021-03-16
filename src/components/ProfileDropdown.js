@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Popper from "popper.js";
 import ProfileDropDownMenu from "./ProfileDropDownMenu";
@@ -33,6 +34,7 @@ function ProfileDropdown(props) {
           profileDropdownRef={profileDropdownRef}
           profileDropDown={profileDropDown}
           setShowModal={setShowModal}
+          setShowSignupModal={setShowSignupModal}
           closeProfileDropdown={closeProfileDropdown}
           openProfileDropdown={openProfileDropdown}
         />
