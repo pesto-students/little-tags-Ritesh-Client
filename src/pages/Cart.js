@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
 import { FormattedMessage } from "react-intl";
+
 function Cart(props) {
   const { itemList, handleClick } = props;
   const [totalPrice, setTotalPrice] = React.useState(0);
