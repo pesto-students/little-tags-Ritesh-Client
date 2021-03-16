@@ -10,6 +10,7 @@ function Login({ props, showModal, setShowModal }) {
   const dispatch = useDispatch();
   const handleLogin = async provider => {
     const res = await socialMediaAuth(provider);
+    console.log(res.providerData);
     dispatch({ type: actions.SET_USER, data: res.providerData[0].displayName });
     setShowModal(false);
   };
