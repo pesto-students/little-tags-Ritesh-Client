@@ -5,14 +5,15 @@ import { FormattedMessage } from "react-intl";
 import * as actions from "../redux/actionTypes";
 import { useDispatch } from "react-redux";
 import firebase from "firebase/app";
-
+import Loading from "../pages/Loading";
 function Signup({ showModal, setShowModal }) {
   const [displayName, setdisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-
+  const [load, setLoad] = useState(false);
   const createAccount = async () => {
+    setLoad(true);
     console.log(displayName, email, password);
     firebase
       .auth()
@@ -30,9 +31,12 @@ function Signup({ showModal, setShowModal }) {
                   data: displayName,
                 });
                 setShowModal(false);
+                setLoad(false);
               },
               function (error) {
                 console.log(error);
+                setShowModal(false);
+                setLoad(false);
               }
             );
         },
@@ -41,12 +45,16 @@ function Signup({ showModal, setShowModal }) {
           var errorMessage = error.message;
           if (errorCode === "auth/weak-password") {
             alert("The password is too weak.");
+            setLoad(false);
           } else {
             console.error(error);
+            setShowModal(false);
+            setLoad(false);
           }
         }
       );
   };
+  if (load) return <Loading />;
   return (
     <div>
       {showModal ? (
