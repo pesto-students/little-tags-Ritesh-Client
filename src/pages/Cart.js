@@ -3,36 +3,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
 import { FormattedMessage } from "react-intl";
-
+import CheckoutMobileButton from "../components/CheckoutMobileButton";
 function Cart(props) {
-  const { itemList, handleClick } = props;
-  const [totalPrice, setTotalPrice] = React.useState(0);
-  React.useEffect(() => {
-    let tp = 0;
-    tp = itemList.map(
-      item =>
-        tp + item.price * (item.quantity !== undefined ? item.quantity : 1)
-    );
-    console.log(tp[0]);
-    setTotalPrice(tp[0]);
-  }, [itemList]);
+  const {
+    itemList,
+    handleClick,
+    handleMoveToWishlist,
+    handleRemoveFromCart,
+  } = props;
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="w-3/4 sm:block hidden shadow-md rounded-b-md mr-2">
         {itemList.map(item => (
-          <button
+          <div
             key={item.id}
             className="flex flex-row justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-4 p-4"
           >
-            <div className="w-1/4 flex justify-center items-center">
+            <div className="w-1/4 h-28  p-2 flex justify-center items-center">
               <img
+                style={{ maxWidth: "100%", maxHeight: "7rem" }}
                 src={item.image}
-                className="w-20 bg-gray-300"
                 alt="Thumbnail"
               />
             </div>
             <div className="w-1/2 flex flex-col justify-start space-y-4">
-              <span className="text-md font-medium">{item.title}</span>
+              <span className="text-md font-medium truncate">{item.title}</span>
               <div className="flex mt-6 items-center text-sm font-normal">
                 {"men clothing".includes("clothing") ? (
                   <div className="flex items-center mr-4">
@@ -73,7 +68,9 @@ function Cart(props) {
                   <div className="relative">
                     <input
                       className="w-auto px-3 py-2  border-2 border-blue-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                      placeholder={item.quantity}
+                      placeholder="1"
+                      value={item.quantity}
+                      onChange={q => console.log(q.target.value)}
                       type="number"
                       min="1"
                       max="30"
@@ -100,7 +97,10 @@ function Cart(props) {
             </div>
             <div className="w-1/3 flex flex-col justify-center items-center text-sm font-light">
               <div className="w-hull">
-                <button className="my-2 flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white">
+                <button
+                  onClick={() => handleMoveToWishlist(item)}
+                  className="my-2 flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
+                >
                   <svg
                     fill="currentColor"
                     strokeLinecap="round"
@@ -115,7 +115,10 @@ function Cart(props) {
                     <FormattedMessage id="MoveToWishList" />
                   </span>
                 </button>
-                <button className="flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white">
+                <button
+                  onClick={() => handleRemoveFromCart(item.id)}
+                  className="flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
+                >
                   <svg
                     fill="currentColor"
                     strokeLinecap="round"
@@ -137,7 +140,7 @@ function Cart(props) {
                 </button>
               </div>
             </div>
-          </button>
+          </div>
         ))}
       </div>
       {/* mobile view for cart item */}
@@ -146,19 +149,19 @@ function Cart(props) {
           {itemList.map(item => (
             <div
               key={item.id}
-              className="flex flex-col justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-4 p-4"
+              className="flex flex-col justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-2 p-2"
             >
-              <div className="flex flex-row justify-around">
-                <div className="w-1/3 flex justify-center items-center mr-2">
+              <div className="w-full flex flex-row justify-around">
+                <div className="w-2/5 flex justify-center items-center mr-1">
                   <img
+                    style={{ maxHeight: "7rem" }}
                     src={item.image}
-                    className="bg-gray-300"
                     alt="Thumbnail"
                   />
                 </div>
-                <div className="w-1/2 flex flex-col justify-start">
+                <div className="w-3/5 flex flex-col justify-start">
                   <span className="text-md font-medium">{item.title}</span>
-                  <div className="flex flex-col justify-between mt-2 text-xs font-light">
+                  <div className="w-2/3  flex flex-col justify-between mt-2 text-xs font-light">
                     {"men clothing".includes("clothing") ? (
                       <div className="flex items-center justify-between">
                         <span className="mr-2">
@@ -199,6 +202,8 @@ function Cart(props) {
                         className="py-2 text-black px-2 border-2 border-blue-100 rounded-lg focus:outline-none focus:border-blue-700 transition-colors"
                         placeholder="1"
                         type="number"
+                        value={item.quantity}
+                        onChange={q => console.log(q.target.value)}
                         min="1"
                         max="30"
                         step="1"
@@ -343,33 +348,11 @@ function Cart(props) {
           <FormattedMessage id="PlaceOrder" />
         </button>
       </div>
-      <div className="sm:hidden block">
-        <div className="fixed inset-x-0 text-blue-700 bottom-0 flex justify-around items-center bg-white border-t border-blue-200 rounded-t-sm p-1 shadow-sm">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
-          <span className="text-md font-medium text-center">
-            ${totalPrice.toFixed(2)}
-          </span>
-          <button
-            onClick={() => handleClick("next")}
-            className="w-4/6 border-blue-200  border-2 p-2 rounded-lg bg-blue-700 text-white"
-          >
-            <FormattedMessage id="PlaceOrder" />
-          </button>
-        </div>
-      </div>
+      <CheckoutMobileButton
+        handleClick={handleClick}
+        itemList={itemList}
+        buttonName={"PlaceOrder"}
+      />
     </div>
   );
 }

@@ -6,16 +6,63 @@ import Address from "./Address";
 import Payment from "./Payment";
 import EmptyPage from "./EmptyPage";
 import { store } from "../redux/store";
+import { removeFromCart, addToWishList } from "../redux/actions";
 function Checkout() {
   const [itemList, setItemList] = useState([]);
   const [load, setLoad] = useState(true);
-  // const temp = useSelector(cartListStore => cartListStore);
-  setTimeout(() => {
-    // setItemList(temp);
-    setItemList(store.getState().cartListReducer.items);
-    // setItemList([]);
-    setLoad(false);
-  }, 1.5 * 1000);
+  const handleMoveToWishlist = data => {
+    store.dispatch(addToWishList(data));
+    handleRemoveFromCart(data.id);
+  };
+  const handleRemoveFromCart = id => {
+    store.dispatch(removeFromCart(id));
+    setItemList(itemList.filter(item => item.id !== id));
+  };
+  React.useEffect(() => {
+    setTimeout(() => {
+      setItemList(store.getState().cartListReducer.items);
+      // const temp = [
+      //   {
+      //     id: 31,
+      //     title: "Floral Blouse",
+      //     price: 20,
+      //     description:
+      //       "B Slim Beige Soft Sleek Under Clothing Seamless High Waist Women Body Shapewear Shorts",
+      //     category: "women clothing",
+      //     image:
+      //       "https://images-na.ssl-images-amazon.com/images/I/31WrGdqfijL.jpg",
+      //     size: "L",
+      //     quantity: "12",
+      //   },
+      //   {
+      //     id: 8,
+      //     title: "Men's Coats Jackets",
+      //     price: 44.39,
+      //     description:
+      //       "Nilesh Men's Coats Jackets,Winter Casual Fashion Pure Color Patchwork Jacket Zipper Outwear Coat (Nilesh JK67)",
+      //     category: "men clothing",
+      //     image:
+      //       "https://images-na.ssl-images-amazon.com/images/I/41kpS4bT4vL.jpg",
+      //     size: "m",
+      //     quantity: "5",
+      //   },
+      //   {
+      //     id: 3,
+      //     title: "Mens Cotton Jacket",
+      //     price: 55.99,
+      //     description:
+      //       "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
+      //     category: "men clothing",
+      //     image:
+      //       "https://images-na.ssl-images-amazon.com/images/I/51%2BuK8oPfyL._SY679_.jpg",
+      //     size: "xl",
+      //     quantity: 1,
+      //   },
+      // ];
+      // setItemList(temp);
+      setLoad(false);
+    }, 1.5 * 1000);
+  }, [itemList]);
 
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -41,7 +88,12 @@ function Checkout() {
       </div>
       {itemList.length !== 0 ? (
         currentStep === 1 ? (
-          <Cart handleClick={handleClick} itemList={itemList} />
+          <Cart
+            handleClick={handleClick}
+            itemList={itemList}
+            handleMoveToWishlist={handleMoveToWishlist}
+            handleRemoveFromCart={handleRemoveFromCart}
+          />
         ) : currentStep === 2 ? (
           <Address handleClick={handleClick} itemList={itemList} />
         ) : (
