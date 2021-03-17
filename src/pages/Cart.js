@@ -7,27 +7,18 @@ import { FormattedMessage } from "react-intl";
 function Cart(props) {
   const { itemList, handleClick } = props;
   const [totalPrice, setTotalPrice] = React.useState(0);
-  React.useEffect(() => {
-    let tp = 0;
-    tp = itemList.map(
-      item =>
-        tp + item.price * (item.quantity !== undefined ? item.quantity : 1)
-    );
-    console.log(tp[0]);
-    setTotalPrice(tp[0]);
-  }, [itemList]);
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="w-3/4 sm:block hidden shadow-md rounded-b-md mr-2">
         {itemList.map(item => (
-          <button
+          <div
             key={item.id}
             className="flex flex-row justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-4 p-4"
           >
-            <div className="w-1/4 flex justify-center items-center">
+            <div className="w-1/4 h-28  p-2 flex justify-center items-center">
               <img
+                style={{ maxWidth: "100%", maxHeight: "7rem" }}
                 src={item.image}
-                className="w-20 bg-gray-300"
                 alt="Thumbnail"
               />
             </div>
@@ -73,7 +64,9 @@ function Cart(props) {
                   <div className="relative">
                     <input
                       className="w-auto px-3 py-2  border-2 border-blue-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                      placeholder={item.quantity}
+                      placeholder="1"
+                      value={item.quantity}
+                      onChange={q => console.log(q.target.value)}
                       type="number"
                       min="1"
                       max="30"
@@ -137,7 +130,7 @@ function Cart(props) {
                 </button>
               </div>
             </div>
-          </button>
+          </div>
         ))}
       </div>
       {/* mobile view for cart item */}
@@ -146,19 +139,19 @@ function Cart(props) {
           {itemList.map(item => (
             <div
               key={item.id}
-              className="flex flex-col justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-4 p-4"
+              className="flex flex-col justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-2 p-2"
             >
-              <div className="flex flex-row justify-around">
-                <div className="w-1/3 flex justify-center items-center mr-2">
+              <div className="w-full flex flex-row justify-around">
+                <div className="w-2/5 flex justify-center items-center mr-1">
                   <img
+                    style={{ maxHeight: "7rem" }}
                     src={item.image}
-                    className="bg-gray-300"
                     alt="Thumbnail"
                   />
                 </div>
-                <div className="w-1/2 flex flex-col justify-start">
+                <div className="w-3/5 flex flex-col justify-start">
                   <span className="text-md font-medium">{item.title}</span>
-                  <div className="flex flex-col justify-between mt-2 text-xs font-light">
+                  <div className="w-2/3  flex flex-col justify-between mt-2 text-xs font-light">
                     {"men clothing".includes("clothing") ? (
                       <div className="flex items-center justify-between">
                         <span className="mr-2">

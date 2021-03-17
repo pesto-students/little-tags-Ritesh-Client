@@ -5,15 +5,6 @@ import { FormattedMessage } from "react-intl";
 function Payment(props) {
   const { handleClick, itemList } = props;
   const [totalPrice, setTotalPrice] = React.useState(0);
-  React.useEffect(() => {
-    let tp = 0;
-    tp = itemList.map(
-      item =>
-        tp + item.price * (item.quantity !== undefined ? item.quantity : 1)
-    );
-    console.log(tp[0]);
-    setTotalPrice(tp[0]);
-  }, [itemList]);
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="sm:w-3/4 shadow-md rounded-b-md mr-2  p-4">
