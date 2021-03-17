@@ -11,7 +11,20 @@ function Footer() {
           <FormattedMessage id="copyright" />
         </div>
         <div className="mt-2 capitalize">
-          Made by <span className="text-red-700">❤</span> Ritesh & manmeet
+          Design by
+          <a
+            className=" text-blue-400 blue no-underline hover:underline"
+            href={"https://www.linkedin.com/in/ritesh-kumar-sinha-897735101/"}
+          >
+            {" Ritesh "}
+          </a>{" "}
+          &
+          <a
+            className=" text-blue-400 blue no-underline hover:underline"
+            href={"https://www.linkedin.com/in/manmeet-singh-parmar-9733a511b/"}
+          >
+            {" Manmeet"}
+          </a>
         </div>
         <div className="flex flex-row mt-2">
           <span className="mx-2 capitalize">Want's to contribute</span>
