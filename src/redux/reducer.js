@@ -13,6 +13,7 @@ const removeItem = (array, action) =>
   array.filter(item => item.id !== action.payload.id);
 
 const wishlistReducer = (state = initialWishlist, action) => {
+  console.log(action);
   switch (action.type) {
     case actions.ADDED_TO_WISHLIST:
       return { ...state, items: [...state.items, action.payload.data] };
@@ -28,6 +29,7 @@ const wishlistReducer = (state = initialWishlist, action) => {
 };
 
 const cartListReducer = (state = initialCart, action) => {
+  console.log(action);
   switch (action.type) {
     case actions.ADDED_TO_CART:
       return { ...state, items: [...state.items, action.payload.data] };

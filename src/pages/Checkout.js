@@ -6,10 +6,18 @@ import Address from "./Address";
 import Payment from "./Payment";
 import EmptyPage from "./EmptyPage";
 import { store } from "../redux/store";
-import data from "../localData/data";
+import { removeFromCart, addToWishList } from "../redux/actions";
 function Checkout() {
   const [itemList, setItemList] = useState([]);
   const [load, setLoad] = useState(true);
+  const handleMoveToWishlist = data => {
+    store.dispatch(addToWishList(data));
+    handleRemoveFromCart(data.id);
+  };
+  const handleRemoveFromCart = id => {
+    store.dispatch(removeFromCart(id));
+    setItemList(itemList.filter(item => item.id !== id));
+  };
   setTimeout(() => {
     setItemList(store.getState().cartListReducer.items);
     const temp = [
@@ -78,7 +86,12 @@ function Checkout() {
       </div>
       {itemList.length !== 0 ? (
         currentStep === 1 ? (
-          <Cart handleClick={handleClick} itemList={itemList} />
+          <Cart
+            handleClick={handleClick}
+            itemList={itemList}
+            handleMoveToWishlist={handleMoveToWishlist}
+            handleRemoveFromCart={handleRemoveFromCart}
+          />
         ) : currentStep === 2 ? (
           <Address handleClick={handleClick} itemList={itemList} />
         ) : (

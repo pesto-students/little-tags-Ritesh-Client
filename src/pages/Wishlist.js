@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import * as actions from "../redux/actionTypes";
 import { store } from "../redux/store";
-import { addToCart } from "../redux/actions";
+import { addToCart, removeFromWishList } from "../redux/actions";
 import EmptyPage from "./EmptyPage";
 function Wishlist() {
   const [itemInWishlist, setItemList] = React.useState([]);
@@ -11,9 +10,8 @@ function Wishlist() {
   }, [itemInWishlist]);
 
   const handleRemoveFromWishlist = id => {
-    store.dispatch({ type: actions.REMOVE_FROM_WISHLIST, payload: id });
-    const remainingArray = itemInWishlist.filter(item => item.id !== id);
-    setItemList(remainingArray);
+    store.dispatch(removeFromWishList(id));
+    setItemList(itemInWishlist.filter(item => item.id !== id));
   };
 
   const handleMoveToCart = data => {

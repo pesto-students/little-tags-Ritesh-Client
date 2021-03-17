@@ -3,22 +3,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
 import { FormattedMessage } from "react-intl";
-import { store } from "../redux/store";
-import { removeFromCart, addToWishList } from "../redux/actions";
 
 function Cart(props) {
-  const { itemList, handleClick } = props;
+  const {
+    itemList,
+    handleClick,
+    handleMoveToWishlist,
+    handleRemoveFromCart,
+  } = props;
   const [totalPrice, setTotalPrice] = React.useState(0);
 
-  const handleMoveToWishlist = data => {
-    console.log(data);
-    store.dispatch(addToWishList(data));
-    handleRemoveFromCart(data.id);
-  };
-  const handleRemoveFromCart = id => {
-    console.log(id);
-    store.dispatch(removeFromCart(id));
-  };
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="w-3/4 sm:block hidden shadow-md rounded-b-md mr-2">
