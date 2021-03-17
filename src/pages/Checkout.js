@@ -11,8 +11,7 @@ function Checkout() {
   const [itemList, setItemList] = useState([]);
   const [load, setLoad] = useState(true);
   setTimeout(() => {
-    // setItemList(store.getState().cartListReducer.items);
-    // console.log(itemList);
+    setItemList(store.getState().cartListReducer.items);
     const temp = [
       {
         id: 31,
@@ -51,7 +50,7 @@ function Checkout() {
         quantity: 1,
       },
     ];
-    setItemList(temp);
+    // setItemList(temp);
     setLoad(false);
   }, 1.5 * 1000);
 

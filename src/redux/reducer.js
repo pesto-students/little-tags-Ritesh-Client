@@ -10,18 +10,13 @@ const initialStateForUser = {
   userData: "",
 };
 const removeItem = (array, action) =>
-  array.filter(item => item.id !== action.payload);
+  array.filter(item => item.id !== action.payload.id);
 
 const wishlistReducer = (state = initialWishlist, action) => {
   switch (action.type) {
     case actions.ADDED_TO_WISHLIST:
-      // console.log(state);
       return { ...state, items: [...state.items, action.payload.data] };
     case actions.REMOVE_FROM_WISHLIST: {
-      // console.log({
-      //   ...state,
-      //   items: removeItem(state.items, action),
-      // });
       return {
         ...state,
         items: removeItem(state.items, action),
