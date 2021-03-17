@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
 import { FormattedMessage } from "react-intl";
+import CheckoutMobileButton from "../components/CheckoutMobileButton";
 function Payment(props) {
   const { handleClick, itemList } = props;
-  const [totalPrice, setTotalPrice] = React.useState(0);
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="sm:w-3/4 shadow-md rounded-b-md mr-2  p-4">
@@ -16,7 +17,7 @@ function Payment(props) {
             <FormattedMessage id="PaymentOptions" />
           </span>
           <div className="shadow-md border-blue-200 border-2 flex sm:flex-row flex-col space-y-2 space-x-2 p-4 rounded-md mt-2">
-            <div className=" sm:w-1/3 flex space-y-2 flex-col">
+            <div className=" sm:w-1/2 flex space-y-2 flex-col">
               <button className="p-2 hover:bg-blue-700 border-2 border-blue-200 rounded-lg capitalize hover:text-white">
                 <FormattedMessage id="CashOnDelivery" />
               </button>
@@ -35,10 +36,7 @@ function Payment(props) {
               </button>
             </div>
             <div className="w-full sm:px-4">
-              <label
-                for="name"
-                className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-              >
+              <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
                 <FormattedMessage id="Remarks" />
               </label>
               <FormattedMessage id="AnyMessage">
@@ -49,20 +47,37 @@ function Payment(props) {
                   />
                 )}
               </FormattedMessage>
-              <div className="flex flex-row justify-start mt-4 space-x-4">
-                <button
-                  onClick={() => handleClick()}
-                  className="text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
-                >
-                  <FormattedMessage id="GoBack" />
-                </button>
-                <Link
-                  // onClick={() => handleClick("next")}
-                  to="/thanks"
-                  className="text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
-                >
-                  <FormattedMessage id="PlaceOrder" />
-                </Link>
+              <div className="sm:hidden block">
+                <div className="flex flex-col space-y-2 justify-center items-center">
+                  <Link
+                    to="/thanks"
+                    className="w-full text-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
+                  >
+                    <FormattedMessage id="PlaceOrder" />
+                  </Link>
+                  <button
+                    onClick={() => handleClick()}
+                    className="w-full text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
+                  >
+                    <FormattedMessage id="GoBack" />
+                  </button>
+                </div>
+              </div>
+              <div className="sm:block hidden">
+                <div className="flex flex-row justify-start mt-4 space-x-4">
+                  <button
+                    onClick={() => handleClick()}
+                    className="text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
+                  >
+                    <FormattedMessage id="GoBack" />
+                  </button>
+                  <Link
+                    to="/thanks"
+                    className="text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
+                  >
+                    <FormattedMessage id="PlaceOrder" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -86,34 +101,12 @@ function Payment(props) {
         {/* <PriceDetail handleClick={handleClick} /> */}
         <PriceDetail itemList={itemList} />
       </div>
-      <div className="sm:hidden block">
-        <div className="fixed inset-x-0 text-blue-700 bottom-0 flex justify-around items-center bg-white border-t border-blue-200 rounded-t-sm p-1 shadow-sm">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
-          <span className="text-md font-medium text-center">
-            ${totalPrice.toFixed(2)}
-          </span>
-          <Link
-            // onClick={() => handleClick("next")}
-            to="/thanks"
-            className="w-4/6 border-blue-200  border-2 p-2 rounded-lg bg-blue-700 text-white"
-          >
-            <FormattedMessage id="PlaceOrder" />
-          </Link>
-        </div>
-      </div>
+      <CheckoutMobileButton
+        handleClick={handleClick}
+        itemList={itemList}
+        buttonName={"PlaceOrder"}
+        buttonType="Link"
+      />
     </div>
   );
 }

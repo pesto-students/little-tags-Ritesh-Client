@@ -1,11 +1,11 @@
 import React from "react";
 import PriceDetail from "../components/PriceDetail";
 import AddressModal from "../components/AddressModal";
+import CheckoutMobileButton from "../components/CheckoutMobileButton";
 import { FormattedMessage } from "react-intl";
 function Address(props) {
   const { handleClick, itemList } = props;
   const [showModal, setShowModal] = React.useState(false);
-  const [totalPrice, setTotalPrice] = React.useState(0);
 
   return (
     <div className="flex sm:flex-row flex-col mt-12">
@@ -28,7 +28,7 @@ function Address(props) {
           </span>
           <div className="shadow-md border-blue-200 border-2 flex flex-col space-y-2 justify-start p-4 rounded-md mt-2">
             <div>
-              <input type="checkbox" checked={true} />
+              <input type="checkbox" checked={true} value={true} />
               <span className="text-sm font-normal ml-2">Ritesh Sinha</span>
 
               <div className="ml-5 flex flex-col space-y-2">
@@ -114,33 +114,11 @@ function Address(props) {
           <FormattedMessage id="GoBack" />
         </button>
       </div>
-      <div className="sm:hidden block">
-        <div className="fixed inset-x-0 text-blue-700 bottom-0 flex justify-around items-center bg-white border-t border-blue-200 rounded-t-sm p-1 shadow-sm">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
-          <span className="text-md font-medium text-center">
-            ${totalPrice.toFixed(2)}
-          </span>
-          <button
-            onClick={() => handleClick("next")}
-            className="w-4/6 border-blue-200  border-2 p-2 rounded-lg bg-blue-700 text-white"
-          >
-            <FormattedMessage id="Continue" />
-          </button>
-        </div>
-      </div>
+      <CheckoutMobileButton
+        handleClick={handleClick}
+        itemList={itemList}
+        buttonName={"Continue"}
+      />
     </div>
   );
 }
