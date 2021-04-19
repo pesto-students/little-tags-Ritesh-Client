@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
 import { FormattedMessage } from "react-intl";
 import { toast } from "react-toastify";
@@ -238,8 +237,8 @@ function Cart(props) {
                 </span>
               </div>
               <div className="mt-2 flex flex-row justify-between space-x-1 items-center text-sm font-light">
-                <Link
-                  to="/"
+                <button
+                  onClick={() => handleRemoveFromCart(item._id)}
                   className="flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
                 >
                   <svg
@@ -260,9 +259,9 @@ function Cart(props) {
                   <span className="pl-2">
                     <FormattedMessage id="Remove" />
                   </span>
-                </Link>
-                <Link
-                  to="/"
+                </button>
+                <button
+                  onClick={() => handleMoveToWishlist(item)}
                   className="flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
                 >
                   <svg
@@ -278,7 +277,7 @@ function Cart(props) {
                   <span className="pl-2">
                     <FormattedMessage id="MoveToWishList" />
                   </span>
-                </Link>
+                </button>
               </div>
             </div>
           ))}
