@@ -5,18 +5,19 @@ import { addToCart, removeFromWishList } from "../redux/actions";
 import EmptyPage from "./EmptyPage";
 function Wishlist() {
   const [itemInWishlist, setItemList] = React.useState([]);
+  const wishlistStore = store.getState().wishlistReducer.items;
   React.useEffect(() => {
-    setItemList(store.getState().wishlistReducer.items);
-  }, [itemInWishlist]);
+    setItemList(wishlistStore);
+  }, [wishlistStore]);
 
   const handleRemoveFromWishlist = id => {
     store.dispatch(removeFromWishList(id));
-    setItemList(itemInWishlist.filter(item => item.id !== id));
+    setItemList(store.getState().wishlistReducer.items);
   };
 
   const handleMoveToCart = data => {
     store.dispatch(addToCart(data));
-    handleRemoveFromWishlist(data.id);
+    handleRemoveFromWishlist(data._id);
   };
   return (
     <main className="my-8">
@@ -33,7 +34,7 @@ function Wishlist() {
               >
                 <div className="flex items-end justify-end mt-2">
                   <button
-                    onClick={() => handleRemoveFromWishlist(item.id)}
+                    onClick={() => handleRemoveFromWishlist(item._id)}
                     className="
                     transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 p-2 rounded-full mx-5 -mb-4  focus:outline-none
                     flex-none flex items-center justify-center w-6 h-6 text-gray-400 border border-blue-500 hover:animate-ping"

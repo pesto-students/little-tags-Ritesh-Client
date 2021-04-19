@@ -1,18 +1,50 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { googleProvider } from "../config/auth";
 import socialMediaAuth from "../services/socialMediaAuth";
+import loginUser from "../services/loginUser";
 import * as actions from "../redux/actionTypes";
 import { useDispatch } from "react-redux";
-function Login({ props, showModal, setShowModal }) {
+import { toast } from "react-toastify";
+import { useCookies } from "react-cookie";
+function Login({ showModal, setShowModal }) {
   const dispatch = useDispatch();
+  const [cookies, setCookie] = useCookies(["token"]);
+  useEffect(() => {
+    console.log(cookies);
+  }, [cookies]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleLogin = async provider => {
     const res = await socialMediaAuth(provider);
-    console.log(res.providerData);
     dispatch({ type: actions.SET_USER, data: res.providerData[0].displayName });
     setShowModal(false);
+  };
+  const loginUsingEmail = e => {
+    e.preventDefault();
+    const data = {
+      email,
+      password,
+    };
+    loginUser(data)
+      .then(r => {
+        return r.json();
+      })
+      .then(res => {
+        if (res.token) {
+          setCookie("token", res.token);
+          setShowModal(false);
+          toast("Welcome back to shopkart");
+        } else {
+          setShowModal(false);
+          toast("something went wrong");
+        }
+      })
+      .catch(e => {
+        toast(`${e}`);
+      });
   };
   return (
     <div>
@@ -55,7 +87,6 @@ function Login({ props, showModal, setShowModal }) {
                           enableBackground: "new 0 0 512 512",
                         }}
                         xmlSpace="preserve"
-                        {...props}
                       >
                         <path
                           style={{
@@ -106,12 +137,7 @@ function Login({ props, showModal, setShowModal }) {
                       // onClick={() => handleLogin(facebookProvider)}
                       className="w-4/9 h-auto p-2 bg-gray-200 border-2 solid border-blue-400 hover:bg-gray-100 rounded  my-2 flex flex-row items-center"
                     >
-                      <svg
-                        height="26px"
-                        viewBox="0 0 512 512"
-                        width="26px"
-                        {...props}
-                      >
+                      <svg height="26px" viewBox="0 0 512 512" width="26px">
                         <path
                           d="m483.738281 0h-455.5c-15.597656.0078125-28.24218725 12.660156-28.238281 28.261719v455.5c.0078125 15.597656 12.660156 28.242187 28.261719 28.238281h455.476562c15.605469.003906 28.257813-12.644531 28.261719-28.25 0-.003906 0-.007812 0-.011719v-455.5c-.007812-15.597656-12.660156-28.24218725-28.261719-28.238281zm0 0"
                           fill="#4267b2"
@@ -132,18 +158,56 @@ function Login({ props, showModal, setShowModal }) {
                     <hr className="w-1/4 bg-gray-100" />
                   </div>
                   <div className="flex flex-col justify-center items-center">
-                    <div className="flex flex-col mb-4">
-                      <label className="text-sm items-start">
-                        <FormattedMessage id="mobileLabel" />
-                      </label>
-                      <input
-                        className="border-b-2 py-2 px-3 text-grey-darkest border-orange-500 focus:border-b-2 focus:border-orange-500"
-                        type="text"
-                      />
-                      <button className="mt-6 w-auto p-2 text-white border solid bg-orange-500 rounded hover:bg-orange-400">
-                        <FormattedMessage id="loginButton" />
+                    <form
+                      className="flex flex-col mb-4"
+                      onSubmit={loginUsingEmail}
+                    >
+                      <div className="flex flex-col space-y-4 justify-center items-center">
+                        <div className="">
+                          <label
+                            htmlFor="email"
+                            className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                          >
+                            Email
+                          </label>
+                          <input
+                            type="email"
+                            name="email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            id="email"
+                            placeholder="info@shopkart.com"
+                            required
+                            className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                          />
+                        </div>
+                        <div className="">
+                          <label
+                            htmlFor="name"
+                            className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                          >
+                            Password
+                          </label>
+                          <input
+                            type="password"
+                            name="password"
+                            value={password}
+                            onChange={p => setPassword(p.target.value)}
+                            id="password"
+                            placeholder="******"
+                            required
+                            minLength="8"
+                            className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                          />
+                        </div>
+                      </div>
+                      <button
+                        type="submit"
+                        className="mt-6 w-auto p-2 text-white border solid bg-orange-500 rounded hover:bg-orange-400"
+                      >
+                        Login
                       </button>
-                    </div>
+                    </form>
                   </div>
                   <p className="text-sm text-gray-600">
                     <span>

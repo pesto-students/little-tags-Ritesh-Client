@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
+import { store } from "../redux/store";
+import { addAddress } from "../redux/actions";
 function AddressModal({ showModal, setShowModal }) {
+  const [name, setName] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [postalcode, setPostalcode] = useState();
+  const [country, setCountry] = useState();
+  const [defaultAddress, setDefaultAddress] = useState(false);
+  const addNewAddress = e => {
+    e.preventDefault();
+    const userAddress = {
+      id: Math.random().toString(16).replace("0", "addressID"),
+      name,
+      phoneNumber,
+      address,
+      city,
+      postalcode,
+      country,
+      defaultAddress,
+    };
+    store.dispatch(addAddress(userAddress));
+    setShowModal(false);
+  };
   return (
     <div>
       {showModal ? (
@@ -22,87 +46,121 @@ function AddressModal({ showModal, setShowModal }) {
                   </button>
                 </div>
                 {/*body*/}
-                <div className=" flex flex-col justify-center items-start relative p-5 pb-6">
-                  <div className="mb-6">
-                    <label
-                      for="name"
-                      class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                    >
-                      <FormattedMessage id="FullName" />
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      placeholder="John Doe"
-                      required
-                      class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                    />
+                <form
+                  method="post"
+                  action="#"
+                  onSubmit={e => addNewAddress(e)}
+                  className=" flex flex-col justify-center items-start relative p-5 pb-6"
+                >
+                  <div className="flex sm:flex-row space-x-2 justify-between">
+                    <div className="mb-6">
+                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                        <FormattedMessage id="FullName" />
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={name}
+                        onChange={n => setName(n.target.value)}
+                        placeholder="John Doe"
+                        required
+                        className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                      />
+                    </div>
+                    <div className="mb-6">
+                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                        <FormattedMessage id="MobileNumber" />
+                      </label>
+                      <input
+                        type="tel"
+                        name="number"
+                        value={phoneNumber}
+                        onChange={p => setPhoneNumber(p.target.value)}
+                        placeholder="8770919212"
+                        required
+                        className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                      />
+                    </div>
                   </div>
-                  <div className="mb-6">
-                    <label
-                      for="name"
-                      class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                    >
-                      <FormattedMessage id="MobileNumber" />
-                    </label>
-                    <input
-                      type="number"
-                      name="name"
-                      id="name"
-                      placeholder="8770919212"
-                      required
-                      class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                    />
+                  <div className="flex sm:flex-row space-x-2 justify-between">
+                    <div className="mb-6">
+                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                        <FormattedMessage id="Address" />
+                      </label>
+                      <input
+                        type="text"
+                        name="address"
+                        value={address}
+                        onChange={a => setAddress(a.target.value)}
+                        placeholder="Raipur CG India"
+                        required
+                        className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                      />
+                    </div>
+                    <div className="mb-6">
+                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                        City
+                      </label>
+                      <input
+                        type="text"
+                        name="city"
+                        id="city"
+                        value={city}
+                        onChange={c => setCity(c.target.value)}
+                        placeholder="Raipur"
+                        required
+                        className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                      />
+                    </div>
                   </div>
-                  <div className="mb-6">
-                    <label
-                      for="name"
-                      className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                    >
-                      <FormattedMessage id="Address" />
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      placeholder="Raipur CG India"
-                      required
-                      class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                    />
+                  <div className="flex sm:flex-row space-x-2 justify-between">
+                    <div className="mb-6">
+                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                        <FormattedMessage id="ZipCode" />
+                      </label>
+                      <input
+                        type="number"
+                        name="postcode"
+                        value={postalcode}
+                        onChange={p => setPostalcode(p.target.value)}
+                        placeholder="491332"
+                        required
+                        className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                      />
+                    </div>
+                    <div className="mb-6">
+                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                        Country
+                      </label>
+                      <input
+                        type="text"
+                        name="country"
+                        id="country"
+                        value={country}
+                        onChange={c => setCountry(c.target.value)}
+                        placeholder="India"
+                        required
+                        className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                      />
+                    </div>
                   </div>
-                  <div class="mb-6">
-                    <label
-                      for="name"
-                      class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                    >
-                      <FormattedMessage id="ZipCode" />
-                    </label>
+                  <div className="mb-6 flex flex-row items-center space-x-2">
                     <input
-                      type="number"
-                      name="name"
-                      id="name"
-                      placeholder="491332"
-                      required
-                      class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                      type="checkbox"
+                      value={defaultAddress}
+                      onChange={() => setDefaultAddress(!defaultAddress)}
                     />
-                  </div>
-                  <div class="mb-6 flex flex-row items-center space-x-2">
-                    <input type="checkbox" />
-                    <label
-                      for="name"
-                      class="ml-2 text-sm text-gray-600 dark:text-gray-400"
-                    >
+                    <label className="ml-2 text-sm text-gray-600 dark:text-gray-400">
                       <FormattedMessage id="MakeItDefault" />
                     </label>
                   </div>
                   <button
-                    onClick={() => setShowModal(false)}
+                    type="submit"
                     className="w-full text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
                   >
                     <FormattedMessage id="Add" />
                   </button>
-                </div>
+                </form>
               </div>
             </div>
           </div>

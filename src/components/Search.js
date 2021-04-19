@@ -2,8 +2,22 @@ import React from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
-import data from "../localData/data";
+import getAllProducts from "../services/getAllProducts";
+import { useCookies } from "react-cookie";
 function Search() {
+  const [data, setData] = React.useState();
+  const [cookies] = useCookies();
+  React.useEffect(() => {
+    const result = getAllProducts(cookies);
+    result
+      .then(r => r.json())
+      .then(res => {
+        setData(res);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }, [cookies]);
   const history = useHistory();
   const handleOnSelect = item => {
     history.push({
@@ -20,7 +34,7 @@ function Search() {
         return (
           <ReactSearchAutocomplete
             items={data}
-            fuseOptions={{ keys: ["title", "category"] }}
+            fuseOptions={{ keys: ["title", "categoryName"] }}
             resultStringKeyName="title"
             onSelect={handleOnSelect}
             placeholder={placeholder[0]}

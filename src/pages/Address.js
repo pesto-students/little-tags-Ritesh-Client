@@ -3,8 +3,11 @@ import PriceDetail from "../components/PriceDetail";
 import AddressModal from "../components/AddressModal";
 import CheckoutMobileButton from "../components/CheckoutMobileButton";
 import { FormattedMessage } from "react-intl";
+import EmptyPage from "./EmptyPage";
+import { store } from "../redux/store";
 function Address(props) {
   const { handleClick, itemList } = props;
+  const userAddress = store.getState().userReducer.userData.address;
   const [showModal, setShowModal] = React.useState(false);
 
   return (
@@ -22,69 +25,67 @@ function Address(props) {
             <FormattedMessage id="AddNewAddress" />
           </button>
         </div>
-        <div className="mt-2">
-          <span className="uppercase text-xs font-medium text-blue-700">
-            <FormattedMessage id="DefaultAddress" />
-          </span>
-          <div className="shadow-md border-blue-200 border-2 flex flex-col space-y-2 justify-start p-4 rounded-md mt-2">
-            <div>
-              <input type="checkbox" checked={true} value={true} />
-              <span className="text-sm font-normal ml-2">Ritesh Sinha</span>
+        {userAddress !== undefined ? (
+          userAddress.map((u, index) => (
+            <div key={index}>
+              {u.defaultAddress ? (
+                <div className="mt-2">
+                  <span className="uppercase text-xs font-medium text-blue-700">
+                    <FormattedMessage id="DefaultAddress" />
+                  </span>
+                  <div className="shadow-md border-blue-200 border-2 flex flex-col space-y-2 justify-start p-4 rounded-md mt-2">
+                    <div>
+                      <input type="checkbox" checked={true} value={true} />
+                      <span className="text-sm font-normal ml-2">{u.name}</span>
 
-              <div className="ml-5 flex flex-col space-y-2">
-                <span className="capitalize text-xs tracking-normal">
-                  Shanti vihar colony dangania raipur cg india
-                </span>
-                <span className="capitalize text-xs tracking-normal">
-                  <span className="font-medium">Mobile - </span>877091912
-                </span>
-                <div className="flex flex-row space-x-2 justify-start text-sm font-normal">
-                  <button className="border-blue-200 rounded-md border-2 text-blue-700 p-2 hover:bg-blue-700 hover:text-white">
-                    <FormattedMessage id="Remove" />
-                  </button>
-                  <button className="border-blue-200 rounded-md border-2 p-2 text-blue-700 hover:bg-blue-700 hover:text-white">
-                    <FormattedMessage id="Edit" />
-                  </button>
+                      <div className="ml-5 flex flex-col space-y-2">
+                        <span className="capitalize text-xs tracking-normal">
+                          {u.address} {u.city} {u.postalcode} {u.country}
+                        </span>
+                        <span className="capitalize text-xs tracking-normal">
+                          <span className="font-medium">Mobile - </span>
+                          {u.phoneNumber}
+                        </span>
+                        <div className="flex flex-row space-x-2 justify-start text-sm font-normal">
+                          <button className="border-blue-200 rounded-md border-2 text-blue-700 p-2 hover:bg-blue-700 hover:text-white">
+                            <FormattedMessage id="Remove" />
+                          </button>
+                          <button className="border-blue-200 rounded-md border-2 p-2 text-blue-700 hover:bg-blue-700 hover:text-white">
+                            <FormattedMessage id="Edit" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-2">
-          <span className="uppercase text-xs font-medium text-blue-700">
-            <FormattedMessage id="OtherAddress" />
-          </span>
-          <div className="border-blue-200 border-2 flex flex-col space-y-2 justify-start p-4 rounded-md mt-2">
-            <div>
-              <input type="checkbox" />
-              <span className="text-sm font-normal ml-2">Ritesh Sinha</span>
+              ) : (
+                <div className="mt-2">
+                  <span className="uppercase text-xs font-medium text-blue-700">
+                    <FormattedMessage id="OtherAddress" />
+                  </span>
+                  <div className="border-blue-200 border-2 flex flex-col space-y-2 justify-start p-4 rounded-md mt-2">
+                    <div>
+                      <input type="checkbox" />
+                      <span className="text-sm font-normal ml-2">{u.name}</span>
 
-              <div className="ml-5 flex flex-col space-y-2">
-                <span className="capitalize text-xs tracking-normal">
-                  Shanti vihar colony dangania raipur cg india
-                </span>
-                <span className="capitalize text-xs tracking-normal">
-                  <span className="font-medium">Mobile - </span>877091912
-                </span>
-              </div>
+                      <div className="ml-5 flex flex-col space-y-2">
+                        <span className="capitalize text-xs tracking-normal">
+                          {u.address} {u.city} {u.postalcode} {u.country}
+                        </span>
+                        <span className="capitalize text-xs tracking-normal">
+                          <span className="font-medium">Mobile - </span>
+                          {u.phoneNumber}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-          <div className="border-blue-200 border-2 flex flex-col space-y-2 justify-start p-4 rounded-md mt-2">
-            <div>
-              <input type="checkbox" />
-              <span className="text-sm font-normal ml-2">Manmeet Parmar</span>
-
-              <div className="ml-5 flex flex-col space-y-2">
-                <span className="capitalize text-xs tracking-normal">
-                  Bangla No 46 C.R.P.F Road, Neemuch, India
-                </span>
-                <span className="capitalize text-xs tracking-normal">
-                  <span className="font-medium">Mobile - </span>8871576137
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+          ))
+        ) : (
+          <EmptyPage title="Please add address" type="address" />
+        )}
       </div>
       <div className="sm:w-1/4 flex flex-col space-y-2 shadow-md rounded-b-md ">
         <div className="py-2 border-b-2 rounded-b-lg  border-gray-200 px-2 shadow-inner flex flex-col justify-start">

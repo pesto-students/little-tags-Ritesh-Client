@@ -30,7 +30,7 @@ function ProductDetail(props) {
       } else {
         setItem(data.item);
         setLoad(false);
-        setTitle(data.item.category);
+        setTitle(data.item.categoryName);
       }
     }, 1.5 * 1000);
   }, [data]);
@@ -56,7 +56,7 @@ function ProductDetail(props) {
 
   let titleName;
   if (data) {
-    switch (data.item.category) {
+    switch (data.item.categoryName) {
       case "men clothing":
         titleName = "menClothing";
         break;
@@ -64,7 +64,7 @@ function ProductDetail(props) {
         titleName = "womenClothing";
         break;
       default:
-        titleName = data.item.category;
+        titleName = data.item.categoryName;
     }
   }
   if (load) {
@@ -81,8 +81,8 @@ function ProductDetail(props) {
             <Link
               to={{
                 pathname: "/productList",
-                search: `${item.category}`,
-                title: `${item.category}`,
+                search: `${item.categoryName}`,
+                title: `${item.categoryName}`,
               }}
               className="mx-1"
             >

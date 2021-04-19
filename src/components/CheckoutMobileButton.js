@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { Link } from "react-router-dom";
 import calculateTotalPrice from "../services/calculateTotalPrice";
 function CheckoutMobileButton(props) {
-  const { handleClick, itemList, buttonName, buttonType } = props;
+  const {
+    handleClick,
+    itemList,
+    buttonName,
+    buttonType,
+    handelPlaceOrder,
+  } = props;
   const totalPrice = calculateTotalPrice(itemList);
   return (
     <div className="sm:hidden block">
@@ -27,12 +32,12 @@ function CheckoutMobileButton(props) {
           ${totalPrice.toFixed(2)}
         </span>
         {buttonType ? (
-          <Link
-            to="/thanks"
+          <button
+            onClick={handelPlaceOrder}
             className="w-4/6 border-blue-200  border-2 p-2 rounded-lg bg-blue-700 text-white"
           >
             <FormattedMessage id={buttonName} />
-          </Link>
+          </button>
         ) : (
           <button
             onClick={() => handleClick("next")}
