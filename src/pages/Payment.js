@@ -41,7 +41,7 @@ function Payment(props) {
       quantity: item.quantity,
       image: item.image,
       netPrice: item.price,
-      productId: item.id,
+      productId: item._id,
     }));
     // TODO: we have to pick default address, right now picking oth indexed data
     const userAddress = store.getState().userReducer.userData.address[0];
@@ -61,6 +61,7 @@ function Payment(props) {
   };
   const placeOrder = async data => {
     setLoad(true);
+    console.log(data);
     const result = makeOrder(data, cookies);
     result
       .then(r => r.json())
