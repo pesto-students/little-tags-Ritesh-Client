@@ -3,6 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PriceDetail from "../components/PriceDetail";
 import { FormattedMessage } from "react-intl";
+import { toast } from "react-toastify";
+import { store } from "../redux/store";
 import CheckoutMobileButton from "../components/CheckoutMobileButton";
 function Cart(props) {
   const {
@@ -11,12 +13,20 @@ function Cart(props) {
     handleMoveToWishlist,
     handleRemoveFromCart,
   } = props;
+  const checkUser = () => {
+    if (store.getState().userReducer.userData.userName === undefined) {
+      toast(`Please log in`);
+      return;
+    } else {
+      handleClick("next");
+    }
+  };
   return (
     <div className="flex sm:flex-row flex-col mt-12">
       <div className="w-3/4 sm:block hidden shadow-md rounded-b-md mr-2">
         {itemList.map(item => (
           <div
-            key={item.id}
+            key={item._id}
             className="flex flex-row justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-4 p-4"
           >
             <div className="w-1/4 h-28  p-2 flex justify-center items-center">
@@ -29,7 +39,7 @@ function Cart(props) {
             <div className="w-1/2 flex flex-col justify-start space-y-4">
               <span className="text-md font-medium truncate">{item.title}</span>
               <div className="flex mt-6 items-center text-sm font-normal">
-                {"men clothing".includes("clothing") ? (
+                {item.categoryName.includes("clothing") ? (
                   <div className="flex items-center mr-4">
                     <span className="mr-3">
                       <FormattedMessage id="Size" />
@@ -99,7 +109,7 @@ function Cart(props) {
               <div className="w-hull">
                 <button
                   onClick={() => handleMoveToWishlist(item)}
-                  className="my-2 flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
+                  className="my-2 capitalize flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
                 >
                   <svg
                     fill="currentColor"
@@ -116,8 +126,8 @@ function Cart(props) {
                   </span>
                 </button>
                 <button
-                  onClick={() => handleRemoveFromCart(item.id)}
-                  className="flex items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
+                  onClick={() => handleRemoveFromCart(item._id)}
+                  className="flex w-full items-center text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
                 >
                   <svg
                     fill="currentColor"
@@ -148,7 +158,7 @@ function Cart(props) {
         <div className="shadow-md rounded-b-md">
           {itemList.map(item => (
             <div
-              key={item.id}
+              key={item._id}
               className="flex flex-col justify-between items-center border border-gray-300 rounded-lg shadow-inner mb-2 p-2"
             >
               <div className="w-full flex flex-row justify-around">
@@ -342,7 +352,9 @@ function Cart(props) {
         </div>
         <PriceDetail itemList={itemList} />
         <button
-          onClick={() => handleClick("next")}
+          onClick={() => {
+            checkUser();
+          }}
           className="text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
         >
           <FormattedMessage id="PlaceOrder" />

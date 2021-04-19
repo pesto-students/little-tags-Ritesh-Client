@@ -1,27 +1,35 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import data from "../localData/data";
 import { withRouter } from "react-router";
 import Loading from "./Loading";
 import Popper from "popper.js";
+import getAllProducts from "../services/getAllProducts";
+import { useCookies } from "react-cookie";
 import { FormattedMessage } from "react-intl";
 function ProductList(props) {
   const { title } = props.location;
+  const [cookies] = useCookies();
   const [itemList, setItemList] = useState([]);
   const [load, setLoad] = React.useState(true);
   useEffect(() => {
     setLoad(true);
     if (title) {
-      setTimeout(() => {
-        setItemList(data.filter(d => d.category === title));
-        setLoad(false);
-      }, 1.5 * 1000);
+      const result = getAllProducts(cookies);
+      result
+        .then(r => r.json())
+        .then(res => {
+          setItemList(res.filter(d => d.categoryName === title));
+          setLoad(false);
+        })
+        .catch(e => {
+          console.log(e);
+          setLoad(false);
+        });
     } else {
       setLoad(false);
-      // props.history.goBack();
     }
-  }, [title, props.history]);
+  }, [title, cookies]);
 
   const sortList = [
     { id: 1, name: "PriceLowToHigh" },

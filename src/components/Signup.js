@@ -4,55 +4,91 @@ import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import * as actions from "../redux/actionTypes";
 import { useDispatch } from "react-redux";
-import firebase from "firebase/app";
+import createNewUser from "../services/createNewUser";
+import loginUser from "../services/loginUser";
 import Loading from "../pages/Loading";
+import { toast } from "react-toastify";
+import { useCookies } from "react-cookie";
+import checkAuth from "../services/checkAuth";
+import { isElement } from "react-dom/test-utils";
 function Signup({ showModal, setShowModal }) {
   const [displayName, setdisplayName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const [cookies, setCookie] = useCookies(["token"]);
+  const [phoneNumberError, setPhoneNumberError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [displayNameError, setDisplayNameError] = useState(false);
+  React.useEffect(() => {
+    console.log(cookies);
+  }, [cookies]);
   const [load, setLoad] = useState(false);
-  const createAccount = async () => {
-    setLoad(true);
-    console.log(displayName, email, password);
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(
-        function (user) {
-          user.user
-            .updateProfile({
-              displayName: displayName,
-            })
-            .then(
-              function () {
-                dispatch({
-                  type: actions.SET_USER,
-                  data: displayName,
-                });
-                setShowModal(false);
-                setLoad(false);
-              },
-              function (error) {
-                console.log(error);
-                setShowModal(false);
-                setLoad(false);
-              }
-            );
-        },
-        function (error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          if (errorCode === "auth/weak-password") {
-            alert("The password is too weak.");
-            setLoad(false);
-          } else {
-            console.error(error);
+  const phoneNumberValidation = () => {
+    if (
+      phoneNumber.match(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/)
+    ) {
+      setPhoneNumberError(false);
+      return true;
+    } else {
+      setPhoneNumberError(true);
+      return false;
+    }
+  };
+  const emailValidation = () => {
+    if (email.match(/\S+@\S+\.\S+/)) {
+      setEmailError(false);
+      return true;
+    } else {
+      setEmailError(true);
+      return false;
+    }
+  };
+  const userNameValidation = () => {
+    if (displayName.match(/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/)) {
+      setDisplayNameError(false);
+      return true;
+    } else {
+      setDisplayNameError(true);
+      return false;
+    }
+  };
+  const createAccount = async event => {
+    event.preventDefault();
+    // setLoad(true);
+    const data = {
+      userName: displayName,
+      email: email,
+      password: password,
+      phoneNumber: phoneNumber,
+    };
+    const isPhone = await phoneNumberValidation();
+    const isEmail = await emailValidation();
+    const isName = await userNameValidation();
+    if (isPhone && isEmail && isName) {
+      createNewUser(data)
+        .then(r => r.json())
+        .then(res => {
+          if (res.token) {
+            toast(`${res.full_messages}`);
+            setCookie("token", res.token);
+            checkAuth(res);
             setShowModal(false);
             setLoad(false);
+          } else {
+            setShowModal(false);
+            setLoad(false);
+            toast(`${res.errors.email}`);
           }
-        }
-      );
+        })
+        .catch(e => {
+          toast(`${e}`);
+        });
+    } else {
+      toast("in valid");
+      setShowModal(true);
+    }
   };
   if (load) return <Loading />;
   return (
@@ -76,7 +112,14 @@ function Signup({ showModal, setShowModal }) {
                   </button>
                 </div>
                 {/*body*/}
-                <div className=" flex flex-col justify-center items-start relative p-5 pb-6">
+                <form
+                  method="post"
+                  onSubmit={event => {
+                    createAccount(event);
+                  }}
+                  className=" flex flex-col justify-center items-start relative
+                  p-5 pb-6"
+                >
                   <div className="mb-6">
                     <label
                       htmlFor="name"
@@ -94,6 +137,34 @@ function Signup({ showModal, setShowModal }) {
                       required
                       className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                     />
+                    {displayNameError ? (
+                      <span className="text-xs text-red-600">
+                        Please enter valid name
+                      </span>
+                    ) : undefined}
+                  </div>
+                  <div className="mb-6">
+                    <label
+                      htmlFor="phoneNumber"
+                      className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      type="number"
+                      onChange={p => setPhoneNumber(p.target.value)}
+                      name="phoneNumber"
+                      id="phoneNumber"
+                      value={phoneNumber}
+                      placeholder="8770919212"
+                      required
+                      className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                    />
+                    {phoneNumberError ? (
+                      <span className="text-xs text-red-600">
+                        Please enter valid phone numbaer
+                      </span>
+                    ) : undefined}
                   </div>
                   <div className="mb-6">
                     <label
@@ -112,6 +183,11 @@ function Signup({ showModal, setShowModal }) {
                       required
                       className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                     />
+                    {emailError ? (
+                      <span className="text-xs text-red-600">
+                        Please enter valid email
+                      </span>
+                    ) : undefined}
                   </div>
                   <div className="mb-6">
                     <label
@@ -132,15 +208,12 @@ function Signup({ showModal, setShowModal }) {
                     />
                   </div>
                   <button
-                    onClick={() => {
-                      createAccount();
-                      setShowModal(false);
-                    }}
+                    type="submit"
                     className="w-full text-blue-700 border-blue-200  border-2 p-2 rounded-lg hover:bg-blue-700 hover:text-white"
                   >
                     Create
                   </button>
-                </div>
+                </form>
               </div>
             </div>
           </div>

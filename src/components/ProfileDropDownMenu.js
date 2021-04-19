@@ -5,12 +5,20 @@ import { Link } from "react-router-dom";
 import { store } from "../redux/store";
 import * as actions from "../redux/actionTypes";
 import { useDispatch } from "react-redux";
-import firebase from "firebase/app";
+// import firebase from "firebase/app";
+import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
 import Loading from "../pages/Loading";
 function ProfileDropDownMenu(props) {
   const dispatch = useDispatch();
+  const [cookies, removeCookie] = useCookies(["token"]);
   const [load, setLoad] = React.useState(false);
-  const username = store.getState().userReducer.userData;
+  const username = store.getState().userReducer.userData
+    ? store.getState().userReducer.userData.userName
+    : undefined;
+  React.useEffect(() => {
+    console.log(cookies);
+  }, [cookies]);
   const {
     profileDropdownRef,
     profileDropDown,
@@ -20,26 +28,17 @@ function ProfileDropDownMenu(props) {
     setShowSignupModal,
   } = props;
   const profile = [
-    { id: 1, catName: "orderHistory" },
-    { id: 2, catName: "trackOrder" },
+    // { id: 1, catName: "orderHistory" },
+    // { id: 2, catName: "trackOrder" },
     { id: 3, catName: "contactUs" },
-    { id: 4, catName: "editProfile" },
   ];
   const signOutUser = () => {
     setLoad(true);
-    firebase
-      .auth()
-      .signOut()
-      .then(function () {
-        dispatch({ type: actions.SET_USER, data: "" });
-        console.log("sign out");
-        closeProfileDropdown();
-        setLoad(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-        setLoad(false);
-      });
+    removeCookie("token");
+    dispatch({ type: actions.SET_USER, data: "" });
+    toast(`User logged out`);
+    closeProfileDropdown();
+    setLoad(false);
   };
   if (load) {
     return <Loading />;
@@ -65,7 +64,7 @@ function ProfileDropDownMenu(props) {
           <FormattedMessage id="manageOrder" />
         </p>
       </span>
-      {username === "" ? (
+      {username === "" || username === undefined ? (
         <div className="pr-2 pl-2 flex flex-row space-x-4 items-center">
           <button
             className="text-white block mt-2 lg:inline-block lg:mt-2 px-4 py-2 rounded  mr-2 transition duration-500 ease-in-out bg-blue-700 hover:bg-orange-700 transform hover:-translate-y-1 hover:scale-110"
@@ -100,15 +99,33 @@ function ProfileDropDownMenu(props) {
             <FormattedMessage id={p.catName} />
           </Link>
         ))}
-      {username !== "" ? (
-        <button
-          onClick={signOutUser}
-          className={
-            "text-gray-800 text-left text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white"
-          }
-        >
-          Sign Out
-        </button>
+      {username !== "" && username !== undefined ? (
+        <div>
+          <Link
+            to="/orderHistory"
+            className={
+              "text-gray-800 text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white"
+            }
+          >
+            <FormattedMessage id="orderHistory" />
+          </Link>
+          <Link
+            to="/editProfile"
+            className={
+              "text-gray-800 text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white"
+            }
+          >
+            <FormattedMessage id="editProfile" />
+          </Link>
+          <button
+            onClick={signOutUser}
+            className={
+              "text-gray-800 text-left text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent hover:bg-blue-700 hover:text-white"
+            }
+          >
+            Sign Out
+          </button>
+        </div>
       ) : undefined}
     </div>
   );

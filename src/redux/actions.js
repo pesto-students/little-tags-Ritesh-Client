@@ -7,6 +7,19 @@ export const setUser = data => {
     data,
   };
 };
+export const addAddress = data => {
+  return {
+    type: actions.ADD_ADDRESS,
+    data,
+  };
+};
+
+export const removeAddress = id => {
+  return {
+    type: actions.REMOVE_ADDRESS,
+    id,
+  };
+};
 // wishlist functions
 export const addToWishList = data => {
   return {
@@ -33,6 +46,12 @@ export function removeFromCart(id) {
   return {
     type: actions.REMOVE_FROM_CART,
     payload: { id },
+  };
+}
+export function removeAllFromCart(data) {
+  return {
+    type: actions.REMOVE_All_FROM_CART,
+    payload: { data },
   };
 }
 
