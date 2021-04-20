@@ -1,20 +1,18 @@
-# Shopkart 
-**fronend** https://serene-davinci-7c0c9c.netlify.app/
-
-**backend** https://shopkart-backend.herokuapp.com/
-
-**backend github** https://github.com/pesto-students/little-tags-Manmeet-Server
-
 <h1 align="center">
 <br>
-  <img src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Shopkart" width="90">
-<br>
+  <img src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Shopkart" width="60">
 <br>
 Shopkart
 </h1>
 
 
 <hr />
+
+**Fronend** https://serene-davinci-7c0c9c.netlify.app/
+
+**Backend** https://shopkart-backend.herokuapp.com/
+
+**Backend github** https://github.com/pesto-students/little-tags-Manmeet-Server
 
 ## Features
 - Web and mobile responsive
