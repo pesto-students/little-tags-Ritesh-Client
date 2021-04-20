@@ -7,6 +7,7 @@
   <br />
 </h1>
 <hr />
+
 **Fronend** https://serene-davinci-7c0c9c.netlify.app/
 
 **Backend** https://shopkart-backend.herokuapp.com/
