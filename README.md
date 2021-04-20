@@ -2,12 +2,11 @@
 <br>
   <img src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Shopkart" width="60">
 <br>
-Shopkart
+  Shopkart <br /><br />
+<img src="https://user-images.githubusercontent.com/20131952/115367987-46f4dd00-a1e4-11eb-8b6d-4f77368b25c5.gif" alt='user'  />
+  <br />
 </h1>
-
-
 <hr />
-
 **Fronend** https://serene-davinci-7c0c9c.netlify.app/
 
 **Backend** https://shopkart-backend.herokuapp.com/
